@@ -17,7 +17,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self testApi];
+    
 }
+
+
+-(void) testApi
+{
+    
+    [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
+    
+        if (dataResponse != nil) {
+            
+            
+            NSDictionary *dic = dataResponse;
+            
+            NSArray *array = [dic objectForKey:WEBSITE];
+            
+            NSLog(@"data get is %@",[array firstObject]);
+            
+            
+        }
+        
+    }];
+    
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

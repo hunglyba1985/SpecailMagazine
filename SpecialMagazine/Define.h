@@ -1,0 +1,35 @@
+//
+//  Define.h
+//  SpecialMagazine
+//
+//  Created by Macbook Pro on 9/3/16.
+//  Copyright © 2016 Macbook Pro. All rights reserved.
+//
+
+#ifndef Define_h
+#define Define_h
+
+#define SCREEN_HEIGHT                        [[UIScreen mainScreen] bounds].size.height
+#define SCREEN_WIDTH                         [[UIScreen mainScreen] bounds].size.width
+
+
+#define DEVICE_ID  [UIDevice currentDevice].identifierForVendor.UUIDString
+
+
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
+#define URL_BASE @"http://api.5play.mobi/news"
+
+
+#define ARTIST_API [ArtistAPI  sharedInstance]
+
+
+#define WEBSITE @"websites"
+
+
+
+
+
+
+#endif /* Define_h */

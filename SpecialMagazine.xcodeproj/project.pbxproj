@@ -13,6 +13,8 @@
 		52EBA9911D7A667500273548 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA98F1D7A667500273548 /* Main.storyboard */; };
 		52EBA9931D7A667600273548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA9921D7A667600273548 /* Assets.xcassets */; };
 		52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA9941D7A667600273548 /* LaunchScreen.storyboard */; };
+		52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9A01D7A6ED700273548 /* ArtistAPI.m */; };
+		5647DA2B772D13103B5E2016 /* libPods-SpecialMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67641A894018992672889CD9 /* libPods-SpecialMagazine.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,13 @@
 		52EBA9921D7A667600273548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52EBA9951D7A667600273548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		52EBA9971D7A667600273548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52EBA99D1D7A6A2400273548 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		52EBA99E1D7A6C2A00273548 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		52EBA99F1D7A6ED700273548 /* ArtistAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtistAPI.h; path = Model/ArtistAPI.h; sourceTree = "<group>"; };
+		52EBA9A01D7A6ED700273548 /* ArtistAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtistAPI.m; path = Model/ArtistAPI.m; sourceTree = "<group>"; };
+		67641A894018992672889CD9 /* libPods-SpecialMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpecialMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.debug.xcconfig"; sourceTree = "<group>"; };
+		D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5647DA2B772D13103B5E2016 /* libPods-SpecialMagazine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +54,8 @@
 			children = (
 				52EBA9851D7A667500273548 /* SpecialMagazine */,
 				52EBA9841D7A667500273548 /* Products */,
+				878C7841E8677B75BBCA7C5D /* Pods */,
+				A35584569E7FC49EA69331E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +74,7 @@
 				52EBA98A1D7A667500273548 /* AppDelegate.m */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
+				52EBA9A21D7A6EE200273548 /* Model */,
 				52EBA98F1D7A667500273548 /* Main.storyboard */,
 				52EBA9921D7A667600273548 /* Assets.xcassets */,
 				52EBA9941D7A667600273548 /* LaunchScreen.storyboard */,
@@ -74,9 +87,37 @@
 		52EBA9861D7A667500273548 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				52EBA99E1D7A6C2A00273548 /* Define.h */,
 				52EBA9871D7A667500273548 /* main.m */,
+				52EBA99D1D7A6A2400273548 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52EBA9A21D7A6EE200273548 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52EBA99F1D7A6ED700273548 /* ArtistAPI.h */,
+				52EBA9A01D7A6ED700273548 /* ArtistAPI.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		878C7841E8677B75BBCA7C5D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */,
+				D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A35584569E7FC49EA69331E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				67641A894018992672889CD9 /* libPods-SpecialMagazine.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52EBA99A1D7A667600273548 /* Build configuration list for PBXNativeTarget "SpecialMagazine" */;
 			buildPhases = (
+				2E1CED405560FB7CF05A9821 /* [CP] Check Pods Manifest.lock */,
 				52EBA97F1D7A667500273548 /* Sources */,
 				52EBA9801D7A667500273548 /* Frameworks */,
 				52EBA9811D7A667500273548 /* Resources */,
+				585E956A5838331FF5D45A95 /* [CP] Embed Pods Frameworks */,
+				02ABB35B9A4936F52B55BC4F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,6 +188,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02ABB35B9A4936F52B55BC4F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E1CED405560FB7CF05A9821 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		585E956A5838331FF5D45A95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		52EBA97F1D7A667500273548 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -152,6 +244,7 @@
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
+				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,9 +356,13 @@
 		};
 		52EBA99B1D7A667600273548 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "/Users/macbookpro/Applicaiton Project/SpecialMagazine/SpecialMagazine/PrefixHeader.pch";
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LightStudio.SpecialMagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,9 +371,13 @@
 		};
 		52EBA99C1D7A667600273548 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "/Users/macbookpro/Applicaiton Project/SpecialMagazine/SpecialMagazine/PrefixHeader.pch";
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LightStudio.SpecialMagazine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +403,7 @@
 				52EBA99C1D7A667600273548 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
