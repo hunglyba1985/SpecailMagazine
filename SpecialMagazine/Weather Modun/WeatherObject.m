@@ -17,6 +17,9 @@
 
 -(id) getWeatherForecast
 {
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"WeatherForecast" ofType:@"plist"];
+    converForecast = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
     YQL *yql = [[YQL alloc] init];
 
     NSDictionary *hanoiResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hanoi, vn\")"];
@@ -58,6 +61,10 @@
     int cTemp = [self convertFToC:fTemp];
     [temp removeObjectForKey:@"temp"];
     [temp setObject:[NSString stringWithFormat:@"%i",cTemp] forKey:@"temp"];
+    NSString *forecastWeather = [converForecast objectForKey:[current objectForKey:CODE]];
+    if (forecastWeather) {
+        [temp setObject:forecastWeather forKey:FORECAST];
+    }
     self.currentWeatherCondition = temp;
     
     
@@ -69,17 +76,21 @@
         
         NSMutableDictionary *dicTemp = [[NSMutableDictionary alloc] initWithDictionary:dic];
         
-        int high = [[dic objectForKey:@"high"] intValue];
+        int high = [[dic objectForKey:HIGH] intValue];
         int convertHight = [self convertFToC:high];
-        [dicTemp removeObjectForKey:@"high"];
-        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertHight] forKey:@"high"];
+        [dicTemp removeObjectForKey:HIGH];
+        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertHight] forKey:HIGH];
         
         
-        int low = [[dic objectForKey:@"low"] intValue];
+        int low = [[dic objectForKey:LOW] intValue];
         int convertLow = [self convertFToC:low];
-        [dicTemp removeObjectForKey:@"low"];
-        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertLow] forKey:@"low"];
+        [dicTemp removeObjectForKey:LOW];
+        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertLow] forKey:LOW];
         
+        NSString *forecastWeather = [converForecast objectForKey:[dic objectForKey:CODE]];
+        if (forecastWeather) {
+            [dicTemp setObject:forecastWeather forKey:FORECAST];
+        }
         [tempArray addObject:dicTemp];
     }
     

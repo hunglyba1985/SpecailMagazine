@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E929AC01D7EA9C8001EAEBB /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E929ABD1D7EA9C8001EAEBB /* WeatherObject.m */; };
 		0E929AC11D7EA9C8001EAEBB /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E929ABF1D7EA9C8001EAEBB /* YQL.m */; };
+		0E929AC51D7EB86B001EAEBB /* WeatherForecast.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E929AC41D7EB86B001EAEBB /* WeatherForecast.plist */; };
 		52EBA9881D7A667500273548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9871D7A667500273548 /* main.m */; };
 		52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98A1D7A667500273548 /* AppDelegate.m */; };
 		52EBA98E1D7A667500273548 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98D1D7A667500273548 /* ViewController.m */; };
@@ -24,6 +25,7 @@
 		0E929ABD1D7EA9C8001EAEBB /* WeatherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherObject.m; sourceTree = "<group>"; };
 		0E929ABE1D7EA9C8001EAEBB /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
 		0E929ABF1D7EA9C8001EAEBB /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
+		0E929AC41D7EB86B001EAEBB /* WeatherForecast.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeatherForecast.plist; sourceTree = "<group>"; };
 		52EBA9831D7A667500273548 /* SpecialMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecialMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EBA9871D7A667500273548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EBA9891D7A667500273548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				52EBA99E1D7A6C2A00273548 /* Define.h */,
+				0E929AC41D7EB86B001EAEBB /* WeatherForecast.plist */,
 				52EBA9871D7A667500273548 /* main.m */,
 				52EBA99D1D7A6A2400273548 /* PrefixHeader.pch */,
 			);
@@ -200,6 +203,7 @@
 			files = (
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
+				0E929AC51D7EB86B001EAEBB /* WeatherForecast.plist in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

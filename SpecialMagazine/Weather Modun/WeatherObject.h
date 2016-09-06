@@ -13,9 +13,18 @@
 #define FORECAST_WEATHER @"ForecastWeather"
 #define ASTRONOMY @"Astronomy"
 
+#define FORECAST @"Forecast"
+#define DATE @"date"
+#define TEMP @"temp"
+#define LOW @"low"
+#define HIGH @"high"
+#define CODE @"code"
+
 
 @interface WeatherObject : NSObject
-
+{
+    NSDictionary *converForecast;
+}
 
 @property (nonatomic,strong) NSDictionary *currentWeatherCondition;
 @property (nonatomic,strong) NSArray *forecastWeather;
