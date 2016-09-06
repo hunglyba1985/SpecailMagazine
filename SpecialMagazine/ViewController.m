@@ -7,6 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "YQL.h"
+#import "WeatherObject.h"
+
+
+
 
 @interface ViewController ()
 
@@ -18,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testApi];
+//    [self testApi];
     [self testYahooWeather];
     
     
@@ -49,8 +54,23 @@
 
 -(void) testYahooWeather
 {
+  
+    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+
+    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
+    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
+    NSLog(@"weather of danang is %@",weather.danangWeather);
+
     
 }
+
+
+
+
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -59,3 +79,27 @@
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

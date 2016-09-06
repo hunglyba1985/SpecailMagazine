@@ -8,9 +8,35 @@
 
 #import "WeatherObject.h"
 
+#define HANOI @"hanoi"
+#define HOCHIMINH @"hochiminh"
+#define DANANG @"danang"
+
+
 @implementation WeatherObject
 
-- (id)initWithJSONDict:(NSDictionary *)dict
+-(id) getWeatherForecast
+{
+    YQL *yql = [[YQL alloc] init];
+
+    NSDictionary *hanoiResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hanoi, vn\")"];
+    
+    [self initWithJSONDict:hanoiResult forRegion:HANOI];
+    
+    NSDictionary *hochiminhResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hochiminh, vn\")"];
+    
+    [self initWithJSONDict:hochiminhResult forRegion:HOCHIMINH];
+
+    
+    NSDictionary *danangResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"danang, vn\")"];
+    
+    [self initWithJSONDict:danangResult forRegion:DANANG];
+
+    
+    return self;
+}
+
+- (void)initWithJSONDict:(NSDictionary *)dict forRegion:(NSString*) region
 {
     
     NSDictionary *query = [dict objectForKey:@"query"];
@@ -59,10 +85,27 @@
     
     self.forecastWeather = tempArray;
     
+    NSMutableDictionary *allData = [NSMutableDictionary new];
+    [allData setObject:self.astronomy forKey:ASTRONOMY];
+    [allData setObject:self.currentWeatherCondition forKey:CURRENT_CONDITION_WEATHER];
+    [allData setObject:self.forecastWeather forKey:FORECAST_WEATHER];
     
     
+    if ([region isEqualToString:HANOI]) {
     
-    return self;
+        self.hanoiWeather = allData;
+        
+    }
+    else if ([region isEqualToString:HOCHIMINH])
+    {
+        self.hochiminhWeather = allData;
+    }
+    else
+    {
+        self.danangWeather = allData;
+    }
+    
+    
 }
 
 -(int) convertFToC:(int) fValue

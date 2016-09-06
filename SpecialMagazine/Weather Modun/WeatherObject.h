@@ -7,6 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YQL.h"
+
+#define CURRENT_CONDITION_WEATHER @"CurrentConditionWeather"
+#define FORECAST_WEATHER @"ForecastWeather"
+#define ASTRONOMY @"Astronomy"
+
 
 @interface WeatherObject : NSObject
 
@@ -15,7 +21,14 @@
 @property (nonatomic,strong) NSArray *forecastWeather;
 @property (nonatomic,strong) NSDictionary *astronomy;
 
-- (id)initWithJSONDict:(NSDictionary *)dict;
+@property (nonatomic,strong) NSDictionary *hanoiWeather;
+@property (nonatomic,strong) NSDictionary *hochiminhWeather;
+@property (nonatomic,strong) NSDictionary *danangWeather;
+
+
+//- (id)initWithJSONDict:(NSDictionary *)dict;
+
+-(id) getWeatherForecast;
 
 
 
