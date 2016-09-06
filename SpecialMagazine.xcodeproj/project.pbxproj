@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E929AC01D7EA9C8001EAEBB /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E929ABD1D7EA9C8001EAEBB /* WeatherObject.m */; };
+		0E929AC11D7EA9C8001EAEBB /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E929ABF1D7EA9C8001EAEBB /* YQL.m */; };
 		52EBA9881D7A667500273548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9871D7A667500273548 /* main.m */; };
 		52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98A1D7A667500273548 /* AppDelegate.m */; };
 		52EBA98E1D7A667500273548 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98D1D7A667500273548 /* ViewController.m */; };
@@ -18,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E929ABC1D7EA9C8001EAEBB /* WeatherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObject.h; sourceTree = "<group>"; };
+		0E929ABD1D7EA9C8001EAEBB /* WeatherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherObject.m; sourceTree = "<group>"; };
+		0E929ABE1D7EA9C8001EAEBB /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
+		0E929ABF1D7EA9C8001EAEBB /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		52EBA9831D7A667500273548 /* SpecialMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecialMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EBA9871D7A667500273548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EBA9891D7A667500273548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +55,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E929ABB1D7EA9C8001EAEBB /* Weather Modun */ = {
+			isa = PBXGroup;
+			children = (
+				0E929ABC1D7EA9C8001EAEBB /* WeatherObject.h */,
+				0E929ABD1D7EA9C8001EAEBB /* WeatherObject.m */,
+				0E929ABE1D7EA9C8001EAEBB /* YQL.h */,
+				0E929ABF1D7EA9C8001EAEBB /* YQL.m */,
+			);
+			path = "Weather Modun";
+			sourceTree = "<group>";
+		};
 		52EBA97A1D7A667500273548 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +91,7 @@
 				52EBA98A1D7A667500273548 /* AppDelegate.m */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
+				0E929ABB1D7EA9C8001EAEBB /* Weather Modun */,
 				52EBA9A21D7A6EE200273548 /* Model */,
 				52EBA98F1D7A667500273548 /* Main.storyboard */,
 				52EBA9921D7A667600273548 /* Assets.xcassets */,
@@ -241,9 +259,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E929AC11D7EA9C8001EAEBB /* YQL.m in Sources */,
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
+				0E929AC01D7EA9C8001EAEBB /* WeatherObject.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
