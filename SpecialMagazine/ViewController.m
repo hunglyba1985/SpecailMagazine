@@ -60,6 +60,26 @@
     
 }
 
+-(void) testYahooWeather
+{
+  
+    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+
+    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
+    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
+    NSLog(@"weather of danang is %@",weather.danangWeather);
+
+    
+}
+
+
+
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,3 +87,27 @@
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

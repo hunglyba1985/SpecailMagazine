@@ -103,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				52EBA99E1D7A6C2A00273548 /* Define.h */,
+				0E929AC41D7EB86B001EAEBB /* WeatherForecast.plist */,
 				52EBA9871D7A667500273548 /* main.m */,
 				52EBA99D1D7A6A2400273548 /* PrefixHeader.pch */,
 				52AB659B1D7CF85D0032C527 /* DataLichViet.sqlite */,
@@ -199,6 +200,7 @@
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				52AB659C1D7CF85D0032C527 /* DataLichViet.sqlite in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
+				0E929AC51D7EB86B001EAEBB /* WeatherForecast.plist in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E929AC11D7EA9C8001EAEBB /* YQL.m in Sources */,
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
@@ -378,7 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/macbookpro/Applicaiton Project/SpecialMagazine/SpecialMagazine/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = /Users/mobilefolk/Documents/SpecialMagazine/SpecailMagazine/SpecialMagazine/PrefixHeader.pch;
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -393,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/macbookpro/Applicaiton Project/SpecialMagazine/SpecialMagazine/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = /Users/mobilefolk/Documents/SpecialMagazine/SpecailMagazine/SpecialMagazine/PrefixHeader.pch;
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
