@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "DrawInView.h"
+
 
 @interface ViewController ()
 
@@ -18,7 +20,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testApi];
+//    [self testApi];
+    [self testDrawView];
+}
+
+-(void) testDrawView
+{
+    DrawInView *view = [[DrawInView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    view.center = self.view.center;
+    view.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.view addSubview:view];
+    
+
+    
     
 }
 

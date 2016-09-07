@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52AB659C1D7CF85D0032C527 /* DataLichViet.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 52AB659B1D7CF85D0032C527 /* DataLichViet.sqlite */; };
+		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
 		52EBA9881D7A667500273548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9871D7A667500273548 /* main.m */; };
 		52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98A1D7A667500273548 /* AppDelegate.m */; };
 		52EBA98E1D7A667500273548 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98D1D7A667500273548 /* ViewController.m */; };
@@ -18,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52AB659B1D7CF85D0032C527 /* DataLichViet.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DataLichViet.sqlite; sourceTree = "<group>"; };
+		52AB659D1D7DBA670032C527 /* DrawInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawInView.h; path = Test/DrawInView.h; sourceTree = "<group>"; };
+		52AB659E1D7DBA670032C527 /* DrawInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawInView.m; path = Test/DrawInView.m; sourceTree = "<group>"; };
 		52EBA9831D7A667500273548 /* SpecialMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecialMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EBA9871D7A667500273548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EBA9891D7A667500273548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +54,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52AB65A01D7DBA6B0032C527 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				52AB659D1D7DBA670032C527 /* DrawInView.h */,
+				52AB659E1D7DBA670032C527 /* DrawInView.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
 		52EBA97A1D7A667500273548 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +88,7 @@
 				52EBA98A1D7A667500273548 /* AppDelegate.m */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
+				52AB65A01D7DBA6B0032C527 /* Test */,
 				52EBA9A21D7A6EE200273548 /* Model */,
 				52EBA98F1D7A667500273548 /* Main.storyboard */,
 				52EBA9921D7A667600273548 /* Assets.xcassets */,
@@ -90,6 +105,7 @@
 				52EBA99E1D7A6C2A00273548 /* Define.h */,
 				52EBA9871D7A667500273548 /* main.m */,
 				52EBA99D1D7A6A2400273548 /* PrefixHeader.pch */,
+				52AB659B1D7CF85D0032C527 /* DataLichViet.sqlite */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -181,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
+				52AB659C1D7CF85D0032C527 /* DataLichViet.sqlite in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
 			);
@@ -244,6 +261,7 @@
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
+				52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
