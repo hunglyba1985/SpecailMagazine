@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "DrawInView.h"
-
+#import "WeatherObject.h"
 
 @interface ViewController ()
 
@@ -21,8 +21,44 @@
     // Do any additional setup after loading the view, typically from a nib.
     
 //    [self testApi];
-    [self testDrawView];
+//    [self testDrawView];
+//    [self testYahooWeather];
+
+    [self testDatePicker];
+    
 }
+
+
+-(void) testDatePicker
+{
+    
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    
+    NSLog(@"local time zone name is %@",[localTimeZone name]);
+    NSLog(@"local time zone compare with GMT   %ld",[localTimeZone secondsFromGMT]/(60*60));
+    NSLog(@"local time zone abbreviation name is  %@",[localTimeZone abbreviation]);
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    datePicker.center = self.view.center;
+    
+    datePicker.timeZone = [NSTimeZone timeZoneWithName:@"Europe/Paris"];
+    datePicker.minuteInterval = 15;
+    
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    
+    datePicker.backgroundColor = [UIColor whiteColor];
+    
+    [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.view addSubview:datePicker];
+    
+
+}
+
+-(void)dateChanged:(id)sender{
+    NSLog(@"%@",[sender date]);
+}
+
 
 -(void) testDrawView
 {
