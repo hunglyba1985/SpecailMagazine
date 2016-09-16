@@ -19,7 +19,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
-#define URL_BASE @"http://api.5play.mobi/news"
+#define URL_BASE @"http://api.5play.mobi/news/v2.0"
 
 
 #define ARTIST_API [ArtistAPI  sharedInstance]
@@ -27,6 +27,7 @@
 
 #define WEBSITE @"websites"
 
+#define LINFOS @"linfos"
 
 
 

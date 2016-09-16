@@ -38,7 +38,7 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) getAllWebsite:(GetAPIRequestHandle) result
 {
-    NSString *postLink =[NSString stringWithFormat:@"%@/v2.0/website",URL_BASE];
+    NSString *postLink =[NSString stringWithFormat:@"%@/website",URL_BASE];
     
     NSDictionary *parameters = @{
                                  };
@@ -49,8 +49,11 @@ static ArtistAPI  *sharedController = nil;
     
     [manager GET:postLink parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
+        NSDictionary *dic = responseObject;
         
-        result(responseObject,nil);
+        NSArray *array = [dic objectForKey:WEBSITE];
+        
+        result(array,nil);
         
 //        NSLog(@"response object is %@",responseObject);
         
@@ -64,11 +67,42 @@ static ArtistAPI  *sharedController = nil;
         
         
     }];
+    
+}
 
+-(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid successResult:(GetAPIRequestHandle) result
+{
+    NSString *postLink = [NSString stringWithFormat:@"%@/articles?sid=%@&count=24&latest=0&deviceld=%@&lid=0&cid=%@",URL_BASE,sid,DEVICE_ID,cid];
+    
+    NSDictionary *parameters = @{
+                                 };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    [manager GET:postLink parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic = responseObject;
+        
+        NSArray *array = [dic objectForKey:LINFOS];
 
-    
-    
-    
+        
+        result(array,nil);
+        
+        //        NSLog(@"response object is %@",responseObject);
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"error %@",error);
+        
+        result (nil,error);
+        
+        
+    }];
+
 }
 
 

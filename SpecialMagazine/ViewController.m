@@ -20,11 +20,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [self testApi];
+    [self testApi];
 //    [self testDrawView];
 //    [self testYahooWeather];
 
-    [self testDatePicker];
+//    [self testDatePicker];
     
 }
 
@@ -82,15 +82,22 @@
         if (dataResponse != nil) {
             
             
-            NSDictionary *dic = dataResponse;
-            
-            NSArray *array = [dic objectForKey:WEBSITE];
-            
-            NSLog(@"data get is %@",[array firstObject]);
+            NSLog(@"get list all website ----------- %@",dataResponse);
             
             
         }
         
+    }];
+    
+    
+    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" successResult:^(id dataResponse, NSError *error) {
+      
+       if (dataResponse != nil)
+       {
+           NSLog(@"get list article -------- %@",dataResponse);
+           
+           
+       }
     }];
     
     
