@@ -9,8 +9,18 @@
 #import "ViewController.h"
 #import "DrawInView.h"
 #import "WeatherObject.h"
+#import "TableViewCell.h"
 
-@interface ViewController ()
+
+@interface ViewController () <UITableViewDelegate,UITableViewDataSource>
+{
+    NSArray *tableData;
+    
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
 
 @end
 
@@ -26,6 +36,36 @@
 
 //    [self testDatePicker];
     
+    [self setUpTableView];
+    
+}
+
+-(void) setUpTableView
+{
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSLog(@"document directory ------ %@",documentsDirectory);
+    
+    
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return tableData.count;
+}
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test Cell" forIndexPath:indexPath];
+    
+    NSDictionary *cellData = [tableData objectAtIndex:indexPath.row];
+    cell.textLabel.text = [cellData objectForKey:TITLE_ARTICLE];
+    
+    
+    return cell;
 }
 
 
@@ -80,21 +120,20 @@
     [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
     
         if (dataResponse != nil) {
-            
-            
             NSLog(@"get list all website ----------- %@",dataResponse);
-            
-            
         }
         
     }];
     
-    
     [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" successResult:^(id dataResponse, NSError *error) {
-      
        if (dataResponse != nil)
        {
            NSLog(@"get list article -------- %@",dataResponse);
+           
+           tableData = dataResponse;
+           [self.tableView reloadData];
+        
+           [self importDataToRealm];
            
            
        }
@@ -102,6 +141,33 @@
     
     
 }
+
+-(void) importDataToRealm
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    // Import many items in a background thread
+    dispatch_async(queue, ^{
+        // Get new realm and table since we are in a new thread
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        
+        [realm beginWriteTransaction];
+        
+        [tableData  enumerateObjectsUsingBlock:^(NSDictionary * article, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            ArticleObject *object = [[ArticleObject alloc] initWithDictionary:article];
+            [ArticleObject createInRealm:realm withValue:object];
+            
+        }];
+        
+        
+        [realm commitWriteTransaction];
+        
+    });
+    
+}
+
+
 
 -(void) testYahooWeather
 {

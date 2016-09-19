@@ -10,6 +10,21 @@
 
 @interface ArticleObject : RLMObject
 
+@property int  cid;
+@property NSString *content;
+@property NSString *coverImageUrl;
+@property NSString *descriptionArticle;
+@property BOOL hasVideos;
+@property NSInteger lid;
+@property NSData *listImages;
+@property NSData *listVideos;
+@property double postTime;
+@property int sid;
+@property int superCid;
+@property NSString *titleArticle;
+@property NSString *originalLink;
+
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
 
 

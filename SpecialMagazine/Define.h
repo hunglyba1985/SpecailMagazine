@@ -26,11 +26,43 @@
 
 
 #define WEBSITE @"websites"
-
 #define LINFOS @"linfos"
+
+#pragma mark - DEFINE ARTICLE
+
+#define  SID   @"sid"
+#define  DESC @"desc"
+#define POST_TIME @"posttime"
+#define LIST_VIDEOS @"listMp4"
+#define IS_PIN @"isPin"
+#define CID @"cid"
+#define ORIGINAL_LINK @"url"
+#define CONTENT @"content"
+#define LID @"lid"
+#define COVER_IMAGE @"cover"
+#define TITLE_ARTICLE @"title"
+#define HAS_VIDEOS @"hasVideo"
+#define CTACTION @"ctaction"
+#define SUPER_CID @"supercid"
+#define LIST_IMAGES @"listimage"
+
+
 
 
 
 
 
 #endif /* Define_h */
+
+
+
+
+
+
+
+
+
+
+
+
+

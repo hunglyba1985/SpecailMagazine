@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
+		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
 		52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C61D7F948F0032C527 /* WeatherObject.m */; };
 		52AB65CA1D7F948F0032C527 /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C81D7F948F0032C527 /* YQL.m */; };
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		0E1F12011D8BB200007F77EC /* ArticleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleObject.h; path = Model/ArticleObject.h; sourceTree = "<group>"; };
 		0E1F12021D8BB200007F77EC /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
+		5225F86C1D8F69F20079E151 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		52AB659D1D7DBA670032C527 /* DrawInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawInView.h; path = Test/DrawInView.h; sourceTree = "<group>"; };
 		52AB659E1D7DBA670032C527 /* DrawInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawInView.m; path = Test/DrawInView.m; sourceTree = "<group>"; };
 		52AB65C51D7F948F0032C527 /* WeatherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObject.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				52EBA98A1D7A667500273548 /* AppDelegate.m */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
+				5225F86C1D8F69F20079E151 /* TableViewCell.h */,
+				5225F86D1D8F69F20079E151 /* TableViewCell.m */,
 				52AB65A01D7DBA6B0032C527 /* Test */,
 				52EBA9A21D7A6EE200273548 /* Model */,
 				52EBA98F1D7A667500273548 /* Main.storyboard */,
@@ -285,6 +290,7 @@
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
+				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
 				52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */,
 				0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,

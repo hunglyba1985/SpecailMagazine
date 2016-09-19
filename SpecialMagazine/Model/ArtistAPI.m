@@ -38,33 +38,21 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) getAllWebsite:(GetAPIRequestHandle) result
 {
-    NSString *postLink =[NSString stringWithFormat:@"%@/website",URL_BASE];
+    NSString *endPoint = @"website";
     
     NSDictionary *parameters = @{
                                  };
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
-    [manager GET:postLink parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *dic = responseObject;
-        
-        NSArray *array = [dic objectForKey:WEBSITE];
-        
-        result(array,nil);
-        
-//        NSLog(@"response object is %@",responseObject);
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"error %@",error);
-        
-        result (nil,error);
-        
+    [self baseGetDataFromEndPoint:endPoint andParameter:parameters hasResult:^(id dataResponse, NSError *error) {
+        if (dataResponse != nil) {
+            NSDictionary *dic = dataResponse;
+            NSArray *listWebsites = [dic objectForKey:WEBSITE];
+            result(listWebsites,nil);
+        }
+        else
+        {
+            result(nil,error);
+        }
         
     }];
     
@@ -72,10 +60,32 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid successResult:(GetAPIRequestHandle) result
 {
-    NSString *postLink = [NSString stringWithFormat:@"%@/articles?sid=%@&count=24&latest=0&deviceld=%@&lid=0&cid=%@",URL_BASE,sid,DEVICE_ID,cid];
+    NSString *endPoint = [NSString stringWithFormat:@"articles?sid=%@&count=24&latest=0&deviceld=%@&lid=0&cid=%@",sid,DEVICE_ID,cid];
     
     NSDictionary *parameters = @{
                                  };
+    
+    [self baseGetDataFromEndPoint:endPoint andParameter:parameters hasResult:^(id dataResponse, NSError *error) {
+       
+        if (dataResponse != nil) {
+            NSDictionary *dic = dataResponse;
+            NSArray *listArticle = [dic objectForKey:LINFOS];
+            
+            result(listArticle,nil);
+        }
+        else
+        {
+            result(nil,error);
+        }
+        
+    }];
+  
+}
+
+
+-(void) baseGetDataFromEndPoint:(NSString *) endPoint andParameter:(NSDictionary *) parameters hasResult:(GetAPIRequestHandle) result
+{
+    NSString *postLink = [NSString stringWithFormat:@"%@/%@",URL_BASE,endPoint];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -83,16 +93,7 @@ static ArtistAPI  *sharedController = nil;
     
     [manager GET:postLink parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSDictionary *dic = responseObject;
-        
-        NSArray *array = [dic objectForKey:LINFOS];
-
-        
-        result(array,nil);
-        
-        //        NSLog(@"response object is %@",responseObject);
-        
-        
+        result(responseObject,nil);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -102,11 +103,7 @@ static ArtistAPI  *sharedController = nil;
         
         
     }];
-
 }
-
-
-
 
 
 
