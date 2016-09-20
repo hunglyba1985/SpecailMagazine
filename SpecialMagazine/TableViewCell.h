@@ -10,4 +10,7 @@
 
 @interface TableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageCell;
+
+
 @end

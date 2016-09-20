@@ -10,11 +10,12 @@
 #import "DrawInView.h"
 #import "WeatherObject.h"
 #import "TableViewCell.h"
+#import "DetailViewController.h"
 
 
 @interface ViewController () <UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *tableData;
+    NSMutableArray *tableData;
     
 }
 
@@ -42,6 +43,7 @@
 
 -(void) setUpTableView
 {
+    tableData = [NSMutableArray new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -62,10 +64,32 @@
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Test Cell" forIndexPath:indexPath];
     
     NSDictionary *cellData = [tableData objectAtIndex:indexPath.row];
-    cell.textLabel.text = [cellData objectForKey:TITLE_ARTICLE];
+//    cell.textLabel.text = [cellData objectForKey:TITLE_ARTICLE];
+    
+    [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[cellData objectForKey:COVER_IMAGE]]
+                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
     
     
     return cell;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *cellData = [tableData objectAtIndex:indexPath.row];
+    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    detail.article = cellData;
+    [self.navigationController pushViewController:detail animated:YES];
+    
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row > tableData.count - 5) {
+        printf("start to load more ");
+        
+        [self loadMoreData];
+    }
 }
 
 
@@ -125,21 +149,41 @@
         
     }];
     
-    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
        if (dataResponse != nil)
        {
-           NSLog(@"get list article -------- %@",dataResponse);
+//           NSLog(@"get list article -------- %@",dataResponse);
            
-           tableData = dataResponse;
+           [tableData addObjectsFromArray:dataResponse];
            [self.tableView reloadData];
         
-           [self importDataToRealm];
+//           [self importDataToRealm];
            
            
        }
     }];
     
     
+}
+
+-(void) loadMoreData
+{
+    NSDictionary *lastArticle = [tableData lastObject];
+    
+    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+        if (dataResponse != nil)
+        {
+            NSLog(@"get list article -------- %@",dataResponse);
+            
+            [tableData addObjectsFromArray:dataResponse];
+            [self.tableView reloadData];
+            
+//            [self importDataToRealm];
+            
+            
+        }
+    }];
+
 }
 
 -(void) importDataToRealm
@@ -150,19 +194,14 @@
     dispatch_async(queue, ^{
         // Get new realm and table since we are in a new thread
         RLMRealm *realm = [RLMRealm defaultRealm];
-        
         [realm beginWriteTransaction];
-        
         [tableData  enumerateObjectsUsingBlock:^(NSDictionary * article, NSUInteger idx, BOOL * _Nonnull stop) {
             
             ArticleObject *object = [[ArticleObject alloc] initWithDictionary:article];
             [ArticleObject createInRealm:realm withValue:object];
             
         }];
-        
-        
         [realm commitWriteTransaction];
-        
     });
     
 }

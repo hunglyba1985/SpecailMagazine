@@ -17,6 +17,8 @@
 #import "Define.h"
 #import "ArtistAPI.h"
 #import "ArticleObject.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <AFNetworking/UIImage+AFNetworking.h>
 
 
 #endif /* PrefixHeader_pch */

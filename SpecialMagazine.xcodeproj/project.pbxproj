@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
+		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
 		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
 		52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C61D7F948F0032C527 /* WeatherObject.m */; };
 		52AB65CA1D7F948F0032C527 /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C81D7F948F0032C527 /* YQL.m */; };
@@ -28,6 +29,8 @@
 		0E1F12021D8BB200007F77EC /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
 		5225F86C1D8F69F20079E151 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
+		5225F8701D90B4A50079E151 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = Test/DetailViewController.m; sourceTree = "<group>"; };
 		52AB659D1D7DBA670032C527 /* DrawInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawInView.h; path = Test/DrawInView.h; sourceTree = "<group>"; };
 		52AB659E1D7DBA670032C527 /* DrawInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawInView.m; path = Test/DrawInView.m; sourceTree = "<group>"; };
 		52AB65C51D7F948F0032C527 /* WeatherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObject.h; sourceTree = "<group>"; };
@@ -69,6 +72,8 @@
 		52AB65A01D7DBA6B0032C527 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				5225F86F1D90B4A50079E151 /* DetailViewController.h */,
+				5225F8701D90B4A50079E151 /* DetailViewController.m */,
 				52AB659D1D7DBA670032C527 /* DrawInView.h */,
 				52AB659E1D7DBA670032C527 /* DrawInView.m */,
 			);
@@ -198,6 +203,7 @@
 				TargetAttributes = {
 					52EBA9821D7A667500273548 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 988D2L6XZT;
 					};
 				};
 			};
@@ -291,6 +297,7 @@
 				52EBA9881D7A667500273548 /* main.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
 				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
+				5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */,
 				52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */,
 				0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
@@ -409,6 +416,7 @@
 			baseConfigurationReference = C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
@@ -424,6 +432,7 @@
 			baseConfigurationReference = D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;

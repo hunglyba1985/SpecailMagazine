@@ -17,7 +17,7 @@ typedef void(^GetAPIRequestHandle)(id dataResponse, NSError *error);
 +(ArtistAPI *) sharedInstance;
 
 -(void) getAllWebsite:(GetAPIRequestHandle) result;
--(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid successResult:(GetAPIRequestHandle) result;
+-(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid andLastId:(NSString *) lid successResult:(GetAPIRequestHandle) result;
 
 
 
