@@ -47,11 +47,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSLog(@"document directory ------ %@",documentsDirectory);
+//    NSLog(@"document directory ------ %@",documentsDirectory);
     
     
 }
@@ -87,7 +87,6 @@
 {
     if (indexPath.row > tableData.count - 5) {
         printf("start to load more ");
-        
         [self loadMoreData];
     }
 }
@@ -141,15 +140,10 @@
 -(void) testApi
 {
     
-    [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
+    NSLog(@"parameter in request api is website id is %@ -----------  and catolog is %@ and name of catalog is %@",[self.catagoryInfo objectForKey:WEBSITE_ID],[self.catagoryInfo objectForKey:WEBSITE_CATEGORY],[self.catagoryInfo objectForKey:WEBSITE_NAME]);
     
-        if (dataResponse != nil) {
-            NSLog(@"get list all website ----------- %@",dataResponse);
-        }
-        
-    }];
     
-    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
        if (dataResponse != nil)
        {
 //           NSLog(@"get list article -------- %@",dataResponse);
@@ -170,15 +164,12 @@
 {
     NSDictionary *lastArticle = [tableData lastObject];
     
-    [ARTIST_API getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
-            NSLog(@"get list article -------- %@",dataResponse);
-            
+//            NSLog(@"get list article -------- %@",dataResponse);
             [tableData addObjectsFromArray:dataResponse];
             [self.tableView reloadData];
-            
-//            [self importDataToRealm];
             
             
         }
@@ -188,6 +179,8 @@
 
 -(void) importDataToRealm
 {
+    NSLog(@"import data to realm ");
+    
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     // Import many items in a background thread
@@ -220,6 +213,17 @@
     
 }
 
+#pragma mark - XLPagerTabStripViewControllerDelegate
+
+-(NSString *)titleForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+{
+    return [self.catagoryInfo objectForKey:WEBSITE_NAME];
+}
+
+-(UIColor *)colorForPagerTabStripViewController:(XLPagerTabStripViewController *)pagerTabStripViewController
+{
+    return [UIColor whiteColor];
+}
 
 
 

@@ -26,6 +26,13 @@
 
 
 #define WEBSITE @"websites"
+
+#define WEBSITE_ID @"id"
+#define WEBSITE_CATEGORY @"categorys"
+#define WEBSITE_NAME @"name"
+#define WEBSITE_ICON @"icon_url"
+
+
 #define LINFOS @"linfos"
 
 

@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
+		0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E931D9E23B0009C087A /* ContainViewController.m */; };
+		0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E971D9E2CC8009C087A /* TestChildViewController.m */; };
+		0EE72EB01D9E2F75009C087A /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E9C1D9E2F75009C087A /* XLBarPagerTabStripViewController.m */; };
+		0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E9E1D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m */; };
+		0EE72EB21D9E2F75009C087A /* XLPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EA01D9E2F75009C087A /* XLPagerTabStripViewController.m */; };
+		0EE72EB31D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EA21D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m */; };
+		0EE72EB41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EA41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m */; };
+		0EE72EB51D9E2F75009C087A /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE72EA61D9E2F75009C087A /* ButtonCell.xib */; };
+		0EE72EB61D9E2F75009C087A /* FXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EA91D9E2F75009C087A /* FXPageControl.m */; };
+		0EE72EB71D9E2F75009C087A /* XLBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAB1D9E2F75009C087A /* XLBarView.m */; };
+		0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAD1D9E2F75009C087A /* XLButtonBarView.m */; };
+		0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */; };
+		0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
 		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
@@ -27,6 +40,31 @@
 /* Begin PBXFileReference section */
 		0E1F12011D8BB200007F77EC /* ArticleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleObject.h; path = Model/ArticleObject.h; sourceTree = "<group>"; };
 		0E1F12021D8BB200007F77EC /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
+		0EE72E921D9E23B0009C087A /* ContainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainViewController.h; path = ViewController/ContainViewController.h; sourceTree = "<group>"; };
+		0EE72E931D9E23B0009C087A /* ContainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainViewController.m; path = ViewController/ContainViewController.m; sourceTree = "<group>"; };
+		0EE72E961D9E2CC8009C087A /* TestChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestChildViewController.h; sourceTree = "<group>"; };
+		0EE72E971D9E2CC8009C087A /* TestChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestChildViewController.m; sourceTree = "<group>"; };
+		0EE72E9B1D9E2F75009C087A /* XLBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBarPagerTabStripViewController.h; sourceTree = "<group>"; };
+		0EE72E9C1D9E2F75009C087A /* XLBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBarPagerTabStripViewController.m; sourceTree = "<group>"; };
+		0EE72E9D1D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarPagerTabStripViewController.h; sourceTree = "<group>"; };
+		0EE72E9E1D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarPagerTabStripViewController.m; sourceTree = "<group>"; };
+		0EE72E9F1D9E2F75009C087A /* XLPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPagerTabStripViewController.h; sourceTree = "<group>"; };
+		0EE72EA01D9E2F75009C087A /* XLPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPagerTabStripViewController.m; sourceTree = "<group>"; };
+		0EE72EA11D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLSegmentedPagerTabStripViewController.h; sourceTree = "<group>"; };
+		0EE72EA21D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLSegmentedPagerTabStripViewController.m; sourceTree = "<group>"; };
+		0EE72EA31D9E2F75009C087A /* XLTwitterPagerTabStripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTwitterPagerTabStripViewController.h; sourceTree = "<group>"; };
+		0EE72EA41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTwitterPagerTabStripViewController.m; sourceTree = "<group>"; };
+		0EE72EA61D9E2F75009C087A /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		0EE72EA81D9E2F75009C087A /* FXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXPageControl.h; sourceTree = "<group>"; };
+		0EE72EA91D9E2F75009C087A /* FXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXPageControl.m; sourceTree = "<group>"; };
+		0EE72EAA1D9E2F75009C087A /* XLBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLBarView.h; sourceTree = "<group>"; };
+		0EE72EAB1D9E2F75009C087A /* XLBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLBarView.m; sourceTree = "<group>"; };
+		0EE72EAC1D9E2F75009C087A /* XLButtonBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarView.h; sourceTree = "<group>"; };
+		0EE72EAD1D9E2F75009C087A /* XLButtonBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarView.m; sourceTree = "<group>"; };
+		0EE72EAE1D9E2F75009C087A /* XLButtonBarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLButtonBarViewCell.h; sourceTree = "<group>"; };
+		0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarViewCell.m; sourceTree = "<group>"; };
+		0EE72EC01D9E55ED009C087A /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchingViewController.h; path = ViewController/LaunchingViewController.h; sourceTree = "<group>"; };
+		0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchingViewController.m; path = ViewController/LaunchingViewController.m; sourceTree = "<group>"; };
 		5225F86C1D8F69F20079E151 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
@@ -69,6 +107,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EE72E951D9E23B4009C087A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72E921D9E23B0009C087A /* ContainViewController.h */,
+				0EE72E931D9E23B0009C087A /* ContainViewController.m */,
+				0EE72EC01D9E55ED009C087A /* LaunchingViewController.h */,
+				0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0EE72E991D9E2F75009C087A /* XL */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72E9A1D9E2F75009C087A /* Controllers */,
+				0EE72EA51D9E2F75009C087A /* Views */,
+			);
+			path = XL;
+			sourceTree = "<group>";
+		};
+		0EE72E9A1D9E2F75009C087A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72E9B1D9E2F75009C087A /* XLBarPagerTabStripViewController.h */,
+				0EE72E9C1D9E2F75009C087A /* XLBarPagerTabStripViewController.m */,
+				0EE72E9D1D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.h */,
+				0EE72E9E1D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m */,
+				0EE72E9F1D9E2F75009C087A /* XLPagerTabStripViewController.h */,
+				0EE72EA01D9E2F75009C087A /* XLPagerTabStripViewController.m */,
+				0EE72EA11D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.h */,
+				0EE72EA21D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m */,
+				0EE72EA31D9E2F75009C087A /* XLTwitterPagerTabStripViewController.h */,
+				0EE72EA41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0EE72EA51D9E2F75009C087A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72EA61D9E2F75009C087A /* ButtonCell.xib */,
+				0EE72EA71D9E2F75009C087A /* FXPageControl */,
+				0EE72EAA1D9E2F75009C087A /* XLBarView.h */,
+				0EE72EAB1D9E2F75009C087A /* XLBarView.m */,
+				0EE72EAC1D9E2F75009C087A /* XLButtonBarView.h */,
+				0EE72EAD1D9E2F75009C087A /* XLButtonBarView.m */,
+				0EE72EAE1D9E2F75009C087A /* XLButtonBarViewCell.h */,
+				0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0EE72EA71D9E2F75009C087A /* FXPageControl */ = {
+			isa = PBXGroup;
+			children = (
+				0EE72EA81D9E2F75009C087A /* FXPageControl.h */,
+				0EE72EA91D9E2F75009C087A /* FXPageControl.m */,
+			);
+			path = FXPageControl;
+			sourceTree = "<group>";
+		};
 		52AB65A01D7DBA6B0032C527 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,12 +211,16 @@
 		52EBA9851D7A667500273548 /* SpecialMagazine */ = {
 			isa = PBXGroup;
 			children = (
+				0EE72E991D9E2F75009C087A /* XL */,
 				52EBA9891D7A667500273548 /* AppDelegate.h */,
 				52EBA98A1D7A667500273548 /* AppDelegate.m */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
+				0EE72E961D9E2CC8009C087A /* TestChildViewController.h */,
+				0EE72E971D9E2CC8009C087A /* TestChildViewController.m */,
 				5225F86C1D8F69F20079E151 /* TableViewCell.h */,
 				5225F86D1D8F69F20079E151 /* TableViewCell.m */,
+				0EE72E951D9E23B4009C087A /* ViewController */,
 				52AB65A01D7DBA6B0032C527 /* Test */,
 				52EBA9A21D7A6EE200273548 /* Model */,
 				52EBA98F1D7A667500273548 /* Main.storyboard */,
@@ -232,6 +335,7 @@
 			files = (
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
+				0EE72EB51D9E2F75009C087A /* ButtonCell.xib in Resources */,
 				52AB65CC1D7F94A10032C527 /* WeatherForecast.plist in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
 			);
@@ -267,7 +371,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		585E956A5838331FF5D45A95 /* [CP] Embed Pods Frameworks */ = {
@@ -293,15 +397,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
+				0EE72EB21D9E2F75009C087A /* XLPagerTabStripViewController.m in Sources */,
+				0EE72EB61D9E2F75009C087A /* FXPageControl.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
+				0EE72EB41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m in Sources */,
+				0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
 				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
+				0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */,
 				5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */,
 				52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */,
 				0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */,
+				0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */,
+				0EE72EB31D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m in Sources */,
+				0EE72EB01D9E2F75009C087A /* XLBarPagerTabStripViewController.m in Sources */,
+				0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
+				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
+				0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */,
+				0EE72EB71D9E2F75009C087A /* XLBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
