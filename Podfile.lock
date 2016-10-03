@@ -20,6 +20,12 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - DACircularProgress (2.3.1)
+  - IDMPhotoBrowser (1.8.4):
+    - DACircularProgress
+    - pop
+    - SDWebImage
+  - pop (1.0.9)
   - Realm (1.1.0):
     - Realm/Headers (= 1.1.0)
   - Realm/Headers (1.1.0)
@@ -29,14 +35,18 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - IDMPhotoBrowser
   - Realm
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: b7f0308e0cbf308ecd097264600fb41c88b7342d
+PODFILE CHECKSUM: a633f3f3a6b4ae3b90e5e5cd41f5d060f41abe81
 
 COCOAPODS: 1.1.0.rc.2

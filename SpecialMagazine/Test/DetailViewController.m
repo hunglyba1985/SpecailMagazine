@@ -7,8 +7,10 @@
 //
 
 #import "DetailViewController.h"
+#import "IDMPhotoBrowser.h"
 
-@interface DetailViewController ()
+
+@interface DetailViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -21,9 +23,63 @@
     
     [self.webView loadHTMLString:[self.article objectForKey:CONTENT] baseURL:nil];
     
+    self.webView.delegate = self;
+    
+}
+
+
+#pragma mark - UIWebView Delegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+{
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://'+a}"];
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+
+{
+    NSURL *action = request.URL;
+    
+    if ([[action scheme] isEqualToString:@"img"]) {
+        
+        NSLog(@"string get from click on image is %@",action);
+        
+        [self showArrayImagesFrom:action.absoluteString];
+        
+        return NO;
+        
+    }
+    
+    return YES;
+}
+
+
+-(void) showArrayImagesFrom:(NSString *) imageLink
+
+{
+    
+    NSArray *arrayString = [imageLink componentsSeparatedByString:@"://"];
+    
+    NSString *currentImageLink = [arrayString objectAtIndex:1];
+    
+    currentImageLink = [currentImageLink stringByReplacingOccurrencesOfString:@"http//" withString:@"http://"];
+    
+    NSArray *arrayImages = [self.article objectForKey:LIST_IMAGES];
+    
+    
+    
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
+    
+    [browser setInitialPageIndex:[arrayImages indexOfObject:currentImageLink]];
+    
+    [self presentViewController:browser animated:YES completion:nil];
     
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
