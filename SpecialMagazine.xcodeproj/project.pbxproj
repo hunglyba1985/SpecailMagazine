@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
+		0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED7635F1DA24A390065F881 /* ListWebsitesController.m */; };
 		0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E931D9E23B0009C087A /* ContainViewController.m */; };
 		0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E971D9E2CC8009C087A /* TestChildViewController.m */; };
 		0EE72EB01D9E2F75009C087A /* XLBarPagerTabStripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E9C1D9E2F75009C087A /* XLBarPagerTabStripViewController.m */; };
@@ -21,6 +22,7 @@
 		0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAD1D9E2F75009C087A /* XLButtonBarView.m */; };
 		0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */; };
 		0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */; };
+		0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEBAB571DA24CA700D36D0E /* ListWebsiteCell.m */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
 		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		0E1F12011D8BB200007F77EC /* ArticleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleObject.h; path = Model/ArticleObject.h; sourceTree = "<group>"; };
 		0E1F12021D8BB200007F77EC /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
+		0ED7635E1DA24A390065F881 /* ListWebsitesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListWebsitesController.h; path = ViewController/ListWebsitesController.h; sourceTree = "<group>"; };
+		0ED7635F1DA24A390065F881 /* ListWebsitesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListWebsitesController.m; path = ViewController/ListWebsitesController.m; sourceTree = "<group>"; };
 		0EE72E921D9E23B0009C087A /* ContainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainViewController.h; path = ViewController/ContainViewController.h; sourceTree = "<group>"; };
 		0EE72E931D9E23B0009C087A /* ContainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContainViewController.m; path = ViewController/ContainViewController.m; sourceTree = "<group>"; };
 		0EE72E961D9E2CC8009C087A /* TestChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestChildViewController.h; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 		0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLButtonBarViewCell.m; sourceTree = "<group>"; };
 		0EE72EC01D9E55ED009C087A /* LaunchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchingViewController.h; path = ViewController/LaunchingViewController.h; sourceTree = "<group>"; };
 		0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchingViewController.m; path = ViewController/LaunchingViewController.m; sourceTree = "<group>"; };
+		0EEBAB561DA24CA700D36D0E /* ListWebsiteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListWebsiteCell.h; path = ViewController/ListWebsiteCell.h; sourceTree = "<group>"; };
+		0EEBAB571DA24CA700D36D0E /* ListWebsiteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListWebsiteCell.m; path = ViewController/ListWebsiteCell.m; sourceTree = "<group>"; };
 		5225F86C1D8F69F20079E151 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 				0EE72E931D9E23B0009C087A /* ContainViewController.m */,
 				0EE72EC01D9E55ED009C087A /* LaunchingViewController.h */,
 				0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */,
+				0EEBAB591DA24CAE00D36D0E /* List website */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -166,6 +173,17 @@
 				0EE72EA91D9E2F75009C087A /* FXPageControl.m */,
 			);
 			path = FXPageControl;
+			sourceTree = "<group>";
+		};
+		0EEBAB591DA24CAE00D36D0E /* List website */ = {
+			isa = PBXGroup;
+			children = (
+				0ED7635E1DA24A390065F881 /* ListWebsitesController.h */,
+				0ED7635F1DA24A390065F881 /* ListWebsitesController.m */,
+				0EEBAB561DA24CA700D36D0E /* ListWebsiteCell.h */,
+				0EEBAB571DA24CA700D36D0E /* ListWebsiteCell.m */,
+			);
+			name = "List website";
 			sourceTree = "<group>";
 		};
 		52AB65A01D7DBA6B0032C527 /* Test */ = {
@@ -414,6 +432,8 @@
 				0EE72EB01D9E2F75009C087A /* XLBarPagerTabStripViewController.m in Sources */,
 				0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
+				0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */,
+				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
 				0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */,

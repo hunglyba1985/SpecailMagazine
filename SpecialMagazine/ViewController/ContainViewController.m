@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     listWebsites = [NSMutableArray new];
     
-    [self getCatagories];
+//    [self getCatagories];
 
     
     [self setupBarView];
@@ -119,7 +119,7 @@
         NSLog(@"reload new contain view ");
         NSMutableArray *catagories = [NSMutableArray new];
         
-        for (NSDictionary *tempDic  in listWebsites) {
+        for (NSDictionary *tempDic  in self.listCatagories) {
             
             ViewController *tempViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
             tempViewController.catagoryInfo = tempDic;

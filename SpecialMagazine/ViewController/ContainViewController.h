@@ -13,6 +13,7 @@
 
 @property (nonatomic,strong) NSArray* listCatagories;
 
+-(void)reloadPagerTabStripView;
 
 
 @end
