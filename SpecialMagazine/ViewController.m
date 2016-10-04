@@ -69,7 +69,7 @@
     [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[cellData objectForKey:COVER_IMAGE]]
                       placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    
+    cell.nameCell.text = [cellData objectForKey:TITLE_ARTICLE];
     
     return cell;
 }

@@ -23,6 +23,7 @@
 		0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EAF1D9E2F75009C087A /* XLButtonBarViewCell.m */; };
 		0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */; };
 		0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEBAB571DA24CA700D36D0E /* ListWebsiteCell.m */; };
+		0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EEBAB5A1DA34CAC00D36D0E /* document.json */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
 		52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB659E1D7DBA670032C527 /* DrawInView.m */; };
@@ -71,6 +72,7 @@
 		0EE72EC11D9E55ED009C087A /* LaunchingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchingViewController.m; path = ViewController/LaunchingViewController.m; sourceTree = "<group>"; };
 		0EEBAB561DA24CA700D36D0E /* ListWebsiteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListWebsiteCell.h; path = ViewController/ListWebsiteCell.h; sourceTree = "<group>"; };
 		0EEBAB571DA24CA700D36D0E /* ListWebsiteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListWebsiteCell.m; path = ViewController/ListWebsiteCell.m; sourceTree = "<group>"; };
+		0EEBAB5A1DA34CAC00D36D0E /* document.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = document.json; sourceTree = "<group>"; };
 		5225F86C1D8F69F20079E151 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		52EBA9861D7A667500273548 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0EEBAB5A1DA34CAC00D36D0E /* document.json */,
 				52EBA99E1D7A6C2A00273548 /* Define.h */,
 				52EBA9871D7A667500273548 /* main.m */,
 				52AB65CB1D7F94A10032C527 /* WeatherForecast.plist */,
@@ -353,6 +356,7 @@
 			files = (
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
+				0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */,
 				0EE72EB51D9E2F75009C087A /* ButtonCell.xib in Resources */,
 				52AB65CC1D7F94A10032C527 /* WeatherForecast.plist in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,

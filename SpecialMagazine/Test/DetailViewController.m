@@ -21,6 +21,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"content article is %@",[self.article objectForKey:CONTENT]);
+    
     [self.webView loadHTMLString:[self.article objectForKey:CONTENT] baseURL:nil];
     
     self.webView.delegate = self;
@@ -33,7 +35,7 @@
 
 {
     
-    [self.webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://'+a}"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://' + a}"];
     
 }
 
@@ -64,11 +66,11 @@
     
     NSString *currentImageLink = [arrayString objectAtIndex:1];
     
-    currentImageLink = [currentImageLink stringByReplacingOccurrencesOfString:@"http//" withString:@"http://"];
+    currentImageLink = [currentImageLink stringByReplacingOccurrencesOfString:@"//" withString:@"://"];
+    
+    NSLog(@"current image link is %@",currentImageLink);
     
     NSArray *arrayImages = [self.article objectForKey:LIST_IMAGES];
-    
-    
     
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
     

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageCell;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameCell;
 
 @end

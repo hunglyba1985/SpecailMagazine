@@ -35,6 +35,8 @@
 }
 
 
+
+
 -(void) setupBarView
 {
     NSLog(@"set up bar view ");

@@ -8,13 +8,17 @@
 
 #import "LaunchingViewController.h"
 #import "ContainViewController.h"
+#import "ListWebsitesController.h"
 
 
 @interface LaunchingViewController ()
 {
-    NSMutableArray *listWebsites;
 
 }
+
+@property (weak, nonatomic) IBOutlet UILabel *meaningfulSentence;
+
+
 @end
 
 @implementation LaunchingViewController
@@ -23,50 +27,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self getCatagories];
+    [self loadingBeautifulAdvice];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+-(void) loadingBeautifulAdvice
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"document" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    
+    int randomInt = arc4random_uniform((int)json.count);
+    
+    NSString *randomSentence = [json objectAtIndex:randomInt];
+    
+    NSLog(@" nice advices:  %@",randomSentence);
+
+    
+    self.meaningfulSentence.text = randomSentence;
+    
     
 }
+
+
 
 - (IBAction)clickToStart:(id)sender {
     
+    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
     
-    ContainViewController *containViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContainViewController"];
-//    containViewController.listCatagories = listWebsites;
-    [self presentViewController:containViewController animated:YES completion:nil];
-    
+    [self.navigationController pushViewController:listWebsites animated:YES];
     
 }
 
 
--(void) getCatagories
-{
-    [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
-        
-        if (dataResponse != nil) {
-            //            NSLog(@"get list all website ----------- %@",dataResponse);
-            
-            NSDictionary *website1 = [dataResponse objectAtIndex:0];
-            
-            NSArray *catalogWebsite1 = [website1 objectForKey:WEBSITE_CATEGORY];
-            
-            for (NSDictionary *dic in catalogWebsite1) {
-                
-                NSMutableDictionary *tempDic = [NSMutableDictionary new];
-                [tempDic setObject:[website1 objectForKey:WEBSITE_ID] forKey:WEBSITE_ID];
-                [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
-                [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
-                
-                [listWebsites addObject:tempDic];
-                
-                
-            }
-            NSLog(@"get catagories done");
-            
-        }
-        
-    }];
-    
-}
 
 
 - (void)didReceiveMemoryWarning {
