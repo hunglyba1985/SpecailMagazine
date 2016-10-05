@@ -6,9 +6,9 @@
 //  Copyright © 2016 Macbook Pro. All rights reserved.
 //
 
-#import <Realm/Realm.h>
+//#import <Realm/Realm.h>
 
-@interface ArticleObject : RLMObject
+@interface ArticleObject : NSObject
 
 @property int  cid;
 @property NSString *content;
@@ -33,4 +33,4 @@
 
 // This protocol enables typed collections. i.e.:
 // RLMArray<ArticleObject>
-RLM_ARRAY_TYPE(ArticleObject)
+//RLM_ARRAY_TYPE(ArticleObject)
