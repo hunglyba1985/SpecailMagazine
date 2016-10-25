@@ -7,8 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CellCollectionView.h"
 
-@interface CollectionViewCell : UICollectionViewCell
+
+@interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    NSMutableArray *collectionData;
+    
+}
+
 @property (weak, nonatomic) IBOutlet UILabel *lable;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+-(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo;
+
 
 @end

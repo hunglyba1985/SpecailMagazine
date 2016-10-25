@@ -10,7 +10,10 @@
 #import "CollectionViewCell.h"
 
 @interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
-
+{
+    NSMutableArray *collectionData;
+    
+}
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -38,23 +41,35 @@
     
 //    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell Collection"];
     UINib *nib = [UINib nibWithNibName:@"CollectionViewCell" bundle: nil];
-    
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"Cell Collection"];
     
+    
     UICollectionViewFlowLayout *layoutCollectionView = [[UICollectionViewFlowLayout alloc] init];
-    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionVertical;
+    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+//    layoutCollectionView.minimumInteritemSpacing = 0;
+//    layoutCollectionView.minimumLineSpacing = 0;
+    
     self.collectionView.collectionViewLayout = layoutCollectionView;
     
     self.collectionView.pagingEnabled = YES;
     
+    collectionData = [NSMutableArray new];
+    
 
+}
+
+-(void) reloadCatagories
+{
+    [self.collectionView reloadData];
+    
 }
 
 
 #pragma mark CollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 100;
+    return self.listCatagories.count;
     
 }
 
@@ -63,9 +78,8 @@
 {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell Collection" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor yellowColor];
-    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
-    
+    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+    [cell loadingDataForCatalog:oneCatagory];
     
     return cell;
 }
@@ -73,7 +87,7 @@
 
 #pragma mark CollectionView Delegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10);
+    return CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT - 10);
 }
 
 

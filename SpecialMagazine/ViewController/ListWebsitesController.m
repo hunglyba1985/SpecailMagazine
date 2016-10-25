@@ -9,6 +9,7 @@
 #import "ListWebsitesController.h"
 #import "ListWebsiteCell.h"
 #import "ContainViewController.h"
+#import "NewStyleViewController.h"
 
 
 @interface ListWebsitesController () <UITableViewDelegate,UITableViewDataSource>
@@ -104,11 +105,19 @@
         
     }
     
-    ContainViewController *containView = [self.storyboard instantiateViewControllerWithIdentifier:@"ContainViewController"];
-    containView.listCatagories = categoriesInWebsite;
-    [containView reloadPagerTabStripView];
-    [self.navigationController pushViewController:containView animated:YES];
+//    ContainViewController *containView = [self.storyboard instantiateViewControllerWithIdentifier:@"ContainViewController"];
+//    containView.listCatagories = categoriesInWebsite;
+//    [containView reloadPagerTabStripView];
+//    [self.navigationController pushViewController:containView animated:YES];
 
+    
+    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
+    newStyleController.listCatagories = categoriesInWebsite;
+    [newStyleController reloadCatagories];
+    
+    [self presentViewController:newStyleController animated:YES completion:nil];
+    
+    
 }
 
 

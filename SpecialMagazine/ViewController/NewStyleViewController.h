@@ -10,4 +10,11 @@
 
 @interface NewStyleViewController : UIViewController
 
+@property (nonatomic,strong) NSArray* listCatagories;
+
+-(void) reloadCatagories;
+
+
+
+
 @end
