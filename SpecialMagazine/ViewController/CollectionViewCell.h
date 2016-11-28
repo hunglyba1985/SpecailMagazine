@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CellCollectionView.h"
 
+@protocol CollectionViewCellDelegate <NSObject>
+
+-(void) selectedArticleWithInformation:(NSDictionary*) artistInfo;
+
+
+@end
+
 
 @interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -20,7 +27,16 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+
+
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo;
+
+@property (nonatomic,strong) NSDictionary *cellCatagoryInfo;
+
+
+
+@property(nonatomic,weak) id<CollectionViewCellDelegate> delegate;
+
 
 
 @end

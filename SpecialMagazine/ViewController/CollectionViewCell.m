@@ -41,22 +41,25 @@ NSDictionary * catagoryInfor;
     UICollectionViewFlowLayout *layoutCollectionView = [[UICollectionViewFlowLayout alloc] init];
     layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     [layoutCollectionView setSectionInset:UIEdgeInsetsMake(10, 0, 5, 5)];
-    layoutCollectionView.itemSize = CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT - 25);
+    layoutCollectionView.itemSize = CGSizeMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 25);
     layoutCollectionView.minimumInteritemSpacing = 0;
     layoutCollectionView.minimumLineSpacing = 0;
     
     
     self.collectionView.collectionViewLayout = layoutCollectionView;
     self.collectionView.pagingEnabled = YES;
-    collectionData = [NSMutableArray new];
     
     
 }
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
-    catagoryInfor = catagoryInfo;
+    self.cellCatagoryInfo = catagoryInfo;
     
+    NSLog(@"one catagory is %@",catagoryInfor);
+
+    collectionData = [NSMutableArray new];
+
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
@@ -72,7 +75,7 @@ NSDictionary * catagoryInfor;
 {
     NSDictionary *lastArticle = [collectionData lastObject];
     
-    [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfor objectForKey:WEBSITE_ID] andCatalog:[catagoryInfor objectForKey:WEBSITE_CATEGORY] andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
             [collectionData addObjectsFromArray:dataResponse];
@@ -107,6 +110,7 @@ NSDictionary * catagoryInfor;
     
     cell.descriptionLabel.text = [cellData objectForKey:DESC];
     
+    cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
     
     return cell;
 }
@@ -120,6 +124,19 @@ NSDictionary * catagoryInfor;
     }
 
 }
+
+-(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+    
+    NSDictionary *cellData = [collectionData objectAtIndex:indexPath.row];
+    
+    if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
+        [strongDelegate selectedArticleWithInformation:cellData];
+    }
+    
+}
+
 
 
 

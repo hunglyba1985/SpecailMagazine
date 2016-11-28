@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *catagory;
 
 @end

@@ -81,6 +81,12 @@
     
 }
 
+- (IBAction)backToCatalog:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
