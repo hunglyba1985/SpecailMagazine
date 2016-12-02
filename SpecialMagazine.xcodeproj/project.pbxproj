@@ -11,6 +11,7 @@
 		0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */; };
 		0E9AD5381DBF1B3800F6A666 /* CellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */; };
 		0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */; };
+		0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED628621DF01B6400898D15 /* TKNaviViewController.m */; };
 		0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED7635F1DA24A390065F881 /* ListWebsitesController.m */; };
 		0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E931D9E23B0009C087A /* ContainViewController.m */; };
 		0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE72E971D9E2CC8009C087A /* TestChildViewController.m */; };
@@ -54,6 +55,8 @@
 		0E9AD5351DBF1B3800F6A666 /* CellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCollectionView.h; path = ViewController/CellCollectionView.h; sourceTree = "<group>"; };
 		0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCollectionView.m; path = ViewController/CellCollectionView.m; sourceTree = "<group>"; };
 		0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCollectionView.xib; path = ViewController/CellCollectionView.xib; sourceTree = "<group>"; };
+		0ED628611DF01B6400898D15 /* TKNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKNaviViewController.h; sourceTree = "<group>"; };
+		0ED628621DF01B6400898D15 /* TKNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKNaviViewController.m; sourceTree = "<group>"; };
 		0ED7635E1DA24A390065F881 /* ListWebsitesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ListWebsitesController.h; path = ViewController/ListWebsitesController.h; sourceTree = "<group>"; };
 		0ED7635F1DA24A390065F881 /* ListWebsitesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ListWebsitesController.m; path = ViewController/ListWebsitesController.m; sourceTree = "<group>"; };
 		0EE72E921D9E23B0009C087A /* ContainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContainViewController.h; path = ViewController/ContainViewController.h; sourceTree = "<group>"; };
@@ -138,6 +141,42 @@
 				0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */,
 			);
 			path = HMSegmentedControl;
+			sourceTree = "<group>";
+		};
+		0ED6285F1DEFDFDA00898D15 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52EBA98F1D7A667500273548 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		0ED628601DF01B6400898D15 /* TransitioningCurp */ = {
+			isa = PBXGroup;
+			children = (
+				0ED628611DF01B6400898D15 /* TKNaviViewController.h */,
+				0ED628621DF01B6400898D15 /* TKNaviViewController.m */,
+			);
+			path = TransitioningCurp;
+			sourceTree = "<group>";
+		};
+		0ED628641DF01B7600898D15 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				0ED628601DF01B6400898D15 /* TransitioningCurp */,
+				0E604CF41DEC32A3006A5346 /* HMSegmentedControl */,
+				0EE72E991D9E2F75009C087A /* XL */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		0ED628651DF01B7E00898D15 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				52EBA9891D7A667500273548 /* AppDelegate.h */,
+				52EBA98A1D7A667500273548 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
 			sourceTree = "<group>";
 		};
 		0EE72E951D9E23B4009C087A /* Controller */ = {
@@ -272,10 +311,8 @@
 		52EBA9851D7A667500273548 /* SpecialMagazine */ = {
 			isa = PBXGroup;
 			children = (
-				0E604CF41DEC32A3006A5346 /* HMSegmentedControl */,
-				0EE72E991D9E2F75009C087A /* XL */,
-				52EBA9891D7A667500273548 /* AppDelegate.h */,
-				52EBA98A1D7A667500273548 /* AppDelegate.m */,
+				0ED628641DF01B7600898D15 /* Lib */,
+				0ED628651DF01B7E00898D15 /* App Delegate */,
 				52EBA98C1D7A667500273548 /* ViewController.h */,
 				52EBA98D1D7A667500273548 /* ViewController.m */,
 				0EE72E961D9E2CC8009C087A /* TestChildViewController.h */,
@@ -285,7 +322,7 @@
 				0EE72E951D9E23B4009C087A /* Controller */,
 				52AB65A01D7DBA6B0032C527 /* Test */,
 				52EBA9A21D7A6EE200273548 /* Model */,
-				52EBA98F1D7A667500273548 /* Main.storyboard */,
+				0ED6285F1DEFDFDA00898D15 /* View */,
 				52AB65C41D7F948F0032C527 /* Weather Modun */,
 				52EBA9921D7A667600273548 /* Assets.xcassets */,
 				52EBA9941D7A667600273548 /* LaunchScreen.storyboard */,
@@ -465,6 +502,7 @@
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */,
 				0E9AD5381DBF1B3800F6A666 /* CellCollectionView.m in Sources */,
+				0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */,
 				0EE72EB21D9E2F75009C087A /* XLPagerTabStripViewController.m in Sources */,
 				0EE72EB61D9E2F75009C087A /* FXPageControl.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,

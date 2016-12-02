@@ -30,7 +30,19 @@
     [self loadingBeautifulAdvice];
     
     self.navigationController.navigationBarHidden = YES;
+    
+    [self testYahooWeather];
+    
 }
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    
+}
+
+
 
 -(void) loadingBeautifulAdvice
 {
@@ -47,6 +59,18 @@
 
     
     self.meaningfulSentence.text = randomSentence;
+    
+    
+}
+
+-(void) testYahooWeather
+{
+    
+    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+    
+//    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
+//    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
+//    NSLog(@"weather of danang is %@",weather.danangWeather);
     
     
 }

@@ -19,6 +19,7 @@
 #import "ArticleObject.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <AFNetworking/UIImage+AFNetworking.h>
+#import "WeatherObject.h"
 
 
 #endif /* PrefixHeader_pch */

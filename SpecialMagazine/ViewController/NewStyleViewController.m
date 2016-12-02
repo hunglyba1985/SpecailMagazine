@@ -33,6 +33,8 @@
 //    self.view.backgroundColor = [UIColor yellowColor];
     
     NSLog(@"new style view controller did load");
+    self.navigationController.navigationBarHidden = YES;
+    
     
     [self setUpCollectionView];
     [self addVerticalSegment];
@@ -165,8 +167,9 @@
 
     detail.article = artistInfo;
     
-    [self presentViewController:detail animated:YES completion:nil];
+//    [self presentViewController:detail animated:YES completion:nil];
     
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 

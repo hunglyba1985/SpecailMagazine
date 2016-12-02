@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNeedsStatusBarAppearanceUpdate];
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBarHidden = YES;
     [self getCatagories];
 }
 
@@ -115,8 +115,9 @@
     newStyleController.listCatagories = categoriesInWebsite;
     [newStyleController reloadCatagories];
     
-    [self presentViewController:newStyleController animated:YES completion:nil];
+//    [self presentViewController:newStyleController animated:YES completion:nil];
     
+    [self.navigationController pushViewController:newStyleController animated:YES];
     
 }
 

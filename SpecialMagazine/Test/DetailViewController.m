@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
+    
     
     NSLog(@"content article is %@",[self.article objectForKey:CONTENT]);
     
