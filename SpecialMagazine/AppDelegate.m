@@ -18,7 +18,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
     NSLog(@"application did finish launching with option --");
 
     return YES;
@@ -26,7 +25,8 @@
 
 -(void) getWeatherForecast
 {
-    
+    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

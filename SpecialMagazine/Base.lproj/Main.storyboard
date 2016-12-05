@@ -222,9 +222,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Good morning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsJ-pb-2Kd">
-                                <rect key="frame" x="16" y="246" width="288" height="30"/>
+                                <rect key="frame" x="16" y="237" width="288" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6df-eE-pMR">
+                                <rect key="frame" x="9" y="284" width="295" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -243,6 +250,7 @@
                         <outlet property="currentDegree" destination="vnq-Rh-Yub" id="0NL-HD-Msz"/>
                         <outlet property="dateLabel" destination="5i9-Ek-nvj" id="1Sm-3k-JS2"/>
                         <outlet property="dayLabel" destination="8iM-u6-5p8" id="mfs-gQ-r5P"/>
+                        <outlet property="forcastWeather" destination="6df-eE-pMR" id="mLh-AR-EMS"/>
                         <outlet property="highDegree" destination="Nho-eO-zMn" id="DA2-Ig-BPw"/>
                         <outlet property="lowDegree" destination="PEb-MO-Udu" id="I9j-w2-zc5"/>
                         <outlet property="meaningfulSentence" destination="daf-Mv-3z8" id="kiw-51-g58"/>

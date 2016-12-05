@@ -55,8 +55,21 @@
 #define LIST_IMAGES @"listimage"
 
 
+#pragma mark - DEFINE WEATHER
+#define CURRENT_CONDITION_WEATHER @"CurrentConditionWeather"
+#define FORECAST_WEATHER @"ForecastWeather"
+#define ASTRONOMY @"Astronomy"
+
+#define FORECAST @"Forecast"
+#define DATE @"date"
+#define TEMP @"temp"
+#define LOW @"low"
+#define HIGH @"high"
+#define CODE @"code"
 
 
+// Notification Center
+#define NOTIFICATION_FOR_WEATHER @"Notification for weather"
 
 
 

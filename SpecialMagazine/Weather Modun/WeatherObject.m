@@ -102,6 +102,8 @@
     [allData setObject:self.forecastWeather forKey:FORECAST_WEATHER];
     
     
+    
+    
     if ([region isEqualToString:HANOI]) {
     
         self.hanoiWeather = allData;

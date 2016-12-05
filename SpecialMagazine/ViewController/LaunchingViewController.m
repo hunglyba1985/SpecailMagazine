@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *highDegree;
 @property (weak, nonatomic) IBOutlet UILabel *lowDegree;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
+@property (weak, nonatomic) IBOutlet UILabel *forcastWeather;
 
 
 @end
@@ -106,9 +107,15 @@
     
     WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
     
-//    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
+    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
 //    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
 //    NSLog(@"weather of danang is %@",weather.danangWeather);
+    
+    NSDictionary *currentWeather = [weather.hanoiWeather objectForKey:CURRENT_CONDITION_WEATHER];
+    self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
+    self.forcastWeather.text = [currentWeather objectForKey:FORECAST];
+    
+    
     
     
 }
