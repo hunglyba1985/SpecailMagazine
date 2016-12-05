@@ -17,6 +17,16 @@
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *meaningfulSentence;
+// Calendar
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
+
+// Weather
+@property (weak, nonatomic) IBOutlet UILabel *currentDegree;
+@property (weak, nonatomic) IBOutlet UILabel *highDegree;
+@property (weak, nonatomic) IBOutlet UILabel *lowDegree;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
 
 
 @end
@@ -27,11 +37,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"launching view did load");
+    
+    
     [self loadingBeautifulAdvice];
     
     self.navigationController.navigationBarHidden = YES;
     
     [self testYahooWeather];
+    
+    UITapGestureRecognizer *tapToView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToScreen)];
+    [self.view addGestureRecognizer:tapToView];
+    
+    [self setDayOfCalendar];
+    
+    
+}
+
+
+-(void) setDayOfCalendar
+{
+    NSDate * today = [NSDate date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    dateFormat.dateFormat = @"EEEE";
+    self.dateLabel.text = [dateFormat stringFromDate:today];
+    
+    dateFormat.dateFormat = @"MMMM";
+    self.monthLabel.text = [dateFormat stringFromDate:today];
+    
+    dateFormat.dateFormat = @"dd";
+    self.dayLabel.text = [dateFormat stringFromDate:today];
+    
+    
     
 }
 
@@ -85,6 +123,13 @@
     
 }
 
+-(void) tapToScreen
+{
+    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+    
+    [self.navigationController pushViewController:listWebsites animated:YES];
+
+}
 
 
 

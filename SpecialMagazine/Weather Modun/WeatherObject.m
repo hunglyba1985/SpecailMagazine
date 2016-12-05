@@ -15,7 +15,7 @@
 
 @implementation WeatherObject
 
--(id) getWeatherForecast
+- (id) getWeatherForecast
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"WeatherForecast" ofType:@"plist"];
     converForecast = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -126,6 +126,27 @@
     return cValue;
 }
 
-
+-(NSDictionary *) displayWeatherData
+{
+    NSMutableDictionary *temp = [NSMutableDictionary new];
+    
+    
+    
+    return temp;
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

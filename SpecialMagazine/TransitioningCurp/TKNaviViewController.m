@@ -31,7 +31,7 @@ CGFloat const MMDrawerDefaultShadowOpacity = 0.5;
 @end
 
 static CGFloat offset_float = 0.55;// Stretching parameters
-static CGFloat min_distance = 120;// The minimum distance Rebound
+static CGFloat min_distance = 100;// The minimum distance Rebound
 
 @implementation TKNaviViewController
 
@@ -216,7 +216,7 @@ static CGFloat min_distance = 120;// The minimum distance Rebound
     
     // we get the touch position by the window's coordinate
     CGPoint touchPoint = [recoginzer locationInView:KEY_WINDOW];
-    
+    NSLog(@"start point of panning %i",(int)touchPoint.x);
     // begin paning, show the backgroundView(last screenshot),if not exist, create it.
     if (recoginzer.state == UIGestureRecognizerStateBegan) {
         
@@ -248,6 +248,9 @@ static CGFloat min_distance = 120;// The minimum distance Rebound
         
         //End paning, always check that if it should move right or move left automatically
     }else if (recoginzer.state == UIGestureRecognizerStateEnded){
+        
+        
+        NSLog(@"check how far we pan %i",(int)(touchPoint.x - startPoint.x));
         
         if (touchPoint.x - startPoint.x > min_distance)
         {

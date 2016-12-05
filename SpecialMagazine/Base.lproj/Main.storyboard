@@ -130,12 +130,12 @@
                         <viewControllerLayoutGuide type="top" id="iIw-D2-XCc"/>
                         <viewControllerLayoutGuide type="bottom" id="QD8-EV-psl"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="cFV-ZV-NOP">
+                    <view key="view" contentMode="scaleToFill" id="cFV-ZV-NOP">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg1" translatesAutoresizingMaskIntoConstraints="NO" id="jUu-bl-DUE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show nice animation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b7-FM-H8I">
                                 <rect key="frame" x="51" y="463" width="218" height="21"/>
@@ -228,33 +228,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnJ-IB-4bh">
-                                <rect key="frame" x="63" y="530" width="194" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Rsj-nG-gZo"/>
-                                    <constraint firstAttribute="width" constant="194" id="pmW-MK-N1S"/>
-                                </constraints>
-                                <state key="normal" title="Click to view to start"/>
-                                <connections>
-                                    <action selector="clickToStart:" destination="Evc-xo-A5w" eventType="touchUpInside" id="qYV-Dc-4tK"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jUu-bl-DUE" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" id="Grv-VM-tIn"/>
-                            <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="SnJ-IB-4bh" secondAttribute="bottom" constant="8" id="HMS-hf-c65"/>
-                            <constraint firstItem="SnJ-IB-4bh" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" constant="63" id="Yq8-f8-XRI"/>
                             <constraint firstItem="jUu-bl-DUE" firstAttribute="top" secondItem="cFV-ZV-NOP" secondAttribute="top" id="abc-aM-fwF"/>
                             <constraint firstAttribute="trailing" secondItem="jUu-bl-DUE" secondAttribute="trailing" id="cak-Q0-xYC"/>
                             <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="jUu-bl-DUE" secondAttribute="bottom" id="cf7-bb-KeK"/>
-                            <constraint firstAttribute="trailing" secondItem="SnJ-IB-4bh" secondAttribute="trailing" constant="63" id="pyn-Im-7O9"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="oCr-TC-DtO"/>
                     <connections>
+                        <outlet property="currentDegree" destination="vnq-Rh-Yub" id="0NL-HD-Msz"/>
+                        <outlet property="dateLabel" destination="5i9-Ek-nvj" id="1Sm-3k-JS2"/>
+                        <outlet property="dayLabel" destination="8iM-u6-5p8" id="mfs-gQ-r5P"/>
+                        <outlet property="highDegree" destination="Nho-eO-zMn" id="DA2-Ig-BPw"/>
+                        <outlet property="lowDegree" destination="PEb-MO-Udu" id="I9j-w2-zc5"/>
                         <outlet property="meaningfulSentence" destination="daf-Mv-3z8" id="kiw-51-g58"/>
+                        <outlet property="monthLabel" destination="gxf-Ew-5Od" id="aF1-fJ-AZi"/>
+                        <outlet property="weatherIcon" destination="sK2-sn-bzq" id="fqT-VL-G9m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blR-96-tD3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,7 +280,7 @@
                                         <rect key="frame" x="35.5" y="0.0" width="219" height="197"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="219" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="197"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

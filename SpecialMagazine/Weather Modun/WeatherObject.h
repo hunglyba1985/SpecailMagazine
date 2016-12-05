@@ -21,6 +21,12 @@
 #define CODE @"code"
 
 
+@protocol WeatherObjectDelegate <NSObject>
+
+@optional
+
+@end
+
 @interface WeatherObject : NSObject
 {
     NSDictionary *converForecast;
@@ -34,11 +40,14 @@
 @property (nonatomic,strong) NSDictionary *hochiminhWeather;
 @property (nonatomic,strong) NSDictionary *danangWeather;
 
+@property (nonatomic,weak) id <WeatherObjectDelegate> delegate;
+
 
 //- (id)initWithJSONDict:(NSDictionary *)dict;
 
--(id) getWeatherForecast;
+- (id) getWeatherForecast;
 
+-(NSDictionary *) displayWeatherData;
 
 
 @end
