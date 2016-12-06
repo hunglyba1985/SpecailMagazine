@@ -175,7 +175,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="14°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEb-MO-Udu">
-                                        <rect key="frame" x="95" y="113" width="42" height="21"/>
+                                        <rect key="frame" x="95" y="111" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -185,6 +185,13 @@
                                         <rect key="frame" x="8" y="8" width="45" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TP Hồ Chí Minh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXK-UO-Hkd">
+                                        <rect key="frame" x="0.0" y="126" width="145" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -255,7 +262,9 @@
                         <outlet property="lowDegree" destination="PEb-MO-Udu" id="I9j-w2-zc5"/>
                         <outlet property="meaningfulSentence" destination="daf-Mv-3z8" id="kiw-51-g58"/>
                         <outlet property="monthLabel" destination="gxf-Ew-5Od" id="aF1-fJ-AZi"/>
+                        <outlet property="nameProvince" destination="NXK-UO-Hkd" id="zj2-PN-DKE"/>
                         <outlet property="weatherIcon" destination="sK2-sn-bzq" id="fqT-VL-G9m"/>
+                        <outlet property="wellcomeLabel" destination="fsJ-pb-2Kd" id="GVr-ZI-eYu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blR-96-tD3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,7 +297,7 @@
                                         <rect key="frame" x="35.5" y="0.0" width="219" height="197"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="219" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="220" height="197"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

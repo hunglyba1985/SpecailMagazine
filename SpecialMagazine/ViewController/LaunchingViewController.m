@@ -10,11 +10,13 @@
 #import "ContainViewController.h"
 #import "ListWebsitesController.h"
 #import "FLAnimatedImage.h"
+#import "CurrentLocationManager.h"
 
 
 @interface LaunchingViewController ()
 {
-
+    WeatherObject *weather;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *meaningfulSentence;
@@ -29,6 +31,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lowDegree;
 @property (weak, nonatomic) IBOutlet FLAnimatedImageView *weatherIcon;
 @property (weak, nonatomic) IBOutlet UILabel *forcastWeather;
+@property (weak, nonatomic) IBOutlet UILabel *nameProvince;
+
+// Launching wellcome
+@property (weak, nonatomic) IBOutlet UILabel *wellcomeLabel;
 
 
 @end
@@ -71,6 +77,20 @@
     dateFormat.dateFormat = @"dd";
     self.dayLabel.text = [dateFormat stringFromDate:today];
     
+    dateFormat.dateFormat = @"HH";
+//    NSLog(@"get current time %@",[dateFormat stringFromDate:today]);
+    int hours = [[dateFormat stringFromDate:today] intValue];
+    if (hours > 7 && hours < 12 ) {
+        self.wellcomeLabel.text = @"Good morning";
+    }
+    else if (hours >= 12 && hours < 18)
+    {
+        self.wellcomeLabel.text = @"Good afternoon";
+    }
+    else
+    {
+        self.wellcomeLabel.text = @"Good evening";
+    }
     
     
 }
@@ -79,6 +99,15 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_WEATHER object:nil];
+    
+    
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -106,17 +135,49 @@
 -(void) setYahooWeather
 {
     
-    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+     weather = [[WeatherObject alloc] getWeatherForecast];
     
     NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
 //    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
 //    NSLog(@"weather of danang is %@",weather.danangWeather);
     
-    NSDictionary *currentWeather = [weather.hanoiWeather objectForKey:CURRENT_CONDITION_WEATHER];
-    self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
-    self.forcastWeather.text = [currentWeather objectForKey:FORECAST];
+    [self setDataForWeatherView:weather.hanoiWeather inProvince:@"TP Hà Nội"];
     
-    NSArray *forecast = [weather.hanoiWeather objectForKey:FORECAST_WEATHER];
+    
+}
+
+-(void) getLocalProvince:(NSNotification *) userData
+{
+    NSDictionary *localData = [userData userInfo];
+    
+    NSLog(@"local data is %@", localData);
+    
+    NSString *localProvince = [localData objectForKey:PROVINCE];
+    
+    if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
+        
+        [self setDataForWeatherView:weather.danangWeather inProvince:@"TP Đà Nẵng"];
+    }
+    else if ([localProvince isEqualToString:@"Ho Chi Minh City"])
+    {
+        [self setDataForWeatherView:weather.hochiminhWeather inProvince:@"TP Hồ Chí Minh"];
+    }
+    else
+    {
+        [self setDataForWeatherView:weather.hanoiWeather inProvince:@"TP Hà Nội"];
+    }
+    
+    
+}
+
+
+-(void) setDataForWeatherView:(NSDictionary *) weatherDic inProvince:(NSString *) provinceName
+{
+    NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
+    self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
+    self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
+    
+    NSArray *forecast = [weatherDic objectForKey:FORECAST_WEATHER];
     NSDictionary *object1 = [forecast firstObject];
     
     self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
@@ -124,20 +185,14 @@
     
     
     FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
-
+    
     self.weatherIcon.animatedImage = image;
     
+    self.nameProvince.text = provinceName;
+
 }
 
 
-
-- (IBAction)clickToStart:(id)sender {
-    
-    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
-    
-    [self.navigationController pushViewController:listWebsites animated:YES];
-    
-}
 
 -(void) tapToScreen
 {

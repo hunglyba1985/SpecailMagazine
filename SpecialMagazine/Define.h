@@ -66,6 +66,8 @@
 #define LOW @"low"
 #define HIGH @"high"
 #define CODE @"code"
+#define PROVINCE @"province"
+
 
 
 // Notification Center

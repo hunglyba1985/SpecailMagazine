@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "CurrentLocationManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIAlertViewDelegate>
 
 @end
 
@@ -20,14 +21,36 @@
     
     NSLog(@"application did finish launching with option --");
 
+    [self getCurrentLocation];
+    
     return YES;
 }
 
--(void) getWeatherForecast
+
+-(void) getCurrentLocation
 {
-    WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
+    if ([[CurrentLocationManager sharedInstance] checkLocationAuthorizationStatus]) {
+        NSLog(@"gain permission to access current location ");
+    }
+    else
+    {
+        NSLog(@"fail to get current location");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Bật location để chúng tôi thông báo dự báo thời tiết cho bạn tốt hơn." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        [alertView show];
+
+    }
+}
+
+#pragma mark - AlertView Delegate
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:settingsURL];
+    }
 
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

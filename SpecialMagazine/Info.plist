@@ -50,5 +50,7 @@
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Truy cập để dự báo thời tiết tốt hơn.</string>
 </dict>
 </plist>

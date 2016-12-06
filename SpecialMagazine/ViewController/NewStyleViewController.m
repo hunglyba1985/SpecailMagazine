@@ -167,6 +167,7 @@
 
     detail.article = artistInfo;
     
+    NSLog(@"article information is %@",artistInfo);
 //    [self presentViewController:detail animated:YES completion:nil];
     
     [self.navigationController pushViewController:detail animated:YES];
