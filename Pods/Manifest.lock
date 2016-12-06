@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - DACircularProgress (2.3.1)
+  - FLAnimatedImage (1.0.12)
   - IDMPhotoBrowser (1.8.4):
     - DACircularProgress
     - pop
@@ -32,16 +33,18 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - FLAnimatedImage (~> 1.0)
   - IDMPhotoBrowser
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: 1fdc2e661db9cfd7aa4268ee60554bda4495f987
+PODFILE CHECKSUM: bf322c04ecbbe4b5aa92a1a7c501e23668a5b8eb
 
 COCOAPODS: 1.1.1

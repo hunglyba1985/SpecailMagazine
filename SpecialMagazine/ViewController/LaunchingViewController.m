@@ -9,6 +9,7 @@
 #import "LaunchingViewController.h"
 #import "ContainViewController.h"
 #import "ListWebsitesController.h"
+#import "FLAnimatedImage.h"
 
 
 @interface LaunchingViewController ()
@@ -26,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentDegree;
 @property (weak, nonatomic) IBOutlet UILabel *highDegree;
 @property (weak, nonatomic) IBOutlet UILabel *lowDegree;
-@property (weak, nonatomic) IBOutlet UIImageView *weatherIcon;
+@property (weak, nonatomic) IBOutlet FLAnimatedImageView *weatherIcon;
 @property (weak, nonatomic) IBOutlet UILabel *forcastWeather;
 
 
@@ -45,7 +46,7 @@
     
     self.navigationController.navigationBarHidden = YES;
     
-    [self testYahooWeather];
+    [self setYahooWeather];
     
     UITapGestureRecognizer *tapToView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToScreen)];
     [self.view addGestureRecognizer:tapToView];
@@ -102,7 +103,7 @@
     
 }
 
--(void) testYahooWeather
+-(void) setYahooWeather
 {
     
     WeatherObject *weather = [[WeatherObject alloc] getWeatherForecast];
@@ -115,8 +116,16 @@
     self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
     self.forcastWeather.text = [currentWeather objectForKey:FORECAST];
     
+    NSArray *forecast = [weather.hanoiWeather objectForKey:FORECAST_WEATHER];
+    NSDictionary *object1 = [forecast firstObject];
+    
+    self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
+    self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
     
     
+    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
+
+    self.weatherIcon.animatedImage = image;
     
 }
 
