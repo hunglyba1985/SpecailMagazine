@@ -25,7 +25,6 @@
     if (error) NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
     
     
-    
     return results;
 }
 

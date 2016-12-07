@@ -8,15 +8,15 @@
 
 #import "WeatherObject.h"
 
-#define HANOI @"hanoi"
-#define HOCHIMINH @"hochiminh"
-#define DANANG @"danang"
+
 
 
 @implementation WeatherObject
 
 - (id) getWeatherForecast
 {
+    self.saveForecastWeather = [NSMutableDictionary new];
+    
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"WeatherForecast" ofType:@"plist"];
     converForecast = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     
@@ -41,84 +41,95 @@
 
 - (void)initWithJSONDict:(NSDictionary *)dict forRegion:(NSString*) region
 {
-    
-    NSDictionary *query = [dict objectForKey:@"query"];
-    
-    NSDictionary *result = [query objectForKey:@"results"];
-    
-    NSDictionary *channel = [result objectForKey:@"channel"];
-    
-    self.astronomy =  [channel objectForKey:@"astronomy"];
-    
-    
-    NSDictionary *item = [channel objectForKey:@"item"];
-    
-    
-    // Convert F to C for current condition of weather
-    NSDictionary *current = [item objectForKey:@"condition"];
-    NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithDictionary:current];
-    int fTemp = [[temp objectForKey:@"temp"] intValue];
-    int cTemp = [self convertFToC:fTemp];
-    [temp removeObjectForKey:@"temp"];
-    [temp setObject:[NSString stringWithFormat:@"%i",cTemp] forKey:@"temp"];
-    NSString *forecastWeather = [converForecast objectForKey:[current objectForKey:CODE]];
-    if (forecastWeather) {
-        [temp setObject:forecastWeather forKey:FORECAST];
-    }
-    self.currentWeatherCondition = temp;
-    
-    
-    
-    // Convert F to C for few days weather
-    NSArray *array = [item objectForKey:@"forecast"];
-    NSMutableArray *tempArray = [NSMutableArray new];
-    for (NSDictionary *dic  in array) {
+    if (dict != nil) {
+        NSDictionary *query = [dict objectForKey:@"query"];
         
-        NSMutableDictionary *dicTemp = [[NSMutableDictionary alloc] initWithDictionary:dic];
+        NSDictionary *result = [query objectForKey:@"results"];
         
-        int high = [[dic objectForKey:HIGH] intValue];
-        int convertHight = [self convertFToC:high];
-        [dicTemp removeObjectForKey:HIGH];
-        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertHight] forKey:HIGH];
+        NSDictionary *channel = [result objectForKey:@"channel"];
+        
+        self.astronomy =  [channel objectForKey:@"astronomy"];
         
         
-        int low = [[dic objectForKey:LOW] intValue];
-        int convertLow = [self convertFToC:low];
-        [dicTemp removeObjectForKey:LOW];
-        [dicTemp setObject:[NSString stringWithFormat:@"%i",convertLow] forKey:LOW];
+        NSDictionary *item = [channel objectForKey:@"item"];
         
-        NSString *forecastWeather = [converForecast objectForKey:[dic objectForKey:CODE]];
+        
+        // Convert F to C for current condition of weather
+        NSDictionary *current = [item objectForKey:@"condition"];
+        NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithDictionary:current];
+        int fTemp = [[temp objectForKey:@"temp"] intValue];
+        int cTemp = [self convertFToC:fTemp];
+        [temp removeObjectForKey:@"temp"];
+        [temp setObject:[NSString stringWithFormat:@"%i",cTemp] forKey:@"temp"];
+        NSString *forecastWeather = [converForecast objectForKey:[current objectForKey:CODE]];
         if (forecastWeather) {
-            [dicTemp setObject:forecastWeather forKey:FORECAST];
+            [temp setObject:forecastWeather forKey:FORECAST];
         }
-        [tempArray addObject:dicTemp];
-    }
-    
-    self.forecastWeather = tempArray;
-    
-    NSMutableDictionary *allData = [NSMutableDictionary new];
-    [allData setObject:self.astronomy forKey:ASTRONOMY];
-    [allData setObject:self.currentWeatherCondition forKey:CURRENT_CONDITION_WEATHER];
-    [allData setObject:self.forecastWeather forKey:FORECAST_WEATHER];
-    
-    
-    
-    
-    if ([region isEqualToString:HANOI]) {
-    
-        self.hanoiWeather = allData;
+        self.currentWeatherCondition = temp;
         
-    }
-    else if ([region isEqualToString:HOCHIMINH])
-    {
-        self.hochiminhWeather = allData;
+        
+        // Convert F to C for few days weather
+        NSArray *array = [item objectForKey:@"forecast"];
+        NSMutableArray *tempArray = [NSMutableArray new];
+        for (NSDictionary *dic  in array) {
+            
+            NSMutableDictionary *dicTemp = [[NSMutableDictionary alloc] initWithDictionary:dic];
+            
+            int high = [[dic objectForKey:HIGH] intValue];
+            int convertHight = [self convertFToC:high];
+            [dicTemp removeObjectForKey:HIGH];
+            [dicTemp setObject:[NSString stringWithFormat:@"%i",convertHight] forKey:HIGH];
+            
+            
+            int low = [[dic objectForKey:LOW] intValue];
+            int convertLow = [self convertFToC:low];
+            [dicTemp removeObjectForKey:LOW];
+            [dicTemp setObject:[NSString stringWithFormat:@"%i",convertLow] forKey:LOW];
+            
+            NSString *forecastWeather = [converForecast objectForKey:[dic objectForKey:CODE]];
+            if (forecastWeather) {
+                [dicTemp setObject:forecastWeather forKey:FORECAST];
+            }
+            [tempArray addObject:dicTemp];
+        }
+        
+        self.forecastWeather = tempArray;
+        
+        NSMutableDictionary *allData = [NSMutableDictionary new];
+        [allData setObject:self.astronomy forKey:ASTRONOMY];
+        [allData setObject:self.currentWeatherCondition forKey:CURRENT_CONDITION_WEATHER];
+        [allData setObject:self.forecastWeather forKey:FORECAST_WEATHER];
+        
+        
+        
+        
+        if ([region isEqualToString:HANOI]) {
+            
+            self.hanoiWeather = allData;
+            [self.saveForecastWeather setObject:self.hanoiWeather forKey:HANOI];
+        }
+        else if ([region isEqualToString:HOCHIMINH])
+        {
+            self.hochiminhWeather = allData;
+            [self.saveForecastWeather setObject:self.hochiminhWeather forKey:HOCHIMINH];
+        }
+        else
+        {
+            self.danangWeather = allData;
+            [self.saveForecastWeather setObject:self.danangWeather forKey:DANANG];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.saveForecastWeather forKey:WEATHER_SAVE];
     }
     else
     {
-        self.danangWeather = allData;
+        NSDictionary *getOldData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:WEATHER_SAVE];
+        
+        self.hanoiWeather = [getOldData objectForKey:HANOI];
+        self.hochiminhWeather = [getOldData objectForKey:HOCHIMINH];
+        self.danangWeather = [getOldData objectForKey:DANANG];
     }
-    
-    
+ 
 }
 
 -(int) convertFToC:(int) fValue

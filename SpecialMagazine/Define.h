@@ -56,6 +56,10 @@
 
 
 #pragma mark - DEFINE WEATHER
+#define HANOI @"hanoi"
+#define HOCHIMINH @"hochiminh"
+#define DANANG @"danang"
+
 #define CURRENT_CONDITION_WEATHER @"CurrentConditionWeather"
 #define FORECAST_WEATHER @"ForecastWeather"
 #define ASTRONOMY @"Astronomy"
@@ -68,6 +72,7 @@
 #define CODE @"code"
 #define PROVINCE @"province"
 
+#define WEATHER_SAVE @"Weather save"
 
 
 // Notification Center

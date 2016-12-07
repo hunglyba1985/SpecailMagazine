@@ -80,10 +80,10 @@
     dateFormat.dateFormat = @"HH";
 //    NSLog(@"get current time %@",[dateFormat stringFromDate:today]);
     int hours = [[dateFormat stringFromDate:today] intValue];
-    if (hours > 7 && hours < 12 ) {
+    if (hours > 5 && hours < 12 ) {
         self.wellcomeLabel.text = @"Good morning";
     }
-    else if (hours >= 12 && hours < 18)
+    else if (hours >= 12 && hours < 19)
     {
         self.wellcomeLabel.text = @"Good afternoon";
     }
@@ -173,23 +173,26 @@
 
 -(void) setDataForWeatherView:(NSDictionary *) weatherDic inProvince:(NSString *) provinceName
 {
-    NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
-    self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
-    self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
-    
-    NSArray *forecast = [weatherDic objectForKey:FORECAST_WEATHER];
-    NSDictionary *object1 = [forecast firstObject];
-    
-    self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
-    self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
-    
-    
-    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
-    
-    self.weatherIcon.animatedImage = image;
-    
-    self.nameProvince.text = provinceName;
+    if (weatherDic != nil) {
+        NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
+        self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
+        self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
+        
+        NSArray *forecast = [weatherDic objectForKey:FORECAST_WEATHER];
+        NSDictionary *object1 = [forecast firstObject];
+        
+        self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
+        self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
+        
+        
+        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
+        
+        self.weatherIcon.animatedImage = image;
+        
+        self.nameProvince.text = provinceName;
 
+    }
+ 
 }
 
 

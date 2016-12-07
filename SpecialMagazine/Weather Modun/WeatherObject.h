@@ -31,6 +31,8 @@
 @property (nonatomic,strong) NSDictionary *hochiminhWeather;
 @property (nonatomic,strong) NSDictionary *danangWeather;
 
+@property (nonatomic,strong) NSMutableDictionary *saveForecastWeather;
+
 @property (nonatomic,weak) id <WeatherObjectDelegate> delegate;
 
 
