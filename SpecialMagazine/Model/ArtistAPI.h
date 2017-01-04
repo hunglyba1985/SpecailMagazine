@@ -19,6 +19,9 @@ typedef void(^GetAPIRequestHandle)(id dataResponse, NSError *error);
 -(void) getAllWebsite:(GetAPIRequestHandle) result;
 -(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid andLastId:(NSString *) lid successResult:(GetAPIRequestHandle) result;
 
+-(void) downloadForNoInternet;
+
+@property (nonatomic,strong) NSMutableArray *downloadData;
 
 
 

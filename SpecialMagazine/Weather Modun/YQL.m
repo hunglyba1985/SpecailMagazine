@@ -16,7 +16,7 @@
 - (NSDictionary *) query: (NSString *)statement {
     NSString *query = [NSString stringWithFormat:@"%@%@%@", QUERY_PREFIX, [statement stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], QUERY_SUFFIX];
     
-    NSLog(@"query yahoo %@",query);
+//    NSLog(@"query yahoo %@",query);
     
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -25,7 +25,7 @@
     
     [manager GET:query parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"get data from yahoo never stable %@",responseObject);
+//        NSLog(@"get data from yahoo never stable %@",responseObject);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

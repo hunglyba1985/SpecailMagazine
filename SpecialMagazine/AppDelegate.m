@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CurrentLocationManager.h"
+#import "Reachability.h"
 
 @interface AppDelegate () <UIAlertViewDelegate>
 
@@ -23,8 +24,12 @@
 
     [self getCurrentLocation];
     
+//    NSLog(@"get document path: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
+
+    
     return YES;
 }
+
 
 
 -(void) getCurrentLocation

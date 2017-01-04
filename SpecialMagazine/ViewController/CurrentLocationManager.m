@@ -115,15 +115,15 @@ static CurrentLocationManager *sharedLocationController = nil;
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             
-             NSLog(@"get current location -------------------------- ");
-             
-             NSLog(@"get current postalCode %@",placemark.postalCode);
-             NSLog(@"get current subAdministrativeArea %@",placemark.subAdministrativeArea);
-             NSLog(@"get current administrativeArea %@",placemark.administrativeArea);
-             NSLog(@"get current locality %@",placemark.locality);
-             NSLog(@"get current subLocality %@",placemark.subLocality);
-             NSLog(@"get current country %@",placemark.country);
+//             
+//             NSLog(@"get current location -------------------------- ");
+//             
+//             NSLog(@"get current postalCode %@",placemark.postalCode);
+//             NSLog(@"get current subAdministrativeArea %@",placemark.subAdministrativeArea);
+//             NSLog(@"get current administrativeArea %@",placemark.administrativeArea);
+//             NSLog(@"get current locality %@",placemark.locality);
+//             NSLog(@"get current subLocality %@",placemark.subLocality);
+//             NSLog(@"get current country %@",placemark.country);
              
              NSDictionary *currentProvince = @{PROVINCE:placemark.administrativeArea};
              [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_WEATHER object:nil userInfo:currentProvince];

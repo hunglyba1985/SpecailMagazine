@@ -71,6 +71,9 @@ static ArtistAPI  *sharedController = nil;
             NSDictionary *dic = dataResponse;
             NSArray *listArticle = [dic objectForKey:LINFOS];
             
+            [self addDataToRealm:listArticle];
+            
+            
             result(listArticle,nil);
         }
         else
@@ -80,6 +83,37 @@ static ArtistAPI  *sharedController = nil;
         
     }];
   
+}
+
+-(void) addDataToRealm:(NSArray*) data
+{
+    NSLog(@"add data to realm");
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+        
+        [data enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            ArticleRealm *article = [[ArticleRealm alloc] initWithDictionary:obj];
+            
+            [realm beginWriteTransaction];
+            [realm addObject:article];
+            [realm commitWriteTransaction];
+            
+            
+        }];
+
+    });
+    
+//    NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
+
+    
+    
+
 }
 
 
@@ -107,6 +141,12 @@ static ArtistAPI  *sharedController = nil;
 
 
 
+-(void) downloadForNoInternet
+{
+    self.downloadData = [NSMutableArray new];
+    
+    
+}
 
 
 

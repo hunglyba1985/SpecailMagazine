@@ -11,6 +11,8 @@
 		0E28EFBA1DF6A451000F2176 /* CurrentLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E28EFB91DF6A451000F2176 /* CurrentLocationManager.m */; };
 		0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */; };
 		0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */; };
+		0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75931E1CE01B00092056 /* ArticleRealm.m */; };
+		0E6B75981E1CEF9600092056 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75971E1CEF9600092056 /* Reachability.m */; };
 		0E9AD5381DBF1B3800F6A666 /* CellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */; };
 		0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */; };
 		0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED628621DF01B6400898D15 /* TKNaviViewController.m */; };
@@ -57,6 +59,10 @@
 		0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0E604CF51DEC32A3006A5346 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		0E6B75921E1CE01B00092056 /* ArticleRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleRealm.h; path = Model/ArticleRealm.h; sourceTree = "<group>"; };
+		0E6B75931E1CE01B00092056 /* ArticleRealm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleRealm.m; path = Model/ArticleRealm.m; sourceTree = "<group>"; };
+		0E6B75961E1CEF9600092056 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0E6B75971E1CEF9600092056 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0E9AD5351DBF1B3800F6A666 /* CellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCollectionView.h; path = ViewController/CellCollectionView.h; sourceTree = "<group>"; };
 		0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCollectionView.m; path = ViewController/CellCollectionView.m; sourceTree = "<group>"; };
 		0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCollectionView.xib; path = ViewController/CellCollectionView.xib; sourceTree = "<group>"; };
@@ -167,6 +173,15 @@
 			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
+		0E6B75951E1CEF9600092056 /* Check network */ = {
+			isa = PBXGroup;
+			children = (
+				0E6B75961E1CEF9600092056 /* Reachability.h */,
+				0E6B75971E1CEF9600092056 /* Reachability.m */,
+			);
+			path = "Check network";
+			sourceTree = "<group>";
+		};
 		0ED6285F1DEFDFDA00898D15 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +202,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				0E6B75951E1CEF9600092056 /* Check network */,
 				0ED628601DF01B6400898D15 /* TransitioningCurp */,
 				0E604CF41DEC32A3006A5346 /* HMSegmentedControl */,
 				0EE72E991D9E2F75009C087A /* XL */,
@@ -375,6 +391,8 @@
 				52EBA9A01D7A6ED700273548 /* ArtistAPI.m */,
 				0E1F12011D8BB200007F77EC /* ArticleObject.h */,
 				0E1F12021D8BB200007F77EC /* ArticleObject.m */,
+				0E6B75921E1CE01B00092056 /* ArticleRealm.h */,
+				0E6B75931E1CE01B00092056 /* ArticleRealm.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -547,8 +565,10 @@
 				0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 				0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */,
+				0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */,
 				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
+				0E6B75981E1CEF9600092056 /* Reachability.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
 				0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */,
 				5288D21A1DBEDD19003A000D /* CollectionViewCell.m in Sources */,

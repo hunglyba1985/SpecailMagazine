@@ -11,6 +11,7 @@
 #import "ListWebsitesController.h"
 #import "FLAnimatedImage.h"
 #import "CurrentLocationManager.h"
+#import "Reachability.h"
 
 
 @interface LaunchingViewController ()
@@ -59,8 +60,36 @@
     
     [self setDayOfCalendar];
     
+    [self checkConnectNetwork];
     
 }
+
+-(void) checkConnectNetwork
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        //No internet
+        NSLog(@"not connect to internet");
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+        NSLog(@"connect to internet by wifi");
+        
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+        NSLog(@"connect to internet by 3G");
+        
+    }
+}
+
 
 
 -(void) setDayOfCalendar
@@ -101,8 +130,14 @@
     self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_WEATHER object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+
+    
     
 }
+
+
+
 
 -(void) viewDidDisappear:(BOOL)animated
 {
@@ -137,7 +172,7 @@
     
      weather = [[WeatherObject alloc] getWeatherForecast];
     
-    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
+//    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
 //    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
 //    NSLog(@"weather of danang is %@",weather.danangWeather);
     
@@ -150,7 +185,7 @@
 {
     NSDictionary *localData = [userData userInfo];
     
-    NSLog(@"local data is %@", localData);
+//    NSLog(@"local data is %@", localData);
     
     NSString *localProvince = [localData objectForKey:PROVINCE];
     
@@ -196,6 +231,28 @@
 }
 
 
+- (void) reachabilityChanged:(NSNotification *)note
+{
+    
+    NSLog(@"connection change status");
+    
+    Reachability* curReach = [note object];
+    
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    
+    if (netStatus == NotReachable) {
+        
+        NSLog(@"don't have internet");
+        
+    }
+    else
+    {
+        NSLog(@" have internet");
+        
+    }
+    
+}
+
 
 -(void) tapToScreen
 {
@@ -204,6 +261,13 @@
     [self.navigationController pushViewController:listWebsites animated:YES];
 
 }
+
+- (IBAction)downloadClick:(id)sender {
+    
+    NSLog(@"download click");
+    
+}
+
 
 
 

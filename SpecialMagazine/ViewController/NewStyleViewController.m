@@ -41,6 +41,12 @@
     
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
+
 -(void) addVerticalSegment
 {
 //    NSLog(@"list catalog is %@",self.listCatagories);
@@ -135,6 +141,7 @@
     
     NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
     
+//    NSLog(@"one catagory is %@",oneCatagory);
     
     [cell loadingDataForCatalog:oneCatagory];
     

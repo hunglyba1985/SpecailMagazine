@@ -56,7 +56,7 @@ NSDictionary * catagoryInfor;
 {
     self.cellCatagoryInfo = catagoryInfo;
     
-    NSLog(@"one catagory is %@",catagoryInfor);
+//    NSLog(@"one catagory is %@",catagoryInfor);
 
     collectionData = [NSMutableArray new];
 
