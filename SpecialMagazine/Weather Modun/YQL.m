@@ -18,6 +18,23 @@
     
     NSLog(@"query yahoo %@",query);
     
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    [manager GET:query parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"get data from yahoo never stable %@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+      
+        
+        
+    }];
+
+    
     NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error] : nil;

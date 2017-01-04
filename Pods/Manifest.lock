@@ -27,6 +27,9 @@ PODS:
     - pop
     - SDWebImage
   - pop (1.0.9)
+  - Realm (2.1.2):
+    - Realm/Headers (= 2.1.2)
+  - Realm/Headers (2.1.2)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
@@ -35,6 +38,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - FLAnimatedImage (~> 1.0)
   - IDMPhotoBrowser
+  - Realm
   - SDWebImage
 
 SPEC CHECKSUMS:
@@ -43,8 +47,9 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: bf322c04ecbbe4b5aa92a1a7c501e23668a5b8eb
+PODFILE CHECKSUM: f0f35a75e1d1ca2fb0bc2ad167904b7cd37fad42
 
 COCOAPODS: 1.1.1
