@@ -132,7 +132,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
 
-    
+        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
+
     
 }
 
@@ -265,6 +266,10 @@
 - (IBAction)downloadClick:(id)sender {
     
     NSLog(@"download click");
+    
+    
+    [ARTIST_API downloadForNoInternet];
+    
     
 }
 

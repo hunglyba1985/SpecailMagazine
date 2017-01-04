@@ -21,6 +21,7 @@
 #import <AFNetworking/UIImage+AFNetworking.h>
 #import "WeatherObject.h"
 #import "ArticleRealm.h"
+#import "Reachability.h"
 
 
 #endif /* PrefixHeader_pch */

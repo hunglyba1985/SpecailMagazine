@@ -71,8 +71,6 @@ static ArtistAPI  *sharedController = nil;
             NSDictionary *dic = dataResponse;
             NSArray *listArticle = [dic objectForKey:LINFOS];
             
-            [self addDataToRealm:listArticle];
-            
             
             result(listArticle,nil);
         }
@@ -109,7 +107,6 @@ static ArtistAPI  *sharedController = nil;
 
     });
     
-//    NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
 
     
     
@@ -146,8 +143,39 @@ static ArtistAPI  *sharedController = nil;
     self.downloadData = [NSMutableArray new];
     
     
+    [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
+        if (dataResponse != nil)
+        {
+          
+            NSArray *arrayArticle = dataResponse;
+            [self.downloadData addObjectsFromArray:arrayArticle];
+            [self addDataToRealm:arrayArticle];
+            [self loadMoreForDownload];
+            
+        }
+    }];
+
+    
 }
 
+
+-(void) loadMoreForDownload
+{
+    NSDictionary *lastArticle = [self.downloadData lastObject];
+
+    [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+        if (dataResponse != nil)
+        {
+            
+            NSArray *arrayArticle = dataResponse;
+            [self.downloadData addObjectsFromArray:arrayArticle];
+            [self addDataToRealm:arrayArticle];
+            [self loadMoreForDownload];
+
+        }
+    }];
+
+}
 
 
 

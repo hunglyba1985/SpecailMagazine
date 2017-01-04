@@ -17,6 +17,9 @@
     NSMutableArray *collectionData;
     HMSegmentedControl *segmentedControl1;
     
+    BOOL haveInternet;
+    
+    
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -38,8 +41,39 @@
     
     [self setUpCollectionView];
     [self addVerticalSegment];
+    [self checkConnectNetwork];
     
 }
+
+-(void) checkConnectNetwork
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        //No internet
+        NSLog(@"not connect to internet");
+        
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+        NSLog(@"connect to internet by wifi");
+        
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+        NSLog(@"connect to internet by 3G");
+        
+    }
+}
+
+
+
 
 -(void) viewWillAppear:(BOOL)animated
 {

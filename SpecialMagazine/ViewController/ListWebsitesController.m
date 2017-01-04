@@ -52,7 +52,7 @@
     [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
         
         if (dataResponse != nil) {
-            //            NSLog(@"get list all website ----------- %@",dataResponse);
+                        NSLog(@"get list all website ----------- %@",dataResponse);
             
             tableData = dataResponse;
             [self.tableView reloadData];

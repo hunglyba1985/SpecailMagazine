@@ -28,7 +28,40 @@ NSDictionary * catagoryInfor;
     
 //    self.collectionView.hidden = YES;
     
+    [self checkConnectNetwork];
+    
+    
 }
+
+
+-(void) checkConnectNetwork
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    [reachability startNotifier];
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if(status == NotReachable)
+    {
+        //No internet
+        NSLog(@"not connect to internet");
+    }
+    else if (status == ReachableViaWiFi)
+    {
+        //WiFi
+        NSLog(@"connect to internet by wifi");
+        
+    }
+    else if (status == ReachableViaWWAN)
+    {
+        //3G
+        NSLog(@"connect to internet by 3G");
+        
+    }
+}
+
+
+
 
 -(void) setupCollectionView
 {
@@ -50,6 +83,15 @@ NSDictionary * catagoryInfor;
     self.collectionView.pagingEnabled = YES;
     
     
+}
+
+-(void) getDataLocal
+{
+    collectionData = [NSMutableArray new];
+    RLMResults *allLocalData = [ArticleRealm allObjects];
+    
+    
+
 }
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
