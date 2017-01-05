@@ -10,7 +10,7 @@
 
 @interface DetailViewController : UIViewController
 
-@property (nonatomic,strong) NSDictionary *article;
+@property (nonatomic,strong) ArticleRealm *article;
 
 
 @end

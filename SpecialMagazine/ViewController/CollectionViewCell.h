@@ -11,7 +11,7 @@
 
 @protocol CollectionViewCellDelegate <NSObject>
 
--(void) selectedArticleWithInformation:(NSDictionary*) artistInfo;
+-(void) selectedArticleWithInformation:(ArticleRealm*) artistInfo;
 
 
 @end
@@ -30,6 +30,9 @@
 
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo;
+-(void) getDataLocal;
+
+
 
 @property (nonatomic,strong) NSDictionary *cellCatagoryInfo;
 

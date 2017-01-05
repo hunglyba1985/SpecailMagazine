@@ -23,9 +23,9 @@
     self.navigationController.navigationBarHidden = YES;
     
     
-    NSLog(@"content article is %@",[self.article objectForKey:CONTENT]);
+//    NSLog(@"content article is %@",[self.article objectForKey:CONTENT]);
     
-    [self.webView loadHTMLString:[self.article objectForKey:CONTENT] baseURL:nil];
+    [self.webView loadHTMLString:self.article.content baseURL:nil];
     
     self.webView.delegate = self;
     
@@ -72,7 +72,7 @@
     
     NSLog(@"current image link is %@",currentImageLink);
     
-    NSArray *arrayImages = [self.article objectForKey:LIST_IMAGES];
+    NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
     
     IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
     

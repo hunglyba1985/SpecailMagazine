@@ -173,12 +173,15 @@
     
     cell.delegate = self;
     
-    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
     
 //    NSLog(@"one catagory is %@",oneCatagory);
     
-    [cell loadingDataForCatalog:oneCatagory];
+#pragma mark - For have internet
+//    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+//    [cell loadingDataForCatalog:oneCatagory];
     
+#pragma mark - For not have internet
+      [cell getDataLocal];
     
     return cell;
 }
@@ -202,7 +205,7 @@
 
 
 #pragma mark CollectionViewCell Delegate
--(void) selectedArticleWithInformation:(NSDictionary *)artistInfo
+-(void) selectedArticleWithInformation:(ArticleRealm *)artistInfo
 {
     DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
 

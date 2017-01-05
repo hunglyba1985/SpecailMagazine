@@ -88,8 +88,15 @@ NSDictionary * catagoryInfor;
 -(void) getDataLocal
 {
     collectionData = [NSMutableArray new];
-    RLMResults *allLocalData = [ArticleRealm allObjects];
+    NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
     
+    for (ArticleRealm *object in allLocalData) {
+        
+        [collectionData addObject:object];
+        
+    }
+    
+    [self.collectionView reloadData];
     
 
 }
@@ -105,7 +112,16 @@ NSDictionary * catagoryInfor;
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
-            [collectionData addObjectsFromArray:dataResponse];
+            NSArray *gettingArray = dataResponse;
+            
+            [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
+                
+                [collectionData addObject:realmObject];
+                
+            }];
+            
             [self.collectionView reloadData];
             
         }
@@ -120,7 +136,15 @@ NSDictionary * catagoryInfor;
     [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
-            [collectionData addObjectsFromArray:dataResponse];
+            NSArray *gettingArray = dataResponse;
+            
+            [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
+                
+                [collectionData addObject:realmObject];
+                
+            }];
             [self.collectionView reloadData];
             
         }
@@ -143,14 +167,14 @@ NSDictionary * catagoryInfor;
     CellCollectionView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCell" forIndexPath:indexPath];
     
     //    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
-    NSDictionary *cellData = [collectionData objectAtIndex:indexPath.row];
+    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:[cellData objectForKey:COVER_IMAGE]]
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
                       placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    cell.title.text = [cellData objectForKey:TITLE_ARTICLE];
+    cell.title.text = cellData.titleArticle;
     
-    cell.descriptionLabel.text = [cellData objectForKey:DESC];
+    cell.descriptionLabel.text = cellData.descriptionArticle;
     
     cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
     
@@ -171,7 +195,7 @@ NSDictionary * catagoryInfor;
 {
     id<CollectionViewCellDelegate> strongDelegate = self.delegate;
     
-    NSDictionary *cellData = [collectionData objectAtIndex:indexPath.row];
+    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
     if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
         [strongDelegate selectedArticleWithInformation:cellData];
