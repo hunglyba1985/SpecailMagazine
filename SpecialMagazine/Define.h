@@ -53,6 +53,7 @@
 #define CTACTION @"ctaction"
 #define SUPER_CID @"supercid"
 #define LIST_IMAGES @"listimage"
+#define LINK_IMAGE @"linkImage"
 
 
 #pragma mark - DEFINE WEATHER

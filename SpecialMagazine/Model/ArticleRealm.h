@@ -23,6 +23,7 @@
 @property int superCid;
 @property NSString *titleArticle;
 @property NSString *originalLink;
+@property NSData *arrayContent;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 

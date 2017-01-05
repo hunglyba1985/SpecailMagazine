@@ -7,6 +7,7 @@
 //
 
 #import "ArticleRealm.h"
+#import "TFHpple.h"
 
 @implementation ArticleRealm
 
@@ -29,10 +30,55 @@
         self.originalLink = [dictionary objectForKey:ORIGINAL_LINK];
         self.cid = [[dictionary objectForKey:CID] intValue];
         
+        NSArray *temp = [self convertHtmlStringToArray:self.content];
+        
+        self.arrayContent = [NSKeyedArchiver archivedDataWithRootObject:temp];
         
     }
     
     return self;
+}
+
+
+-(NSArray *) convertHtmlStringToArray:(NSString *) htmlStr
+{
+    
+    
+    NSMutableArray *temp = [NSMutableArray new];
+    
+    NSData* data = [htmlStr dataUsingEncoding:NSUTF8StringEncoding];
+
+    TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
+    
+    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
+    NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
+
+    
+    [tutorialsNodes enumerateObjectsUsingBlock:^(TFHppleElement *element , NSUInteger idx, BOOL * _Nonnull stop) {
+        
+//        NSLog(@"get content --------------------%@",element.firstChild.content);
+        
+        if (element.firstChild.content != nil) {
+            [temp addObject:element.firstChild.content];
+
+        }
+        
+        if (element.firstChild.content == nil) {
+//            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
+            
+            if ([element.firstChild.attributes objectForKey:@"src"] != nil) {
+                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
+                [temp addObject:linkImage];
+            }
+            
+            
+        }
+
+        
+    }];
+
+    
+    return temp;
 }
 
 

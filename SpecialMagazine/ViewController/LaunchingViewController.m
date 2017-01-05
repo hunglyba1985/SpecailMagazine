@@ -13,6 +13,7 @@
 #import "CurrentLocationManager.h"
 #import "Reachability.h"
 
+#import "TFHpple.h"
 
 @interface LaunchingViewController ()
 {
@@ -62,7 +63,49 @@
     
     [self checkConnectNetwork];
     
+    
 }
+
+
+-(void) testHtmlString
+{
+    NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
+    
+    ArticleRealm *oneObject = [allLocalData firstObject];
+    
+//    NSLog(@"content article is %@",oneObject.content);
+    
+    
+    NSData* data = [oneObject.content dataUsingEncoding:NSUTF8StringEncoding];
+   
+    
+    TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
+
+    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
+    NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
+    
+//    NSMutableArray *arrayContent = [NSMutableArray new];
+    
+    for (TFHppleElement *element in tutorialsNodes) {
+      
+        NSLog(@"------------------------------------------------------------");
+        
+ 
+        
+        NSLog(@"get content --------------------%@",element.firstChild.content);
+        if (element.firstChild.content == nil) {
+            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
+
+        }
+
+    }
+
+
+}
+
+
+
+
 
 -(void) checkConnectNetwork
 {
@@ -132,7 +175,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
 
-        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
+//        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
 
     
 }

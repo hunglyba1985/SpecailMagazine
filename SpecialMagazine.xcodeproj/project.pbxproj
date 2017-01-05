@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1C78221E1E3EC800B2A41D /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C781D1E1E3EC800B2A41D /* TFHpple.m */; };
+		0E1C78231E1E3EC800B2A41D /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C781F1E1E3EC800B2A41D /* TFHppleElement.m */; };
+		0E1C78241E1E3EC800B2A41D /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C78211E1E3EC800B2A41D /* XPathQuery.m */; };
+		0E1C78261E1E3F9E00B2A41D /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C78251E1E3F9E00B2A41D /* libxml2.tbd */; };
+		0E1C78281E1E3FBD00B2A41D /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1C78271E1E3FBD00B2A41D /* libxml2.2.tbd */; };
+		0E1C782B1E1E491400B2A41D /* NewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C782A1E1E491400B2A41D /* NewDetailViewController.m */; };
+		0E1C782E1E1E55C600B2A41D /* DetailCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C782D1E1E55C600B2A41D /* DetailCell1.m */; };
+		0E1C78311E1E55D900B2A41D /* DetailCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C78301E1E55D900B2A41D /* DetailCell2.m */; };
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
 		0E28EFBA1DF6A451000F2176 /* CurrentLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E28EFB91DF6A451000F2176 /* CurrentLocationManager.m */; };
 		0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */; };
@@ -52,6 +60,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E1C781C1E1E3EC800B2A41D /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		0E1C781D1E1E3EC800B2A41D /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		0E1C781E1E1E3EC800B2A41D /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		0E1C781F1E1E3EC800B2A41D /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		0E1C78201E1E3EC800B2A41D /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		0E1C78211E1E3EC800B2A41D /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		0E1C78251E1E3F9E00B2A41D /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		0E1C78271E1E3FBD00B2A41D /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		0E1C78291E1E491400B2A41D /* NewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewDetailViewController.h; path = ViewController/NewDetailViewController.h; sourceTree = "<group>"; };
+		0E1C782A1E1E491400B2A41D /* NewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewDetailViewController.m; path = ViewController/NewDetailViewController.m; sourceTree = "<group>"; };
+		0E1C782C1E1E55C600B2A41D /* DetailCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailCell1.h; path = ViewController/DetailCell1.h; sourceTree = "<group>"; };
+		0E1C782D1E1E55C600B2A41D /* DetailCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailCell1.m; path = ViewController/DetailCell1.m; sourceTree = "<group>"; };
+		0E1C782F1E1E55D900B2A41D /* DetailCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailCell2.h; path = ViewController/DetailCell2.h; sourceTree = "<group>"; };
+		0E1C78301E1E55D900B2A41D /* DetailCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailCell2.m; path = ViewController/DetailCell2.m; sourceTree = "<group>"; };
 		0E1F12011D8BB200007F77EC /* ArticleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleObject.h; path = Model/ArticleObject.h; sourceTree = "<group>"; };
 		0E1F12021D8BB200007F77EC /* ArticleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleObject.m; path = Model/ArticleObject.m; sourceTree = "<group>"; };
 		0E28EFB81DF6A451000F2176 /* CurrentLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentLocationManager.h; path = ViewController/CurrentLocationManager.h; sourceTree = "<group>"; };
@@ -138,6 +160,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1C78281E1E3FBD00B2A41D /* libxml2.2.tbd in Frameworks */,
+				0E1C78261E1E3F9E00B2A41D /* libxml2.tbd in Frameworks */,
 				0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */,
 				5647DA2B772D13103B5E2016 /* libPods-SpecialMagazine.a in Frameworks */,
 			);
@@ -146,6 +170,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E1C781B1E1E3EC800B2A41D /* Parse html */ = {
+			isa = PBXGroup;
+			children = (
+				0E1C781C1E1E3EC800B2A41D /* TFHpple.h */,
+				0E1C781D1E1E3EC800B2A41D /* TFHpple.m */,
+				0E1C781E1E1E3EC800B2A41D /* TFHppleElement.h */,
+				0E1C781F1E1E3EC800B2A41D /* TFHppleElement.m */,
+				0E1C78201E1E3EC800B2A41D /* XPathQuery.h */,
+				0E1C78211E1E3EC800B2A41D /* XPathQuery.m */,
+			);
+			path = "Parse html";
+			sourceTree = "<group>";
+		};
 		0E28EFB71DF6A397000F2176 /* Launching Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +239,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				0E1C781B1E1E3EC800B2A41D /* Parse html */,
 				0E6B75951E1CEF9600092056 /* Check network */,
 				0ED628601DF01B6400898D15 /* TransitioningCurp */,
 				0E604CF41DEC32A3006A5346 /* HMSegmentedControl */,
@@ -313,6 +351,12 @@
 			children = (
 				5225F86F1D90B4A50079E151 /* DetailViewController.h */,
 				5225F8701D90B4A50079E151 /* DetailViewController.m */,
+				0E1C78291E1E491400B2A41D /* NewDetailViewController.h */,
+				0E1C782A1E1E491400B2A41D /* NewDetailViewController.m */,
+				0E1C782C1E1E55C600B2A41D /* DetailCell1.h */,
+				0E1C782D1E1E55C600B2A41D /* DetailCell1.m */,
+				0E1C782F1E1E55D900B2A41D /* DetailCell2.h */,
+				0E1C78301E1E55D900B2A41D /* DetailCell2.m */,
 				52AB659D1D7DBA670032C527 /* DrawInView.h */,
 				52AB659E1D7DBA670032C527 /* DrawInView.m */,
 			);
@@ -409,6 +453,8 @@
 		A35584569E7FC49EA69331E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E1C78271E1E3FBD00B2A41D /* libxml2.2.tbd */,
+				0E1C78251E1E3F9E00B2A41D /* libxml2.tbd */,
 				0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */,
 				67641A894018992672889CD9 /* libPods-SpecialMagazine.a */,
 			);
@@ -542,8 +588,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1C78231E1E3EC800B2A41D /* TFHppleElement.m in Sources */,
 				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */,
+				0E1C782E1E1E55C600B2A41D /* DetailCell1.m in Sources */,
 				0E9AD5381DBF1B3800F6A666 /* CellCollectionView.m in Sources */,
 				0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */,
 				0EE72EB21D9E2F75009C087A /* XLPagerTabStripViewController.m in Sources */,
@@ -563,16 +611,20 @@
 				0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */,
 				0EE72EB01D9E2F75009C087A /* XLBarPagerTabStripViewController.m in Sources */,
 				0EE72EC21D9E55ED009C087A /* LaunchingViewController.m in Sources */,
+				0E1C78241E1E3EC800B2A41D /* XPathQuery.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 				0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */,
 				0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */,
 				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
+				0E1C782B1E1E491400B2A41D /* NewDetailViewController.m in Sources */,
 				0E6B75981E1CEF9600092056 /* Reachability.m in Sources */,
+				0E1C78311E1E55D900B2A41D /* DetailCell2.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
 				0EE72E981D9E2CC8009C087A /* TestChildViewController.m in Sources */,
 				5288D21A1DBEDD19003A000D /* CollectionViewCell.m in Sources */,
 				0E28EFBA1DF6A451000F2176 /* CurrentLocationManager.m in Sources */,
+				0E1C78221E1E3EC800B2A41D /* TFHpple.m in Sources */,
 				0EE72EB71D9E2F75009C087A /* XLBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,6 +743,18 @@
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/DACircularProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/FLAnimatedImage\"",
+					"\"${PODS_ROOT}/Headers/Public/IDMPhotoBrowser\"",
+					"\"${PODS_ROOT}/Headers/Public/Realm\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/pop\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -707,6 +771,18 @@
 				DEVELOPMENT_TEAM = 988D2L6XZT;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/DACircularProgress\"",
+					"\"${PODS_ROOT}/Headers/Public/FLAnimatedImage\"",
+					"\"${PODS_ROOT}/Headers/Public/IDMPhotoBrowser\"",
+					"\"${PODS_ROOT}/Headers/Public/Realm\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/pop\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = SpecialMagazine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -10,6 +10,7 @@
 #import "CollectionViewCell.h"
 #import "DetailViewController.h"
 #import "HMSegmentedControl.h"
+#import "NewDetailViewController.h"
 
 
 @interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate>
@@ -177,11 +178,11 @@
 //    NSLog(@"one catagory is %@",oneCatagory);
     
 #pragma mark - For have internet
-//    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
-//    [cell loadingDataForCatalog:oneCatagory];
+    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+    [cell loadingDataForCatalog:oneCatagory];
     
 #pragma mark - For not have internet
-      [cell getDataLocal];
+//      [cell getDataLocal];
     
     return cell;
 }
@@ -207,14 +208,17 @@
 #pragma mark CollectionViewCell Delegate
 -(void) selectedArticleWithInformation:(ArticleRealm *)artistInfo
 {
-    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
-
-    detail.article = artistInfo;
+//    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
+//
+//    detail.article = artistInfo;
     
-    NSLog(@"article information is %@",artistInfo);
+//    NSLog(@"article information is %@",artistInfo);
 //    [self presentViewController:detail animated:YES completion:nil];
     
-    [self.navigationController pushViewController:detail animated:YES];
+    NewDetailViewController *newDetail = [self.storyboard instantiateViewControllerWithIdentifier:@"NewDetailViewController"];
+    newDetail.article = artistInfo;
+    
+    [self.navigationController pushViewController:newDetail animated:YES];
     
 }
 

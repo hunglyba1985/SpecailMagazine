@@ -23,7 +23,15 @@
     self.navigationController.navigationBarHidden = YES;
     
     
-//    NSLog(@"content article is %@",[self.article objectForKey:CONTENT]);
+    NSLog(@"content article is %@",self.article.content);
+    
+    NSAttributedString *convertHtmlToString = [[NSAttributedString alloc] initWithData:[self.article.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    
+    
+    NSString *getString = convertHtmlToString.string;
+    
+    NSLog(@"get convert html string is %@",getString);
+    
     
     [self.webView loadHTMLString:self.article.content baseURL:nil];
     
@@ -48,7 +56,7 @@
     
     if ([[action scheme] isEqualToString:@"img"]) {
         
-        NSLog(@"string get from click on image is %@",action);
+//        NSLog(@"string get from click on image is %@",action);
         
         [self showArrayImagesFrom:action.absoluteString];
         
@@ -70,7 +78,7 @@
     
     currentImageLink = [currentImageLink stringByReplacingOccurrencesOfString:@"//" withString:@"://"];
     
-    NSLog(@"current image link is %@",currentImageLink);
+//    NSLog(@"current image link is %@",currentImageLink);
     
     NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
     
