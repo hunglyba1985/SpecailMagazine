@@ -106,17 +106,15 @@ static ArtistAPI  *sharedController = nil;
         }];
 
     });
-    
-
-    
-    
-
 }
 
 
 -(void) baseGetDataFromEndPoint:(NSString *) endPoint andParameter:(NSDictionary *) parameters hasResult:(GetAPIRequestHandle) result
 {
     NSString *postLink = [NSString stringWithFormat:@"%@/%@",URL_BASE,endPoint];
+    
+    NSLog(@"post link is %@",postLink);
+    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];

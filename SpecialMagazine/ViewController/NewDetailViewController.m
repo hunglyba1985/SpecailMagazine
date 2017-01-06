@@ -31,8 +31,10 @@
     NSLog(@"original content is %@",self.article.content);
     
     
-    tableData = [self convertHtmlStringToArray:self.article.content];
+    tableData = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.arrayContent];
     
+    
+    [self.tableView reloadData];
     
     NSLog(@"when convert to array we have %@",tableData);
     
@@ -123,7 +125,7 @@
     
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
     
-    return (size.height + 10);
+    return (size.height + 16);
 }
 
 
@@ -146,7 +148,7 @@
         
         cell.label.text = cellData;
         cell.label.lineBreakMode = NSLineBreakByWordWrapping;
-        
+        cell.label.font = [UIFont systemFontOfSize:16];
         
         return cell;
 
@@ -156,6 +158,8 @@
         DetailCell2 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell2" forIndexPath:indexPath];
 
         NSDictionary *dic = (NSDictionary *) cellData;
+        
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
         
         
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]

@@ -8,6 +8,8 @@
 
 #import "ArticleRealm.h"
 #import "TFHpple.h"
+#import <SDWebImage/SDWebImagePrefetcher.h>
+
 
 @implementation ArticleRealm
 
@@ -22,6 +24,7 @@
         self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKey:HAS_VIDEOS] boolValue]];
         self.lid = [[dictionary objectForKey:LID] intValue];
         NSArray *listPictures = [dictionary objectForKey:LIST_IMAGES];
+        [self preLoadImageForArticle:listPictures];
         self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];
         NSArray *listMp4 = [dictionary objectForKey:LIST_VIDEOS];
         self.listVideos =  [NSKeyedArchiver archivedDataWithRootObject:listMp4];
@@ -37,6 +40,23 @@
     }
     
     return self;
+}
+
+-(void) preLoadImageForArticle:(NSArray *) listImage
+{
+    NSLog(@"preload image for article");
+    
+    NSMutableArray *temp = [NSMutableArray new];
+    
+    [listImage enumerateObjectsUsingBlock:^(NSString* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSURL *url = [NSURL URLWithString:obj];
+        [temp addObject:url];
+    }];
+    
+    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp];
+    [SDWebImagePrefetcher sharedImagePrefetcher].options = SDWebImageHighPriority;
+    
+
 }
 
 
