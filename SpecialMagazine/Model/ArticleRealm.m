@@ -33,18 +33,58 @@
         self.originalLink = [dictionary objectForKey:ORIGINAL_LINK];
         self.cid = [[dictionary objectForKey:CID] intValue];
         
-        NSArray *temp = [self convertHtmlStringToArray:self.content];
+        [self replaceSignImageWithActuallyLinkImage:listPictures];
         
-        self.arrayContent = [NSKeyedArchiver archivedDataWithRootObject:temp];
+        
         
     }
     
     return self;
 }
 
+-(void) replaceSignImageWithActuallyLinkImage:(NSArray *) arrayLinkImage
+{
+    NSArray *temp = [self convertHtmlStringToArray:[self removeUnusedTadAndAddImageSignToHtmlString:self.content]];
+    
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithArray:temp];
+    
+    __block NSInteger index = 0;
+//    self.arrayContent = [NSKeyedArchiver archivedDataWithRootObject:temp];
+    [temp enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if ([obj isEqualToString:PLACE_HOLDER_IMAGE]) {
+            
+            if (index < arrayLinkImage.count) {
+                NSDictionary *linkImage = @{LINK_IMAGE:[arrayLinkImage objectAtIndex:index]};
+                
+                [mutableArray replaceObjectAtIndex:idx withObject:linkImage];
+                
+                index = index + 1;
+            }
+        }
+        
+    }];
+    
+    
+    self.arrayContent = [NSKeyedArchiver archivedDataWithRootObject:mutableArray];
+
+}
+
+-(NSString *) removeUnusedTadAndAddImageSignToHtmlString:(NSString *) original
+{
+    NSString *removeString = [original stringByReplacingOccurrencesOfString:@"<em>" withString:@""];
+    NSString *string2 = [removeString stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
+    
+    NSString *string3 = [string2 stringByReplacingOccurrencesOfString:@"<img" withString:[NSString stringWithFormat:@"<div> <p>%@</p> </div>",PLACE_HOLDER_IMAGE]];
+    
+    return string3;
+}
+
+
+
 -(void) preLoadImageForArticle:(NSArray *) listImage
 {
-    NSLog(@"preload image for article");
+//    NSLog(@"preload image for article");
     
     NSMutableArray *temp = [NSMutableArray new];
     
@@ -63,21 +103,19 @@
 -(NSArray *) convertHtmlStringToArray:(NSString *) htmlStr
 {
     
-    
     NSMutableArray *temp = [NSMutableArray new];
     
     NSData* data = [htmlStr dataUsingEncoding:NSUTF8StringEncoding];
 
     TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
     
-    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
+    NSString *tutorialsXpathQueryString = @"//p";
     NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
 
     
     [tutorialsNodes enumerateObjectsUsingBlock:^(TFHppleElement *element , NSUInteger idx, BOOL * _Nonnull stop) {
         
 //        NSLog(@"get content --------------------%@",element.firstChild.content);
-        
         if (element.firstChild.content != nil) {
             [temp addObject:element.firstChild.content];
 
@@ -90,11 +128,7 @@
                 NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
                 [temp addObject:linkImage];
             }
-            
-            
         }
-
-        
     }];
 
     

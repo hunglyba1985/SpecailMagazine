@@ -29,6 +29,14 @@
     // Do any additional setup after loading the view.
     
     NSLog(@"original content is %@",self.article.content);
+//    
+//    NSString *removeString = [self.article.content stringByReplacingOccurrencesOfString:@"<em>" withString:@""];
+//    NSString *string2 = [removeString stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
+//    
+//    NSString *string3 = [string2 stringByReplacingOccurrencesOfString:@"<img" withString:@"<div> <p> Please add fucking image here</p> </div>"];
+//    
+//    
+//    NSLog(@"parse image source from string %@",string3);
     
     
     tableData = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.arrayContent];
@@ -39,8 +47,9 @@
     NSLog(@"when convert to array we have %@",tableData);
     
     [self getHeightForCell];
-    
 }
+
+
 
 
 -(NSArray *) convertHtmlStringToArray:(NSString *) htmlStr
@@ -53,7 +62,7 @@
     
     TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
     
-    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
+    NSString *tutorialsXpathQueryString = @"//p";
     NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
     
     
@@ -159,10 +168,10 @@
 
         NSDictionary *dic = (NSDictionary *) cellData;
         
-        cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.imageCell.contentMode = UIViewContentModeScaleToFill;
         
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
+        [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
                       placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         
         

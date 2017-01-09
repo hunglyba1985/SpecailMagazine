@@ -55,6 +55,8 @@
 #define LIST_IMAGES @"listimage"
 #define LINK_IMAGE @"linkImage"
 
+#define PLACE_HOLDER_IMAGE @"Please add fucker image here!"
+
 
 #pragma mark - DEFINE WEATHER
 #define HANOI @"hanoi"

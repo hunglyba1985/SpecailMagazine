@@ -178,7 +178,7 @@ NSDictionary * catagoryInfor;
     
     cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
     
-    NSLog(@"array content is %@", [NSKeyedUnarchiver unarchiveObjectWithData:cellData.arrayContent]);
+//    NSLog(@"array content is %@", [NSKeyedUnarchiver unarchiveObjectWithData:cellData.arrayContent]);
     
     return cell;
 }
