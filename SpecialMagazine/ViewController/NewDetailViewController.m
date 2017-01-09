@@ -10,6 +10,7 @@
 #import "DetailCell1.h"
 #import "DetailCell2.h"
 #import "TFHpple.h"
+#import "IDMPhotoBrowser.h"
 
 @interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource>
 {
@@ -154,6 +155,7 @@
         
         DetailCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell1" forIndexPath:indexPath];
 
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.label.text = cellData;
         cell.label.lineBreakMode = NSLineBreakByWordWrapping;
@@ -166,6 +168,9 @@
     {
         DetailCell2 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell2" forIndexPath:indexPath];
 
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        
         NSDictionary *dic = (NSDictionary *) cellData;
         
         cell.imageCell.contentMode = UIViewContentModeScaleToFill;
@@ -186,6 +191,25 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[heightCell objectAtIndex:indexPath.row] floatValue];
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id  cellData = [tableData objectAtIndex:indexPath.row];
+    
+    if (![cellData isKindOfClass:[NSString class]]) {
+        
+        NSDictionary *dic = (NSDictionary *) cellData;
+
+        NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
+        
+        IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
+        
+        [browser setInitialPageIndex:[arrayImages indexOfObject:[dic objectForKey:LINK_IMAGE]]];
+        
+        [self presentViewController:browser animated:YES completion:nil];
+
+    }
 }
 
 
