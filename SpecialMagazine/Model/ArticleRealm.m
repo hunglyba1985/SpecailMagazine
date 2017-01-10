@@ -77,7 +77,10 @@
     
     NSString *string3 = [string2 stringByReplacingOccurrencesOfString:@"<img" withString:[NSString stringWithFormat:@"<div> <p>%@</p> </div>",PLACE_HOLDER_IMAGE]];
     
-    return string3;
+    NSString *string4 = [string3 stringByReplacingOccurrencesOfString:@"<i>" withString:@""];
+    NSString *string5 = [string4 stringByReplacingOccurrencesOfString:@"</i>" withString:@""];
+    
+    return string5;
 }
 
 
@@ -90,7 +93,9 @@
     
     [listImage enumerateObjectsUsingBlock:^(NSString* obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSURL *url = [NSURL URLWithString:obj];
-        [temp addObject:url];
+        if (url != nil) {
+            [temp addObject:url];
+        }
     }];
     
     [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp];
@@ -117,18 +122,18 @@
         
 //        NSLog(@"get content --------------------%@",element.firstChild.content);
         if (element.firstChild.content != nil) {
-            [temp addObject:element.firstChild.content];
+            [temp addObject:[element.firstChild.content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
 
         }
         
-        if (element.firstChild.content == nil) {
+//        if (element.firstChild.content == nil) {
 //            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
-            
-            if ([element.firstChild.attributes objectForKey:@"src"] != nil) {
-                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
-                [temp addObject:linkImage];
-            }
-        }
+//            
+//            if ([element.firstChild.attributes objectForKey:@"src"] != nil) {
+//                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
+//                [temp addObject:linkImage];
+//            }
+//        }
     }];
 
     

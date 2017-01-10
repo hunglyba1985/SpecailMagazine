@@ -18,6 +18,7 @@
 		0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F12021D8BB200007F77EC /* ArticleObject.m */; };
 		0E28EFBA1DF6A451000F2176 /* CurrentLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E28EFB91DF6A451000F2176 /* CurrentLocationManager.m */; };
 		0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */; };
+		0E514FC61E24A3A2003BB550 /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E514FC51E24A3A2003BB550 /* UIImageViewAligned.m */; };
 		0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */; };
 		0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75931E1CE01B00092056 /* ArticleRealm.m */; };
 		0E6B75981E1CEF9600092056 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75971E1CEF9600092056 /* Reachability.m */; };
@@ -79,6 +80,8 @@
 		0E28EFB81DF6A451000F2176 /* CurrentLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentLocationManager.h; path = ViewController/CurrentLocationManager.h; sourceTree = "<group>"; };
 		0E28EFB91DF6A451000F2176 /* CurrentLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentLocationManager.m; path = ViewController/CurrentLocationManager.m; sourceTree = "<group>"; };
 		0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0E514FC41E24A3A2003BB550 /* UIImageViewAligned.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageViewAligned.h; sourceTree = "<group>"; };
+		0E514FC51E24A3A2003BB550 /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAligned.m; sourceTree = "<group>"; };
 		0E604CF51DEC32A3006A5346 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		0E6B75921E1CE01B00092056 /* ArticleRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleRealm.h; path = Model/ArticleRealm.h; sourceTree = "<group>"; };
@@ -201,6 +204,15 @@
 			name = "Location Manager";
 			sourceTree = "<group>";
 		};
+		0E514FC31E24A3A2003BB550 /* UIImageViewAligned */ = {
+			isa = PBXGroup;
+			children = (
+				0E514FC41E24A3A2003BB550 /* UIImageViewAligned.h */,
+				0E514FC51E24A3A2003BB550 /* UIImageViewAligned.m */,
+			);
+			path = UIImageViewAligned;
+			sourceTree = "<group>";
+		};
 		0E604CF41DEC32A3006A5346 /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +251,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				0E514FC31E24A3A2003BB550 /* UIImageViewAligned */,
 				0E1C781B1E1E3EC800B2A41D /* Parse html */,
 				0E6B75951E1CEF9600092056 /* Check network */,
 				0ED628601DF01B6400898D15 /* TransitioningCurp */,
@@ -598,6 +611,7 @@
 				0EE72EB61D9E2F75009C087A /* FXPageControl.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				0EE72EB41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m in Sources */,
+				0E514FC61E24A3A2003BB550 /* UIImageViewAligned.m in Sources */,
 				0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageViewAligned.h"
+
 
 @interface DetailCell2 : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageCell;
+@property (weak, nonatomic) IBOutlet UIImageViewAligned *imageCell;
 
 
 @end

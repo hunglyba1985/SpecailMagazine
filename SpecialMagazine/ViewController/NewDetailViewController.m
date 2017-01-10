@@ -12,11 +12,11 @@
 #import "TFHpple.h"
 #import "IDMPhotoBrowser.h"
 
-@interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 {
     NSArray *tableData;
     NSMutableArray *heightCell;
-    
+    UIWebView *detailWebView;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    NSLog(@"original content is %@",self.article.content);
+    NSLog(@"original content is %@",self.article.content);
 //    
 //    NSString *removeString = [self.article.content stringByReplacingOccurrencesOfString:@"<em>" withString:@""];
 //    NSString *string2 = [removeString stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
@@ -42,15 +42,90 @@
     
     tableData = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.arrayContent];
     
-    
     [self.tableView reloadData];
+
+    NSLog(@"array content now is %@",tableData);
+
+    [self createWebViewForCaseFailLoadTable];
+    
     
 //    NSLog(@"when convert to array we have %@",tableData);
     
     [self getHeightForCell];
 }
 
+-(void) createWebViewForCaseFailLoadTable
+{
+    detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    [detailWebView loadHTMLString:self.article.content baseURL:nil];
+    detailWebView.delegate = self;
 
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSArray *listVideo = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listVideos];
+    
+    if (tableData.count < 3 || listVideo.count > 0 ) {
+        
+        
+        [self.view addSubview:detailWebView];
+    }
+   
+}
+
+
+#pragma mark - UIWebView Delegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+{
+    [webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://' + a}"];
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+
+{
+    NSURL *action = request.URL;
+    
+    if ([[action scheme] isEqualToString:@"img"]) {
+        
+        //        NSLog(@"string get from click on image is %@",action);
+        
+        [self showArrayImagesFrom:action.absoluteString];
+        
+        return NO;
+        
+    }
+    
+    return YES;
+}
+
+
+-(void) showArrayImagesFrom:(NSString *) imageLink
+
+{
+    
+    NSArray *arrayString = [imageLink componentsSeparatedByString:@"://"];
+    
+    NSString *currentImageLink = [arrayString objectAtIndex:1];
+    
+    currentImageLink = [currentImageLink stringByReplacingOccurrencesOfString:@"//" withString:@"://"];
+    
+    //    NSLog(@"current image link is %@",currentImageLink);
+    
+    NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
+    
+    IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
+    
+    [browser setInitialPageIndex:[arrayImages indexOfObject:currentImageLink]];
+    
+    [self presentViewController:browser animated:YES completion:nil];
+    
+    
+}
 
 
 -(NSArray *) convertHtmlStringToArray:(NSString *) htmlStr
@@ -135,7 +210,7 @@
     
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
     
-    return (size.height + 16);
+    return (size.height + 8);
 }
 
 
@@ -173,7 +248,11 @@
         
         NSDictionary *dic = (NSDictionary *) cellData;
         
-        cell.imageCell.contentMode = UIViewContentModeScaleToFill;
+        cell.imageCell.contentMode = UIViewContentModeScaleAspectFill;
+        cell.imageCell.alignTop = YES;
+//        cell.imageCell.alignLeft = YES;
+//        cell.imageCell.alignRight = YES;
+        
         
         
         [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
