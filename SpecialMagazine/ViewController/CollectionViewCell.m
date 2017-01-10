@@ -131,9 +131,9 @@ NSDictionary * catagoryInfor;
 
 -(void) loadMoreData
 {
-    NSDictionary *lastArticle = [collectionData lastObject];
+    ArticleRealm *lastArticle = [collectionData lastObject];
     
-    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:lastArticle.lid successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
             NSArray *gettingArray = dataResponse;

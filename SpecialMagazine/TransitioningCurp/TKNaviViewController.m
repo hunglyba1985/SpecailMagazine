@@ -216,7 +216,7 @@ static CGFloat min_distance = 60;// The minimum distance Rebound
     
     // we get the touch position by the window's coordinate
     CGPoint touchPoint = [recoginzer locationInView:KEY_WINDOW];
-    NSLog(@"start point of panning %i",(int)touchPoint.x);
+//    NSLog(@"start point of panning %i",(int)touchPoint.x);
     // begin paning, show the backgroundView(last screenshot),if not exist, create it.
     if (recoginzer.state == UIGestureRecognizerStateBegan) {
         
@@ -250,7 +250,7 @@ static CGFloat min_distance = 60;// The minimum distance Rebound
     }else if (recoginzer.state == UIGestureRecognizerStateEnded){
         
         
-        NSLog(@"check how far we pan %i",(int)(touchPoint.x - startPoint.x));
+//        NSLog(@"check how far we pan %i",(int)(touchPoint.x - startPoint.x));
         
         if (touchPoint.x - startPoint.x > min_distance)
         {

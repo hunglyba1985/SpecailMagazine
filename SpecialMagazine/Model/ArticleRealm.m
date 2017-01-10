@@ -22,7 +22,7 @@
         self.coverImageUrl = [dictionary objectForKey:COVER_IMAGE];
         self.descriptionArticle = [dictionary objectForKey:DESC];
         self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKey:HAS_VIDEOS] boolValue]];
-        self.lid = [[dictionary objectForKey:LID] intValue];
+        self.lid = [dictionary objectForKey:LID] ;
         NSArray *listPictures = [dictionary objectForKey:LIST_IMAGES];
         [self preLoadImageForArticle:listPictures];
         self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];

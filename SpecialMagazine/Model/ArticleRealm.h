@@ -15,7 +15,7 @@
 @property NSString *coverImageUrl;
 @property NSString *descriptionArticle;
 @property BOOL hasVideos;
-@property NSInteger lid;
+@property NSString* lid;
 @property NSData *listImages;
 @property NSData *listVideos;
 @property double postTime;
