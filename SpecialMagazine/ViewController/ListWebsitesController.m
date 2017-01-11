@@ -10,11 +10,12 @@
 #import "ListWebsiteCell.h"
 #import "ContainViewController.h"
 #import "NewStyleViewController.h"
+#import "CatalogRealm.h"
 
 
 @interface ListWebsitesController () <UITableViewDelegate,UITableViewDataSource>
 {
-    NSArray *tableData;
+    NSMutableArray *tableData;
     
 }
 
@@ -28,6 +29,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    tableData = [NSMutableArray new];
+    
     [self setNeedsStatusBarAppearanceUpdate];
     self.navigationController.navigationBarHidden = YES;
     [self getCatagories];
@@ -54,12 +57,73 @@
         if (dataResponse != nil) {
 //                        NSLog(@"get list all website ----------- %@",dataResponse);
             
-            tableData = dataResponse;
+            NSArray *temp = (NSArray*)dataResponse;
+            
+            [temp enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
+                
+                [tableData addObject:websiteRealm];
+                
+            }];
+            
             [self.tableView reloadData];
+
+//            [self addDataToRealm:tableData];
+            
+        }
+        else
+        {
+            [self getDataFromLocal];
         }
         
     }];
     
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self addDataToRealm:tableData];
+}
+
+
+
+-(void) getDataFromLocal
+{
+    NSLog(@"load local data");
+    NSArray *allLocalData = (NSArray*)[CatalogRealm allObjects];
+    for (CatalogRealm *object in allLocalData) {
+        
+        [tableData addObject:object];
+        
+    }
+    
+    [self.tableView reloadData];
+    
+}
+
+-(void) addDataToRealm:(NSArray*) data
+{
+    NSLog(@"add data to realm");
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+        
+        [data enumerateObjectsUsingBlock:^(CatalogRealm * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            [realm beginWriteTransaction];
+            [realm addOrUpdateObject:obj];
+            [realm commitWriteTransaction];
+            
+            
+        }];
+        
+    });
 }
 
 
@@ -75,10 +139,10 @@
 {
     ListWebsiteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListWebsiteCell" forIndexPath:indexPath];
     
-    NSDictionary *websiteInfo = [tableData objectAtIndex:indexPath.row];
+    CatalogRealm *websiteInfo = [tableData objectAtIndex:indexPath.row];
     
-    [cell.websiteIcon sd_setImageWithURL:[websiteInfo objectForKey:WEBSITE_ICON]];
-    cell.websiteName.text = [websiteInfo objectForKey:WEBSITE_NAME];
+    [cell.websiteIcon sd_setImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink]];
+    cell.websiteName.text = websiteInfo.websiteName;
     
     
     
@@ -89,15 +153,16 @@
 #pragma mark - TableView Delegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *websiteInfo = [tableData objectAtIndex:indexPath.row];
-    NSArray *catalogWebsite = [websiteInfo objectForKey:WEBSITE_CATEGORY];
+    CatalogRealm *websiteInfo = [tableData objectAtIndex:indexPath.row];
+    
+    NSArray *catalogWebsite =[NSKeyedUnarchiver unarchiveObjectWithData:websiteInfo.categories];
     
     NSMutableArray *categoriesInWebsite = [NSMutableArray new];
     
     for (NSDictionary *dic in catalogWebsite) {
         
         NSMutableDictionary *tempDic = [NSMutableDictionary new];
-        [tempDic setObject:[websiteInfo objectForKey:WEBSITE_ID] forKey:WEBSITE_ID];
+        [tempDic setObject:[NSString stringWithFormat:@"%li",(long)websiteInfo.id] forKey:WEBSITE_ID];
         [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
         [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
         

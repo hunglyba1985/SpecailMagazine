@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"original content is %@",self.article.content);
+//    NSLog(@"original content is %@",self.article.content);
 //    
 //    NSString *removeString = [self.article.content stringByReplacingOccurrencesOfString:@"<em>" withString:@""];
 //    NSString *string2 = [removeString stringByReplacingOccurrencesOfString:@"</em>" withString:@""];
@@ -44,7 +44,7 @@
     
     [self.tableView reloadData];
 
-    NSLog(@"array content now is %@",tableData);
+//    NSLog(@"array content now is %@",tableData);
 
     [self createWebViewForCaseFailLoadTable];
     

@@ -87,6 +87,8 @@ NSDictionary * catagoryInfor;
 
 -(void) getDataLocal
 {
+    NSLog(@"get local data ----");
+    
     collectionData = [NSMutableArray new];
     NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
     
@@ -95,6 +97,9 @@ NSDictionary * catagoryInfor;
         [collectionData addObject:object];
         
     }
+    
+//    NSLog(@"all data in local is %@",collectionData);
+    
     
     [self.collectionView reloadData];
     
@@ -124,6 +129,10 @@ NSDictionary * catagoryInfor;
             
             [self.collectionView reloadData];
             
+        }
+        else
+        {
+            [self getDataLocal];
         }
     }];
 

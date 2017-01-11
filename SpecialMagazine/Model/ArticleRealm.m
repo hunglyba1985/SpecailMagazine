@@ -9,6 +9,8 @@
 #import "ArticleRealm.h"
 #import "TFHpple.h"
 #import <SDWebImage/SDWebImagePrefetcher.h>
+#import <SDWebImage/SDWebImageManager.h>
+
 
 
 @implementation ArticleRealm
@@ -20,14 +22,22 @@
         self.sid = [[dictionary objectForKey:SID] intValue];
         self.content = [dictionary objectForKey:CONTENT];
         self.coverImageUrl = [dictionary objectForKey:COVER_IMAGE];
+        
+        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:@[[NSURL URLWithString:self.coverImageUrl]]];
+        [[SDWebImagePrefetcher sharedImagePrefetcher] setOptions:SDWebImageHighPriority];
+
         self.descriptionArticle = [dictionary objectForKey:DESC];
         self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKey:HAS_VIDEOS] boolValue]];
         self.lid = [dictionary objectForKey:LID] ;
+        
         NSArray *listPictures = [dictionary objectForKey:LIST_IMAGES];
         [self preLoadImageForArticle:listPictures];
+        
         self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];
+        
         NSArray *listMp4 = [dictionary objectForKey:LIST_VIDEOS];
         self.listVideos =  [NSKeyedArchiver archivedDataWithRootObject:listMp4];
+        
         self.postTime = [[dictionary objectForKey:POST_TIME] doubleValue];
         self.titleArticle = [dictionary objectForKey:TITLE_ARTICLE];
         self.originalLink = [dictionary objectForKey:ORIGINAL_LINK];
@@ -98,9 +108,23 @@
         }
     }];
     
-    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp];
-    [SDWebImagePrefetcher sharedImagePrefetcher].options = SDWebImageHighPriority;
+    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp progress:^(NSUInteger noOfFinishedUrls, NSUInteger noOfTotalUrls) {
+        
+        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+        NSLog(@"noOfTotalUrls    %lu",(unsigned long)noOfTotalUrls);
+        
+        
+    } completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) {
+        
+        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+        NSLog(@"noOfSkippedUrls    %lu",(unsigned long)noOfSkippedUrls);
+        
+        
+    }];
+    [[SDWebImagePrefetcher sharedImagePrefetcher] setOptions:SDWebImageContinueInBackground];
+
     
+//    NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
 
 }
 

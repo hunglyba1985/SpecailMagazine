@@ -310,11 +310,36 @@
     
     NSLog(@"download click");
     
+    [self deleteAllOldData];
+    
     
     [ARTIST_API downloadForNoInternet];
     
     
+    
 }
+
+-(void) deleteAllOldData
+{
+    NSLog(@"delete all old data in local");
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+        
+        RLMResults *allArticles = [ArticleRealm allObjects];
+        
+        [realm beginWriteTransaction];
+        [realm deleteObjects:allArticles];
+        
+        [realm commitWriteTransaction];
+        
+    });
+    
+}
+
 
 
 

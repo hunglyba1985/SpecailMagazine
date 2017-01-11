@@ -95,9 +95,7 @@ static ArtistAPI  *sharedController = nil;
         // You only need to do this once (per thread)
         
         [data enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
             ArticleRealm *article = [[ArticleRealm alloc] initWithDictionary:obj];
-            
             [realm beginWriteTransaction];
             [realm addObject:article];
             [realm commitWriteTransaction];
@@ -159,20 +157,24 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) loadMoreForDownload
 {
-    NSDictionary *lastArticle = [self.downloadData lastObject];
+    if (self.downloadData.count < 150) {
+        NSDictionary *lastArticle = [self.downloadData lastObject];
+        
+        [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+            if (dataResponse != nil)
+            {
+                
+                NSArray *arrayArticle = dataResponse;
+                [self.downloadData addObjectsFromArray:arrayArticle];
+                [self addDataToRealm:arrayArticle];
+                [self loadMoreForDownload];
+                
+            }
+        }];
 
-    [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
-        if (dataResponse != nil)
-        {
-            
-            NSArray *arrayArticle = dataResponse;
-            [self.downloadData addObjectsFromArray:arrayArticle];
-            [self addDataToRealm:arrayArticle];
-            [self loadMoreForDownload];
-
-        }
-    }];
-
+    }
+    
+   
 }
 
 
