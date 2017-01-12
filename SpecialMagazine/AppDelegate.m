@@ -26,7 +26,7 @@
     
 //    NSLog(@"get document path: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     
-
+    [self getWeatherForcast];
 
     [self changeModelOfDatabase];
     
@@ -67,7 +67,11 @@
     [RLMRealm defaultRealm];
 }
 
-
+-(void) getWeatherForcast
+{
+    WeatherObject *weather = [[WeatherObject alloc] init];
+    [weather requestWeatherForecast];
+}
 
 
 -(void) getCurrentLocation

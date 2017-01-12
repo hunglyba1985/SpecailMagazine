@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "YQL.h"
 
-
-
-
 @protocol WeatherObjectDelegate <NSObject>
 
 @optional
@@ -41,6 +38,8 @@
 - (id) getWeatherForecast;
 
 -(NSDictionary *) displayWeatherData;
+
+-(void) requestWeatherForecast;
 
 
 @end

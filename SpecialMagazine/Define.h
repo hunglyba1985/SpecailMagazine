@@ -58,6 +58,7 @@
 #define PLACE_HOLDER_IMAGE @"Please add fucker image here!"
 
 
+// Weather properties
 #pragma mark - DEFINE WEATHER
 #define HANOI @"hanoi"
 #define HOCHIMINH @"hochiminh"
@@ -80,7 +81,7 @@
 
 // Notification Center
 #define NOTIFICATION_FOR_WEATHER @"Notification for weather"
-
+#define NOTIFICATION_FOR_LOCAITON @"Notification for location"
 
 
 #endif /* Define_h */

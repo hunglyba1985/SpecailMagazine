@@ -22,6 +22,8 @@
 #import "WeatherObject.h"
 #import "ArticleRealm.h"
 #import "Reachability.h"
+#import "UserData.h"
+
 
 
 #endif /* PrefixHeader_pch */

@@ -20,6 +20,7 @@
 		0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */; };
 		0E514FC61E24A3A2003BB550 /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E514FC51E24A3A2003BB550 /* UIImageViewAligned.m */; };
 		0E514FC91E25E267003BB550 /* CatalogRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E514FC81E25E267003BB550 /* CatalogRealm.m */; };
+		0E514FCC1E273DB9003BB550 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E514FCB1E273DB9003BB550 /* UserData.m */; };
 		0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */; };
 		0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75931E1CE01B00092056 /* ArticleRealm.m */; };
 		0E6B75981E1CEF9600092056 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75971E1CEF9600092056 /* Reachability.m */; };
@@ -85,6 +86,8 @@
 		0E514FC51E24A3A2003BB550 /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAligned.m; sourceTree = "<group>"; };
 		0E514FC71E25E267003BB550 /* CatalogRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CatalogRealm.h; path = Model/CatalogRealm.h; sourceTree = "<group>"; };
 		0E514FC81E25E267003BB550 /* CatalogRealm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CatalogRealm.m; path = Model/CatalogRealm.m; sourceTree = "<group>"; };
+		0E514FCA1E273DB9003BB550 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = Model/UserData.h; sourceTree = "<group>"; };
+		0E514FCB1E273DB9003BB550 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserData.m; path = Model/UserData.m; sourceTree = "<group>"; };
 		0E604CF51DEC32A3006A5346 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		0E6B75921E1CE01B00092056 /* ArticleRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleRealm.h; path = Model/ArticleRealm.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				0E6B75931E1CE01B00092056 /* ArticleRealm.m */,
 				0E514FC71E25E267003BB550 /* CatalogRealm.h */,
 				0E514FC81E25E267003BB550 /* CatalogRealm.m */,
+				0E514FCA1E273DB9003BB550 /* UserData.h */,
+				0E514FCB1E273DB9003BB550 /* UserData.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 				0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */,
 				5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */,
 				52AB659F1D7DBA670032C527 /* DrawInView.m in Sources */,
+				0E514FCC1E273DB9003BB550 /* UserData.m in Sources */,
 				0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */,
 				0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */,
 				0EE72EB31D9E2F75009C087A /* XLSegmentedPagerTabStripViewController.m in Sources */,

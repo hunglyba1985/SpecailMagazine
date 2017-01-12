@@ -126,7 +126,12 @@ static CurrentLocationManager *sharedLocationController = nil;
 //             NSLog(@"get current country %@",placemark.country);
              
              NSDictionary *currentProvince = @{PROVINCE:placemark.administrativeArea};
-             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_WEATHER object:nil userInfo:currentProvince];
+             NSLog(@"current province is %@",currentProvince);
+             
+             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_LOCAITON object:nil userInfo:currentProvince];
+             
+             [[UserData sharedInstance] setCurrentProvince:placemark.administrativeArea];
+             
          }
          else
          {

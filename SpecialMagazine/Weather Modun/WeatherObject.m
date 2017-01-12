@@ -9,6 +9,12 @@
 #import "WeatherObject.h"
 
 
+#define QUERY_PREFIX @"http://query.yahooapis.com/v1/public/yql?q="
+#define QUERY_SUFFIX @"&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+
+#define HANOI_WEATHER_QUERY @"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hanoi, vn\")"
+#define HOCHIMINH_WEATHER_QUERY @"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hochiminh, vn\")"
+#define DANANG_WEATHER_QUERY @"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"danang, vn\")"
 
 
 @implementation WeatherObject
@@ -22,21 +28,57 @@
     
     YQL *yql = [[YQL alloc] init];
 
-    NSDictionary *hanoiResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hanoi, vn\")"];
+    NSDictionary *hanoiResult = [yql query:HANOI_WEATHER_QUERY];
     
     [self initWithJSONDict:hanoiResult forRegion:HANOI];
     
-    NSDictionary *hochiminhResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"hochiminh, vn\")"];
+    NSDictionary *hochiminhResult = [yql query:HOCHIMINH_WEATHER_QUERY];
     
     [self initWithJSONDict:hochiminhResult forRegion:HOCHIMINH];
 
     
-    NSDictionary *danangResult = [yql query:@"select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"danang, vn\")"];
+    NSDictionary *danangResult = [yql query:DANANG_WEATHER_QUERY];
     
     [self initWithJSONDict:danangResult forRegion:DANANG];
 
     
     return self;
+}
+
+-(void) requestWeatherForecast
+{
+    self.saveForecastWeather = [NSMutableDictionary new];
+
+    [self getForcastFromProvince:HANOI_WEATHER_QUERY andNameProvince:HANOI];
+    [self getForcastFromProvince:HOCHIMINH_WEATHER_QUERY andNameProvince:HOCHIMINH];
+    [self getForcastFromProvince:DANANG_WEATHER_QUERY andNameProvince:DANANG];
+}
+
+-(void) getForcastFromProvince:(NSString *) province andNameProvince:(NSString*) nameProvince
+{
+    NSString *query = [NSString stringWithFormat:@"%@%@%@", QUERY_PREFIX, [province stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], QUERY_SUFFIX];
+    
+    //    NSLog(@"query yahoo %@",query);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    [manager GET:query parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //        NSLog(@"get data from yahoo never stable %@",responseObject);
+        
+        [self initWithJSONDict:responseObject forRegion:nameProvince];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_WEATHER object:nil];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_WEATHER object:nil];
+
+        
+    }];
+
 }
 
 - (void)initWithJSONDict:(NSDictionary *)dict forRegion:(NSString*) region
@@ -119,16 +161,18 @@
             [self.saveForecastWeather setObject:self.danangWeather forKey:DANANG];
         }
         
-        [[NSUserDefaults standardUserDefaults] setObject:self.saveForecastWeather forKey:WEATHER_SAVE];
-    }
-    else
-    {
-        NSDictionary *getOldData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:WEATHER_SAVE];
+//        [[NSUserDefaults standardUserDefaults] setObject:self.saveForecastWeather forKey:WEATHER_SAVE];
+        [[UserData sharedInstance] setCurrentForcastWeather:self.saveForecastWeather];
         
-        self.hanoiWeather = [getOldData objectForKey:HANOI];
-        self.hochiminhWeather = [getOldData objectForKey:HOCHIMINH];
-        self.danangWeather = [getOldData objectForKey:DANANG];
     }
+//    else
+//    {
+//        NSDictionary *getOldData = [[NSUserDefaults standardUserDefaults] dictionaryForKey:WEATHER_SAVE];
+//        
+//        self.hanoiWeather = [getOldData objectForKey:HANOI];
+//        self.hochiminhWeather = [getOldData objectForKey:HOCHIMINH];
+//        self.danangWeather = [getOldData objectForKey:DANANG];
+//    }
  
 }
 

@@ -15,9 +15,15 @@
 
 #import "TFHpple.h"
 
+#define HANOICITY @""
+#define HOCHIMINHCITY @""
+#define DANANGCITY @""
+
+
 @interface LaunchingViewController ()
 {
-    WeatherObject *weather;
+//    WeatherObject *weather;
+    NSDictionary *weather;
     
 }
 
@@ -171,9 +177,11 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_WEATHER object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
 
 //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
 
@@ -213,40 +221,62 @@
 
 -(void) setYahooWeather
 {
-    
-     weather = [[WeatherObject alloc] getWeatherForecast];
+    NSLog(@"notification when get weather ---------");
+//     weather = [[WeatherObject alloc] getWeatherForecast];
     
 //    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
 //    NSLog(@"weather of hochiminh is %@",weather.hochiminhWeather);
 //    NSLog(@"weather of danang is %@",weather.danangWeather);
     
-    [self setDataForWeatherView:weather.hanoiWeather inProvince:@"TP Hà Nội"];
+     weather = [[UserData sharedInstance] getOldForcast];
+    
+    NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
     
     
+    NSLog(@"old province is %@",oldProvince);
+    
+    
+//    NSLog(@"old weather is %@",weather);
+    
+    
+    if (oldProvince != nil) {
+        
+        [self findWeatherForcastFromProvince:oldProvince];
+    }
+    else
+    {
+        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
+    }
 }
 
 -(void) getLocalProvince:(NSNotification *) userData
 {
+    NSLog(@"notification when get location -----------");
     NSDictionary *localData = [userData userInfo];
     
 //    NSLog(@"local data is %@", localData);
     
     NSString *localProvince = [localData objectForKey:PROVINCE];
     
+    [self findWeatherForcastFromProvince:localProvince];
+    
+}
+
+-(void) findWeatherForcastFromProvince:(NSString *) localProvince
+{
     if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
         
-        [self setDataForWeatherView:weather.danangWeather inProvince:@"TP Đà Nẵng"];
+        [self setDataForWeatherView:[weather objectForKey:DANANG] inProvince:@"TP Đà Nẵng"];
     }
     else if ([localProvince isEqualToString:@"Ho Chi Minh City"])
     {
-        [self setDataForWeatherView:weather.hochiminhWeather inProvince:@"TP Hồ Chí Minh"];
+        [self setDataForWeatherView:[weather objectForKey:HOCHIMINH] inProvince:@"TP Hồ Chí Minh"];
     }
     else
     {
-        [self setDataForWeatherView:weather.hanoiWeather inProvince:@"TP Hà Nội"];
+        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
     }
-    
-    
+
 }
 
 
