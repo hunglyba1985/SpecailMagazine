@@ -48,6 +48,9 @@
 -(void) requestWeatherForecast
 {
     self.saveForecastWeather = [NSMutableDictionary new];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"WeatherForecast" ofType:@"plist"];
+    converForecast = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
     [self getForcastFromProvince:HANOI_WEATHER_QUERY andNameProvince:HANOI];
     [self getForcastFromProvince:HOCHIMINH_WEATHER_QUERY andNameProvince:HOCHIMINH];
@@ -103,10 +106,13 @@
         int cTemp = [self convertFToC:fTemp];
         [temp removeObjectForKey:@"temp"];
         [temp setObject:[NSString stringWithFormat:@"%i",cTemp] forKey:@"temp"];
+        
         NSString *forecastWeather = [converForecast objectForKey:[current objectForKey:CODE]];
+        NSLog(@"show explain for forecast weather is %@",forecastWeather);
         if (forecastWeather) {
             [temp setObject:forecastWeather forKey:FORECAST];
         }
+        
         self.currentWeatherCondition = temp;
         
         

@@ -23,8 +23,11 @@
         self.content = [dictionary objectForKey:CONTENT];
         self.coverImageUrl = [dictionary objectForKey:COVER_IMAGE];
         
-        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:@[[NSURL URLWithString:self.coverImageUrl]]];
-        [[SDWebImagePrefetcher sharedImagePrefetcher] setOptions:SDWebImageHighPriority];
+        if (self.coverImageUrl != nil) {
+            [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:@[[NSURL URLWithString:self.coverImageUrl]]];
+            [[SDWebImagePrefetcher sharedImagePrefetcher] setOptions:SDWebImageHighPriority];
+        }
+      
 
         self.descriptionArticle = [dictionary objectForKey:DESC];
         self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKey:HAS_VIDEOS] boolValue]];
