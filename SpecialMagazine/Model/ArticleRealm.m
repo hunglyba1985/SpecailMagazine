@@ -23,7 +23,7 @@
         self.content = [dictionary objectForKey:CONTENT];
         self.coverImageUrl = [dictionary objectForKey:COVER_IMAGE];
         
-        if (self.coverImageUrl != nil) {
+        if ([NSURL URLWithString:self.coverImageUrl] != nil) {
             [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:@[[NSURL URLWithString:self.coverImageUrl]]];
             [[SDWebImagePrefetcher sharedImagePrefetcher] setOptions:SDWebImageHighPriority];
         }
@@ -35,11 +35,14 @@
         
         NSArray *listPictures = [dictionary objectForKey:LIST_IMAGES];
         [self preLoadImageForArticle:listPictures];
-        
-        self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];
+        if (listPictures != nil) {
+            self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];
+        }
         
         NSArray *listMp4 = [dictionary objectForKey:LIST_VIDEOS];
-        self.listVideos =  [NSKeyedArchiver archivedDataWithRootObject:listMp4];
+        if (listMp4 != nil) {
+            self.listVideos =  [NSKeyedArchiver archivedDataWithRootObject:listMp4];
+        }
         
         self.postTime = [[dictionary objectForKey:POST_TIME] doubleValue];
         self.titleArticle = [dictionary objectForKey:TITLE_ARTICLE];
