@@ -19,6 +19,9 @@
 #define HOCHIMINHCITY @""
 #define DANANGCITY @""
 
+#import "JHChainableAnimations.h"
+#define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
+
 
 @interface LaunchingViewController ()
 {
@@ -44,6 +47,12 @@
 // Launching wellcome
 @property (weak, nonatomic) IBOutlet UILabel *wellcomeLabel;
 
+
+// Launching animation
+@property (weak, nonatomic) IBOutlet UIImageView *sunImageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *cloud1;
+@property (weak, nonatomic) IBOutlet UIImageView *cloud2;
 
 @end
 
@@ -71,6 +80,17 @@
     
     
 }
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.cloud2.hidden = NO;
+    self.cloud1.hidden = NO;
+    self.sunImageView.hidden = NO;
+    
+    
+ }
 
 
 -(void) testHtmlString
@@ -339,13 +359,33 @@
 - (IBAction)downloadClick:(id)sender {
     
     NSLog(@"download click");
+//    
+//    [self deleteAllOldData];
+//    
+//    
+//    [ARTIST_API downloadForNoInternet];
     
-    [self deleteAllOldData];
+    [self testAnimation];
     
     
-    [ARTIST_API downloadForNoInternet];
     
+}
+
+
+-(void) testAnimation
+{
+    self.cloud1.moveX(300).animate(2);
+    self.cloud2.moveX(- 300).animate(2);
     
+    UIBezierPath *aPath = [self.sunImageView bezierPathForAnimation];
+    aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(150, 300)
+                                           radius:150
+                                       startAngle:DEGREES_TO_RADIANS(180)
+                                         endAngle:DEGREES_TO_RADIANS(0)
+                                        clockwise:YES];
+    
+    self.sunImageView.moveOnPath(aPath).animate(2);
+
     
 }
 
