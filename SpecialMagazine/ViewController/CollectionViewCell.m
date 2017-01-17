@@ -178,8 +178,25 @@ NSDictionary * catagoryInfor;
     //    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
     ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
-                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
+
+    
+//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
+//                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    __weak typeof(CellCollectionView) *weakCell = cell;
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        [weakCell.image reveal];
+        
+    }];
+    
+    
     
     cell.title.text = cellData.titleArticle;
     

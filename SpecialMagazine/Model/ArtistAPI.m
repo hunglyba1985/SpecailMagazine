@@ -60,7 +60,7 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid andLastId:(NSString *) lid successResult:(GetAPIRequestHandle) result
 {
-    NSString *endPoint = [NSString stringWithFormat:@"articles?sid=%@&count=24&latest=0&deviceld=%@&lid=%@&cid=%@",sid,DEVICE_ID,lid,cid];
+    NSString *endPoint = [NSString stringWithFormat:@"articles?sid=%@&count=10&latest=0&deviceld=%@&lid=%@&cid=%@",sid,DEVICE_ID,lid,cid];
     
     NSDictionary *parameters = @{
                                  };
