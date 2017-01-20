@@ -17,6 +17,8 @@
     NSArray *tableData;
     NSMutableArray *heightCell;
     UIWebView *detailWebView;
+    UIImage *iamge;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

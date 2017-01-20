@@ -62,7 +62,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"launching view did load");
+//    NSLog(@"launching view did load");
     
     
     [self loadingBeautifulAdvice];
@@ -89,6 +89,8 @@
     self.cloud1.hidden = NO;
     self.sunImageView.hidden = NO;
     
+    
+    [self testAnimation];
     
  }
 
@@ -253,7 +255,7 @@
     NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
     
     
-    NSLog(@"old province is %@",oldProvince);
+//    NSLog(@"old province is %@",oldProvince);
     
     
 //    NSLog(@"old weather is %@",weather);
@@ -271,7 +273,7 @@
 
 -(void) getLocalProvince:(NSNotification *) userData
 {
-    NSLog(@"notification when get location -----------");
+//    NSLog(@"notification when get location -----------");
     NSDictionary *localData = [userData userInfo];
     
 //    NSLog(@"local data is %@", localData);
@@ -359,13 +361,13 @@
 - (IBAction)downloadClick:(id)sender {
     
     NSLog(@"download click");
-//    
-//    [self deleteAllOldData];
-//    
-//    
-//    [ARTIST_API downloadForNoInternet];
     
-    [self testAnimation];
+    [self deleteAllOldData];
+    
+    
+    [ARTIST_API downloadForNoInternet];
+    
+//    [self testAnimation];
     
     
     

@@ -60,6 +60,9 @@
 		52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA9941D7A667600273548 /* LaunchScreen.storyboard */; };
 		52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9A01D7A6ED700273548 /* ArtistAPI.m */; };
 		5647DA2B772D13103B5E2016 /* libPods-SpecialMagazine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67641A894018992672889CD9 /* libPods-SpecialMagazine.a */; };
+		B21828441E2E0E770070B19D /* kissingMinion.gif in Resources */ = {isa = PBXBuildFile; fileRef = B21828431E2E0E770070B19D /* kissingMinion.gif */; };
+		B21828461E2E0E7E0070B19D /* happyMinion.gif in Resources */ = {isa = PBXBuildFile; fileRef = B21828451E2E0E7E0070B19D /* happyMinion.gif */; };
+		B21828891E2E16AA0070B19D /* laughingMinion.gif in Resources */ = {isa = PBXBuildFile; fileRef = B21828881E2E16AA0070B19D /* laughingMinion.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +163,9 @@
 		52EBA99F1D7A6ED700273548 /* ArtistAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtistAPI.h; path = Model/ArtistAPI.h; sourceTree = "<group>"; };
 		52EBA9A01D7A6ED700273548 /* ArtistAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArtistAPI.m; path = Model/ArtistAPI.m; sourceTree = "<group>"; };
 		67641A894018992672889CD9 /* libPods-SpecialMagazine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpecialMagazine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B21828431E2E0E770070B19D /* kissingMinion.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = kissingMinion.gif; sourceTree = "<group>"; };
+		B21828451E2E0E7E0070B19D /* happyMinion.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = happyMinion.gif; sourceTree = "<group>"; };
+		B21828881E2E16AA0070B19D /* laughingMinion.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = laughingMinion.gif; sourceTree = "<group>"; };
 		C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -438,6 +444,9 @@
 		52EBA9861D7A667500273548 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B21828881E2E16AA0070B19D /* laughingMinion.gif */,
+				B21828431E2E0E770070B19D /* kissingMinion.gif */,
+				B21828451E2E0E7E0070B19D /* happyMinion.gif */,
 				0EEBAB5A1DA34CAC00D36D0E /* document.json */,
 				52EBA99E1D7A6C2A00273548 /* Define.h */,
 				52EBA9871D7A667500273548 /* main.m */,
@@ -551,9 +560,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
+				B21828441E2E0E770070B19D /* kissingMinion.gif in Resources */,
 				5288D21B1DBEDD19003A000D /* CollectionViewCell.xib in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
 				0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */,
+				B21828891E2E16AA0070B19D /* laughingMinion.gif in Resources */,
+				B21828461E2E0E7E0070B19D /* happyMinion.gif in Resources */,
 				0EE72EB51D9E2F75009C087A /* ButtonCell.xib in Resources */,
 				52AB65CC1D7F94A10032C527 /* WeatherForecast.plist in Resources */,
 				0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */,

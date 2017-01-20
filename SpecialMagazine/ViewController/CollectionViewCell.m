@@ -7,6 +7,8 @@
 //
 
 #import "CollectionViewCell.h"
+#import <FLAnimatedImage/FLAnimatedImage.h>
+
 
 
 NSDictionary * catagoryInfor;
@@ -178,23 +180,40 @@ NSDictionary * catagoryInfor;
     //    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
     ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
-    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
+//    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
 
     
 //    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
 //                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
-    __weak typeof(CellCollectionView) *weakCell = cell;
+//    __weak typeof(CellCollectionView) *weakCell = cell;
+//    
+//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//        
+//        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+//        
+//    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        [weakCell.image reveal];
+//        
+//    }];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-        
-        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
-        
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        [weakCell.image reveal];
+    
+    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"laughingMinion.gif" ofType:nil]];
+    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:fileURL]];
+    cell.loadingView.animatedImage = image;
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image != nil) {
+            
+            cell.loadingView.hidden = YES;
+            cell.image.image = image;
+            
+        }
         
     }];
+    
+    
     
     
     

@@ -111,7 +111,7 @@ static ArtistAPI  *sharedController = nil;
 {
     NSString *postLink = [NSString stringWithFormat:@"%@/%@",URL_BASE,endPoint];
     
-    NSLog(@"post link is %@",postLink);
+//    NSLog(@"post link is %@",postLink);
     
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

@@ -16,6 +16,8 @@
 @interface ListWebsitesController () <UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *tableData;
+    BOOL firstTime;
+    
     
 }
 
@@ -33,7 +35,9 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     self.navigationController.navigationBarHidden = YES;
-    [self getCatagories];
+    
+    [self getDataFromLocal];
+
 }
 
 - (void)setStatusBarBackgroundColor:(UIColor *)color {
@@ -52,6 +56,9 @@
 
 -(void) getCatagories
 {
+    
+    NSMutableArray *tempArray = [NSMutableArray new];
+    
     [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
         
         if (dataResponse != nil) {
@@ -63,18 +70,25 @@
                 
                 CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
                 
-                [tableData addObject:websiteRealm];
-                
+                if (firstTime) {
+                    [tableData addObject:websiteRealm];
+                }
+                else
+                {
+                    [tempArray addObject:websiteRealm];
+
+                }
             }];
             
-            [self.tableView reloadData];
+            if (firstTime) {
+                [self.tableView reloadData];
+                firstTime = NO;
+            }
+            else
+            {
+                [self addDataToRealm:tempArray];
 
-//            [self addDataToRealm:tableData];
-            
-        }
-        else
-        {
-            [self getDataFromLocal];
+            }
         }
         
     }];
@@ -84,22 +98,35 @@
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self addDataToRealm:tableData];
+        [self getCatagories];
+
 }
 
 
 
 -(void) getDataFromLocal
 {
-    NSLog(@"load local data");
     NSArray *allLocalData = (NSArray*)[CatalogRealm allObjects];
-    for (CatalogRealm *object in allLocalData) {
+    NSLog(@"load local data  %i",(int)allLocalData.count);
+
+    if (allLocalData.count > 0) {
+        for (CatalogRealm *object in allLocalData) {
+            
+            [tableData addObject:object];
+            
+        }
         
-        [tableData addObject:object];
-        
+        [self.tableView reloadData];
+
+    }
+    else
+    {
+        NSLog(@"first time get data");
+        firstTime = YES;
+        [self getCatagories];
     }
     
-    [self.tableView reloadData];
+    
     
 }
 
@@ -142,6 +169,8 @@
     CatalogRealm *websiteInfo = [tableData objectAtIndex:indexPath.row];
     
     [cell.websiteIcon sd_setImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink]];
+    
+    
     cell.websiteName.text = websiteInfo.websiteName;
     
     

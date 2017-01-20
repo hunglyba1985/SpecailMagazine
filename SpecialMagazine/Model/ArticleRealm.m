@@ -116,14 +116,14 @@
     
     [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp progress:^(NSUInteger noOfFinishedUrls, NSUInteger noOfTotalUrls) {
         
-        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
-        NSLog(@"noOfTotalUrls    %lu",(unsigned long)noOfTotalUrls);
+//        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+//        NSLog(@"noOfTotalUrls    %lu",(unsigned long)noOfTotalUrls);
         
         
     } completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) {
         
-        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
-        NSLog(@"noOfSkippedUrls    %lu",(unsigned long)noOfSkippedUrls);
+//        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+//        NSLog(@"noOfSkippedUrls    %lu",(unsigned long)noOfSkippedUrls);
         
         
     }];

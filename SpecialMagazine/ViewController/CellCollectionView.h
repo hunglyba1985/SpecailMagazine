@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FLAnimatedImage/FLAnimatedImage.h>
+
 
 @interface CellCollectionView : UICollectionViewCell
 
@@ -18,5 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *catagory;
+
+@property (weak, nonatomic) IBOutlet FLAnimatedImageView *loadingView;
+
 
 @end

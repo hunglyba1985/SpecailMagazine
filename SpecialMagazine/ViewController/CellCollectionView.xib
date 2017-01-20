@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,11 +19,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zZT-5l-Q40">
+                        <rect key="frame" x="0.0" y="0.0" width="317" height="286"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="286" id="m9o-IK-AxC"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-Q2-yym">
+                        <rect key="frame" x="8" y="296" width="301" height="46"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="FSY-Co-lyZ"/>
                         </constraints>
@@ -29,11 +34,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDG-1a-fqm">
+                        <rect key="frame" x="8" y="371" width="301" height="169"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOS-6k-oEX">
+                        <rect key="frame" x="8" y="8" width="301" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="FaF-sD-g8h"/>
                         </constraints>
@@ -41,10 +48,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="veT-AZ-F3f" customClass="FLAnimatedImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="317" height="286"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="286" id="0vO-4F-nuv"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZDG-1a-fqm" secondAttribute="trailing" constant="8" id="Awy-Uo-KK1"/>
+                <constraint firstAttribute="trailing" secondItem="veT-AZ-F3f" secondAttribute="trailing" id="BfX-fM-jAb"/>
                 <constraint firstAttribute="trailing" secondItem="zZT-5l-Q40" secondAttribute="trailing" id="FCL-Xu-NoQ"/>
                 <constraint firstAttribute="trailing" secondItem="FOS-6k-oEX" secondAttribute="trailing" constant="8" id="NNB-Av-CEm"/>
                 <constraint firstAttribute="bottom" secondItem="ZDG-1a-fqm" secondAttribute="bottom" constant="8" id="OvJ-Fh-Ub3"/>
@@ -56,13 +70,16 @@
                 <constraint firstItem="ZDG-1a-fqm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="YBQ-c4-GFS"/>
                 <constraint firstItem="hNe-Q2-yym" firstAttribute="top" secondItem="zZT-5l-Q40" secondAttribute="bottom" constant="10" id="esg-MU-qBt"/>
                 <constraint firstItem="ZDG-1a-fqm" firstAttribute="top" secondItem="hNe-Q2-yym" secondAttribute="bottom" constant="29" id="fX4-uc-EkF"/>
+                <constraint firstItem="veT-AZ-F3f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hod-H5-8uj"/>
                 <constraint firstAttribute="trailing" secondItem="hNe-Q2-yym" secondAttribute="trailing" constant="8" id="qDF-ob-ekI"/>
+                <constraint firstItem="veT-AZ-F3f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wsU-ha-gkm"/>
             </constraints>
             <size key="customSize" width="317" height="548"/>
             <connections>
                 <outlet property="catagory" destination="FOS-6k-oEX" id="UZ2-QD-ed5"/>
                 <outlet property="descriptionLabel" destination="ZDG-1a-fqm" id="A4w-W2-As9"/>
                 <outlet property="image" destination="zZT-5l-Q40" id="aKZ-lJ-1f9"/>
+                <outlet property="loadingView" destination="veT-AZ-F3f" id="n3P-se-ey0"/>
                 <outlet property="title" destination="hNe-Q2-yym" id="7Gz-8B-hN5"/>
             </connections>
             <point key="canvasLocation" x="-589.5" y="-14"/>
