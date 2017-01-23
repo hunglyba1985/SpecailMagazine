@@ -34,7 +34,10 @@ NSDictionary * catagoryInfor;
     
     int randomInt = arc4random_uniform(33);
     
-    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:UIColorFromRGB(0x9b59b6)];
+    int randomColor = arc4random_uniform(14);
+
+    
+    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
     CGFloat width = SCREEN_WIDTH / 5.0f;
     CGFloat height = SCREEN_HEIGHT / 7.0f;
     
