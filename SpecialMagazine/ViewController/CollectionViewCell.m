@@ -32,14 +32,15 @@ NSDictionary * catagoryInfor;
     
     [self checkConnectNetwork];
     
+    int randomInt = arc4random_uniform(33);
     
-    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeCookieTerminator tintColor:UIColorFromRGB(0xe67e22)];
+    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:UIColorFromRGB(0x9b59b6)];
     CGFloat width = SCREEN_WIDTH / 5.0f;
     CGFloat height = SCREEN_HEIGHT / 7.0f;
     
     activityIndicatorView.frame = CGRectMake(0, 0, width, height);
     
-    activityIndicatorView.center = self.center;
+    activityIndicatorView.center = CGPointMake(self.center.x - 40, self.center.y - 20);
     
     
     [self addSubview:activityIndicatorView];

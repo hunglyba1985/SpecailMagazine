@@ -25,6 +25,9 @@
 #define ARTIST_API [ArtistAPI  sharedInstance]
 
 
+#define ACTIVE_TYPE  @[@(DGActivityIndicatorAnimationTypeNineDots),@(DGActivityIndicatorAnimationTypeTriplePulse),@(DGActivityIndicatorAnimationTypeFiveDots),@(DGActivityIndicatorAnimationTypeRotatingSquares),@(DGActivityIndicatorAnimationTypeDoubleBounce),@(DGActivityIndicatorAnimationTypeTwoDots),@(DGActivityIndicatorAnimationTypeThreeDots),@(DGActivityIndicatorAnimationTypeBallPulse),@(DGActivityIndicatorAnimationTypeBallClipRotate),@(DGActivityIndicatorAnimationTypeBallClipRotatePulse),@(DGActivityIndicatorAnimationTypeBallClipRotateMultiple),@(DGActivityIndicatorAnimationTypeBallRotate),@(DGActivityIndicatorAnimationTypeBallZigZag),@(DGActivityIndicatorAnimationTypeBallZigZagDeflect),@(DGActivityIndicatorAnimationTypeBallTrianglePath),@(DGActivityIndicatorAnimationTypeBallScale),@(DGActivityIndicatorAnimationTypeLineScale),@(DGActivityIndicatorAnimationTypeLineScaleParty),@(DGActivityIndicatorAnimationTypeBallScaleMultiple),@(DGActivityIndicatorAnimationTypeBallPulseSync),@(DGActivityIndicatorAnimationTypeBallBeat),@(DGActivityIndicatorAnimationTypeLineScalePulseOut),@(DGActivityIndicatorAnimationTypeLineScalePulseOutRapid),@(DGActivityIndicatorAnimationTypeBallScaleRipple),@(DGActivityIndicatorAnimationTypeBallScaleRippleMultiple),@(DGActivityIndicatorAnimationTypeTriangleSkewSpin),@(DGActivityIndicatorAnimationTypeBallGridBeat),@(DGActivityIndicatorAnimationTypeBallGridPulse),@(DGActivityIndicatorAnimationTypeRotatingSandglass),@(DGActivityIndicatorAnimationTypeRotatingTrigons),@(DGActivityIndicatorAnimationTypeTripleRings),@(DGActivityIndicatorAnimationTypeCookieTerminator),@(DGActivityIndicatorAnimationTypeBallSpinFadeLoader)]
+
+
 #define WEBSITE @"websites"
 
 #define WEBSITE_ID @"id"

@@ -79,6 +79,7 @@
     [self checkConnectNetwork];
     
     
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -234,7 +235,6 @@
     NSString *randomSentence = [json objectAtIndex:randomInt];
     
     NSLog(@" nice advices:  %@",randomSentence);
-
     
     self.meaningfulSentence.text = randomSentence;
     
