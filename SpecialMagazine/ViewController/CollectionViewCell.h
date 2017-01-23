@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CellCollectionView.h"
+#import "DGActivityIndicatorView.h"
 
 @protocol CollectionViewCellDelegate <NSObject>
 
@@ -20,6 +21,8 @@
 @interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
 {
     NSMutableArray *collectionData;
+    DGActivityIndicatorView *activityIndicatorView;
+    
     
 }
 

@@ -33,6 +33,18 @@ NSDictionary * catagoryInfor;
     [self checkConnectNetwork];
     
     
+    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:DGActivityIndicatorAnimationTypeCookieTerminator tintColor:UIColorFromRGB(0xe67e22)];
+    CGFloat width = SCREEN_WIDTH / 5.0f;
+    CGFloat height = SCREEN_HEIGHT / 7.0f;
+    
+    activityIndicatorView.frame = CGRectMake(0, 0, width, height);
+    
+    activityIndicatorView.center = self.center;
+    
+    
+    [self addSubview:activityIndicatorView];
+    [activityIndicatorView startAnimating];
+    
 }
 
 
@@ -131,6 +143,10 @@ NSDictionary * catagoryInfor;
             
             [self.collectionView reloadData];
             
+            [activityIndicatorView stopAnimating];
+            activityIndicatorView.hidden = YES;
+            
+            
         }
         else
         {
@@ -180,6 +196,9 @@ NSDictionary * catagoryInfor;
     //    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
     ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
 //    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
 
     
@@ -202,6 +221,8 @@ NSDictionary * catagoryInfor;
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"laughingMinion.gif" ofType:nil]];
     FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:fileURL]];
     cell.loadingView.animatedImage = image;
+    cell.loadingView.hidden = NO;
+    
     
     [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image != nil) {
