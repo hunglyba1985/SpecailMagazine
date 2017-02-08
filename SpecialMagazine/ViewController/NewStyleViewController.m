@@ -201,7 +201,7 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SCREEN_HEIGHT;
+    return SCREEN_HEIGHT - 20;
 }
 
 
