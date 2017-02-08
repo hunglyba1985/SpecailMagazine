@@ -1,41 +1,30 @@
 //
-//  CollectionViewCell.m
+//  CustomTableCell.m
 //  SpecialMagazine
 //
-//  Created by Macbook Pro on 10/25/16.
-//  Copyright © 2016 Macbook Pro. All rights reserved.
+//  Created by Macbook Pro on 2/8/17.
+//  Copyright © 2017 Macbook Pro. All rights reserved.
 //
 
-#import "CollectionViewCell.h"
-#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "CustomTableCell.h"
+#import "CellCollectionView.h"
 
-
-
-NSDictionary * catagoryInfor;
-
-@implementation CollectionViewCell
+@implementation CustomTableCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     
-    // Create random background color
-//    CGFloat hue = ( arc4random() % 256 / 256.0 );
-//    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    UIColor *randomColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-//    self.backgroundColor = randomColor;
-    
     [self setupCollectionView];
-    
-//    self.collectionView.hidden = YES;
-    
-    [self checkConnectNetwork];
-    
+    [self createLoadingView];
+}
+
+-(void) createLoadingView
+{
     int randomInt = arc4random_uniform(33);
     
     int randomColor = arc4random_uniform(14);
-
+    
     
     activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
     CGFloat width = SCREEN_WIDTH / 5.0f;
@@ -48,38 +37,7 @@ NSDictionary * catagoryInfor;
     
     [self addSubview:activityIndicatorView];
     [activityIndicatorView startAnimating];
-    
 }
-
-
--(void) checkConnectNetwork
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
-    
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
-    }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
-        
-    }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
-    }
-}
-
-
-
 
 -(void) setupCollectionView
 {
@@ -91,8 +49,8 @@ NSDictionary * catagoryInfor;
     
     UICollectionViewFlowLayout *layoutCollectionView = [[UICollectionViewFlowLayout alloc] init];
     layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(10, 0, 5, 5)];
-    layoutCollectionView.itemSize = CGSizeMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 25);
+    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(20, 0, 0, 0)];
+    layoutCollectionView.itemSize = CGSizeMake(SCREEN_WIDTH - 30, SCREEN_HEIGHT - 20);
     layoutCollectionView.minimumInteritemSpacing = 0;
     layoutCollectionView.minimumLineSpacing = 0;
     
@@ -116,22 +74,23 @@ NSDictionary * catagoryInfor;
         
     }
     
-//    NSLog(@"all data in local is %@",collectionData);
+    //    NSLog(@"all data in local is %@",collectionData);
     
     
     [self.collectionView reloadData];
     
-
+    
 }
+
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
     
-//    NSLog(@"one catagory is %@",catagoryInfor);
-
+    //    NSLog(@"one catagory is %@",catagoryInfor);
+    
     collectionData = [NSMutableArray new];
-
+    
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
@@ -146,13 +105,13 @@ NSDictionary * catagoryInfor;
             }];
             
             [self.collectionView reloadData];
-
+            
             
             self.collectionView.scrollsToTop = YES;
             
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
             
-
+            
             
             [activityIndicatorView stopAnimating];
             activityIndicatorView.hidden = YES;
@@ -164,7 +123,7 @@ NSDictionary * catagoryInfor;
             [self getDataLocal];
         }
     }];
-
+    
 }
 
 -(void) loadMoreData
@@ -191,15 +150,12 @@ NSDictionary * catagoryInfor;
 }
 
 
-
-#pragma mark CollectionView Datasource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+#pragma mark - CollectionView Datasource
+-(NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return collectionData.count;
-    
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CellCollectionView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCell" forIndexPath:indexPath];
@@ -211,25 +167,25 @@ NSDictionary * catagoryInfor;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
     [cell layoutIfNeeded];
-
     
-//    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
-
     
-//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
-//                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    //    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
     
-//    __weak typeof(CellCollectionView) *weakCell = cell;
-//    
-//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//        
-//        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
-//        
-//    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        [weakCell.image reveal];
-//        
-//    }];
+    
+    //    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
+    //                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    //    __weak typeof(CellCollectionView) *weakCell = cell;
+    //
+    //    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    //
+    //        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+    //
+    //    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    //
+    //        [weakCell.image reveal];
+    //
+    //    }];
     
     
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"laughingMinion.gif" ofType:nil]];
@@ -256,14 +212,15 @@ NSDictionary * catagoryInfor;
     
     cell.descriptionLabel.text = cellData.descriptionArticle;
     
-//    cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
+    //    cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
     cell.catagory.hidden = YES;
     
     
-//    NSLog(@"array content is %@", [NSKeyedUnarchiver unarchiveObjectWithData:cellData.arrayContent]);
+    //    NSLog(@"array content is %@", [NSKeyedUnarchiver unarchiveObjectWithData:cellData.arrayContent]);
     
     return cell;
 }
+
 
 #pragma mark CollectionView Delegate
 -(void) collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -272,12 +229,12 @@ NSDictionary * catagoryInfor;
         printf("start to load more ");
         [self loadMoreData];
     }
-
+    
 }
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+    id<CustomTableCellDelegate> strongDelegate = self.delegate;
     
     ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
@@ -290,7 +247,26 @@ NSDictionary * catagoryInfor;
 
 
 
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

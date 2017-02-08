@@ -11,9 +11,10 @@
 #import "DetailViewController.h"
 #import "HMSegmentedControl.h"
 #import "NewDetailViewController.h"
+#import "CustomTableCell.h"
 
 
-@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate>
+@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate>
 {
     NSMutableArray *collectionData;
     HMSegmentedControl *segmentedControl1;
@@ -25,6 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -40,11 +42,21 @@
     self.navigationController.navigationBarHidden = YES;
     
     
-    [self setUpCollectionView];
+//    [self setUpCollectionView];
     [self addVerticalSegment];
     [self checkConnectNetwork];
     
+    [self setupTableView];
+    
 }
+
+
+-(void) setupTableView
+{
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+}
+
 
 -(void) checkConnectNetwork
 {
@@ -94,15 +106,17 @@
     // Segmented control with scrolling
     segmentedControl1 = [[HMSegmentedControl alloc] initWithSectionTitles:listNameOfCatalog];
     segmentedControl1.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    segmentedControl1.frame = CGRectMake(0, 0, SCREEN_HEIGHT - 20, 40);
+    segmentedControl1.frame = CGRectMake(0, 0, SCREEN_HEIGHT - 20, 30);
     segmentedControl1.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
-    segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp;
     segmentedControl1.verticalDividerEnabled = YES;
-    segmentedControl1.verticalDividerColor = [UIColor blackColor];
+    segmentedControl1.verticalDividerColor = UIColorFromRGB(0xc0392b);
+    segmentedControl1.selectionIndicatorColor = UIColorFromRGB(0x9A12B3);
+    segmentedControl1.backgroundColor = UIColorFromRGB(0x2ecc71);
     segmentedControl1.verticalDividerWidth = 1.0f;
     [segmentedControl1 setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor blueColor]}];
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:16]}];
         return attString;
     }];
     [segmentedControl1 addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
@@ -114,7 +128,7 @@
 //
     
     
-    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT - 20, 40)];
+    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT - 20, 30)];
     rotateView.backgroundColor = [UIColor yellowColor];
     rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
     
@@ -159,8 +173,41 @@
     
 }
 
+#pragma mark - TableView Datasource
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.listCatagories.count;
+}
 
-#pragma mark CollectionView Datasource
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CustomTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CustomTableCell"];
+    
+    if (cell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CustomTableCell" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.delegate = self;
+    
+    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+    [cell loadingDataForCatalog:oneCatagory];
+
+    
+    return cell;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return SCREEN_HEIGHT;
+}
+
+
+
+
+#pragma mark - CollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.listCatagories.count;
@@ -176,13 +223,17 @@
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
 
     
+    [cell layoutIfNeeded];
+    
+    
     cell.delegate = self;
     
     
-//    NSLog(@"one catagory is %@",oneCatagory);
     
 #pragma mark - For have internet
     NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+//    NSLog(@"one catagory is %@",oneCatagory);
+
     [cell loadingDataForCatalog:oneCatagory];
     
 #pragma mark - For not have internet
@@ -209,7 +260,7 @@
 
 
 
-#pragma mark CollectionViewCell Delegate
+#pragma mark - CollectionViewCell Delegate
 -(void) selectedArticleWithInformation:(ArticleRealm *)artistInfo
 {
 //    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
@@ -245,7 +296,9 @@
  
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:segmentedControl.selectedSegmentIndex inSection:0];
     
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
     
 }

@@ -52,6 +52,8 @@
 		52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C61D7F948F0032C527 /* WeatherObject.m */; };
 		52AB65CA1D7F948F0032C527 /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AB65C81D7F948F0032C527 /* YQL.m */; };
 		52AB65CC1D7F94A10032C527 /* WeatherForecast.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52AB65CB1D7F94A10032C527 /* WeatherForecast.plist */; };
+		52BE47451E4A946C009AC489 /* CustomTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BE47431E4A946B009AC489 /* CustomTableCell.m */; };
+		52BE47461E4A946C009AC489 /* CustomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52BE47441E4A946C009AC489 /* CustomTableCell.xib */; };
 		52EBA9881D7A667500273548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9871D7A667500273548 /* main.m */; };
 		52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98A1D7A667500273548 /* AppDelegate.m */; };
 		52EBA98E1D7A667500273548 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98D1D7A667500273548 /* ViewController.m */; };
@@ -183,6 +185,9 @@
 		52AB65C71D7F948F0032C527 /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
 		52AB65C81D7F948F0032C527 /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
 		52AB65CB1D7F94A10032C527 /* WeatherForecast.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeatherForecast.plist; sourceTree = "<group>"; };
+		52BE47421E4A946B009AC489 /* CustomTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTableCell.h; path = ViewController/CustomTableCell.h; sourceTree = "<group>"; };
+		52BE47431E4A946B009AC489 /* CustomTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTableCell.m; path = ViewController/CustomTableCell.m; sourceTree = "<group>"; };
+		52BE47441E4A946C009AC489 /* CustomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomTableCell.xib; path = ViewController/CustomTableCell.xib; sourceTree = "<group>"; };
 		52EBA9831D7A667500273548 /* SpecialMagazine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecialMagazine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52EBA9871D7A667500273548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EBA9891D7A667500273548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -394,6 +399,7 @@
 			children = (
 				5288D2141DBED940003A000D /* NewStyleViewController.h */,
 				5288D2151DBED940003A000D /* NewStyleViewController.m */,
+				52BE47471E4A9473009AC489 /* Table Cell */,
 				0E28EFBB1DF6A455000F2176 /* Location Manager */,
 				5288D21C1DBEDD1D003A000D /* Collection Cell */,
 				0EE72E921D9E23B0009C087A /* ContainViewController.h */,
@@ -504,6 +510,16 @@
 				52AB65C81D7F948F0032C527 /* YQL.m */,
 			);
 			path = "Weather Modun";
+			sourceTree = "<group>";
+		};
+		52BE47471E4A9473009AC489 /* Table Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52BE47421E4A946B009AC489 /* CustomTableCell.h */,
+				52BE47431E4A946B009AC489 /* CustomTableCell.m */,
+				52BE47441E4A946C009AC489 /* CustomTableCell.xib */,
+			);
+			name = "Table Cell";
 			sourceTree = "<group>";
 		};
 		52EBA97A1D7A667500273548 = {
@@ -755,6 +771,7 @@
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				B21828441E2E0E770070B19D /* kissingMinion.gif in Resources */,
 				5288D21B1DBEDD19003A000D /* CollectionViewCell.xib in Resources */,
+				52BE47461E4A946C009AC489 /* CustomTableCell.xib in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
 				0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */,
 				B21828891E2E16AA0070B19D /* laughingMinion.gif in Resources */,
@@ -844,6 +861,7 @@
 				0E514FC61E24A3A2003BB550 /* UIImageViewAligned.m in Sources */,
 				0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */,
 				52EBA9881D7A667500273548 /* main.m in Sources */,
+				52BE47451E4A946C009AC489 /* CustomTableCell.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
 				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
 				B22309931E35BA5A0092CD1A /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
