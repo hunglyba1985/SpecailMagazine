@@ -273,7 +273,8 @@
             cell.label.text = cellData;
             cell.label.lineBreakMode = NSLineBreakByWordWrapping;
             cell.label.font = [UIFont systemFontOfSize:16];
-            
+            cell.label.textAlignment = NSTextAlignmentLeft;
+
             return cell;
             
         }
