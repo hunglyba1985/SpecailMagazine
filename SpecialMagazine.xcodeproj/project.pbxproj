@@ -484,7 +484,7 @@
 			name = "Collection Cell";
 			sourceTree = "<group>";
 		};
-		52AB65A01D7DBA6B0032C527 /* Test */ = {
+		52AB65A01D7DBA6B0032C527 /* Detail View Controller */ = {
 			isa = PBXGroup;
 			children = (
 				5225F86F1D90B4A50079E151 /* DetailViewController.h */,
@@ -498,7 +498,7 @@
 				52AB659D1D7DBA670032C527 /* DrawInView.h */,
 				52AB659E1D7DBA670032C527 /* DrawInView.m */,
 			);
-			name = Test;
+			name = "Detail View Controller";
 			sourceTree = "<group>";
 		};
 		52AB65C41D7F948F0032C527 /* Weather Modun */ = {
@@ -552,7 +552,7 @@
 				5225F86C1D8F69F20079E151 /* TableViewCell.h */,
 				5225F86D1D8F69F20079E151 /* TableViewCell.m */,
 				0EE72E951D9E23B4009C087A /* Controller */,
-				52AB65A01D7DBA6B0032C527 /* Test */,
+				52AB65A01D7DBA6B0032C527 /* Detail View Controller */,
 				52EBA9A21D7A6EE200273548 /* Model */,
 				0ED6285F1DEFDFDA00898D15 /* View */,
 				52AB65C41D7F948F0032C527 /* Weather Modun */,

@@ -135,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nyd-gq-Khw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell1" rowHeight="65" id="3qx-to-g0Q" customClass="DetailCell1">
@@ -194,10 +194,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Nyd-gq-Khw" firstAttribute="leading" secondItem="JZ7-Pp-p4Y" secondAttribute="leading" id="AQG-9D-2ql"/>
-                            <constraint firstItem="o2X-AT-dT8" firstAttribute="top" secondItem="Nyd-gq-Khw" secondAttribute="bottom" id="II6-sP-p26"/>
-                            <constraint firstItem="Nyd-gq-Khw" firstAttribute="top" secondItem="JZ7-Pp-p4Y" secondAttribute="top" id="NkT-Ml-kkB"/>
-                            <constraint firstAttribute="trailing" secondItem="Nyd-gq-Khw" secondAttribute="trailing" id="Wex-Gu-6Ny"/>
+                            <constraint firstItem="Nyd-gq-Khw" firstAttribute="leading" secondItem="JZ7-Pp-p4Y" secondAttribute="leading" id="0LB-Wi-mhc"/>
+                            <constraint firstAttribute="trailing" secondItem="Nyd-gq-Khw" secondAttribute="trailing" id="C9J-bD-qtW"/>
+                            <constraint firstItem="Nyd-gq-Khw" firstAttribute="top" secondItem="JZ7-Pp-p4Y" secondAttribute="top" constant="20" id="MtS-ZM-Vrc"/>
+                            <constraint firstItem="o2X-AT-dT8" firstAttribute="top" secondItem="Nyd-gq-Khw" secondAttribute="bottom" id="cAb-l6-jr1"/>
                         </constraints>
                     </view>
                     <connections>

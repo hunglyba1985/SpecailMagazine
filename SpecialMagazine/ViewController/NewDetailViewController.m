@@ -22,6 +22,9 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *articleTitle;
+@property (weak, nonatomic) IBOutlet UILabel *fromNewPaper;
+
 
 @end
 
@@ -54,7 +57,20 @@
 //    NSLog(@"when convert to array we have %@",tableData);
     
     [self getHeightForCell];
+    
+    [self setTitleAndSourceForArticle];
+    
+    [self.tableView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
+
+    
 }
+
+-(void) setTitleAndSourceForArticle
+{
+    self.articleTitle.text = self.article.titleArticle;
+    
+}
+
 
 -(void) createWebViewForCaseFailLoadTable
 {
@@ -174,12 +190,18 @@
 -(void) getHeightForCell
 {
     heightCell = [NSMutableArray new];
+    
+    CGFloat heightTitle = [self getHeightString:self.article.titleArticle withFont:[UIFont boldSystemFontOfSize:20]];
+    
+    [heightCell addObject:[NSString stringWithFormat:@"%f",heightTitle]];
+    
+    
     [tableData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        
         if ([obj isKindOfClass:[NSString class]]) {
             NSString *str = (NSString *) obj;
             
-            CGFloat heightStr = [self getHeightString:str];
+            CGFloat heightStr = [self getHeightString:str withFont:[UIFont systemFontOfSize:16]];
             
             [heightCell addObject:[NSString stringWithFormat:@"%f",heightStr]];
             
@@ -197,7 +219,7 @@
     
 }
 
-- (CGFloat)getHeightString:(NSString*)string
+- (CGFloat)getHeightString:(NSString*)string withFont:(UIFont *) font
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -207,7 +229,7 @@
     NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
     CGSize boundingBox = [string boundingRectWithSize:constraint
                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                           attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}
+                                           attributes:@{NSFontAttributeName:font}
                                               context:context].size;
     
     size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
@@ -220,51 +242,68 @@
 #pragma mark - TableView Datasource
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return tableData.count;
+    return tableData.count + 1;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    id  cellData = [tableData objectAtIndex:indexPath.row];
-    
-    if ([cellData isKindOfClass:[NSString class]]) {
+    if (indexPath.row == 0) {
         
         DetailCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell1" forIndexPath:indexPath];
-
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.label.text = cellData;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.label.text = self.article.titleArticle;
         cell.label.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.label.font = [UIFont systemFontOfSize:16];
+        cell.label.font = [UIFont boldSystemFontOfSize:20];
+        cell.label.textAlignment = NSTextAlignmentCenter;
         
         return cell;
-
     }
     else
     {
-        DetailCell2 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell2" forIndexPath:indexPath];
+        id  cellData = [tableData objectAtIndex:(indexPath.row -1)];
 
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        
-        NSDictionary *dic = (NSDictionary *) cellData;
-        
-        cell.imageCell.contentMode = UIViewContentModeScaleAspectFill;
-        cell.imageCell.alignTop = YES;
-//        cell.imageCell.alignLeft = YES;
-//        cell.imageCell.alignRight = YES;
-        
-        
-        
-        [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
-                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-        
-        
-
-        return cell;
-
+        if ([cellData isKindOfClass:[NSString class]]) {
+            
+            DetailCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell1" forIndexPath:indexPath];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.label.text = cellData;
+            cell.label.lineBreakMode = NSLineBreakByWordWrapping;
+            cell.label.font = [UIFont systemFontOfSize:16];
+            
+            return cell;
+            
+        }
+        else
+        {
+            DetailCell2 *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailCell2" forIndexPath:indexPath];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            NSDictionary *dic = (NSDictionary *) cellData;
+            
+            cell.imageCell.contentMode = UIViewContentModeScaleAspectFill;
+            cell.imageCell.alignTop = YES;
+            //        cell.imageCell.alignLeft = YES;
+            //        cell.imageCell.alignRight = YES;
+            
+            
+            
+            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
+                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            
+            
+            
+            return cell;
+            
+        }
     }
+    
+  
     
 }
 
@@ -276,21 +315,24 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id  cellData = [tableData objectAtIndex:indexPath.row];
-    
-    if (![cellData isKindOfClass:[NSString class]]) {
+    if (indexPath.row != 0) {
+        id  cellData = [tableData objectAtIndex:(indexPath.row -1)];
         
-        NSDictionary *dic = (NSDictionary *) cellData;
-
-        NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
-        
-        IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
-        
-        [browser setInitialPageIndex:[arrayImages indexOfObject:[dic objectForKey:LINK_IMAGE]]];
-        
-        [self presentViewController:browser animated:YES completion:nil];
-
+        if (![cellData isKindOfClass:[NSString class]]) {
+            
+            NSDictionary *dic = (NSDictionary *) cellData;
+            
+            NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
+            
+            IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
+            
+            [browser setInitialPageIndex:[arrayImages indexOfObject:[dic objectForKey:LINK_IMAGE]]];
+            
+            [self presentViewController:browser animated:YES completion:nil];
+            
+        }
     }
+  
 }
 
 
