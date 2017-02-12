@@ -17,6 +17,8 @@
     
     [self setupCollectionView];
     [self createLoadingView];
+    
+    
 }
 
 -(void) createLoadingView
@@ -86,8 +88,11 @@
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
+    self.collectionView.hidden = YES;
+    activityIndicatorView.hidden = NO;
+    [activityIndicatorView startAnimating];
     
-    //    NSLog(@"one catagory is %@",catagoryInfor);
+  NSLog(@"one catagory is %@",catagoryInfo);
     
     collectionData = [NSMutableArray new];
     
@@ -104,7 +109,11 @@
                 
             }];
             
+            NSLog(@"done loading data from server ");
+            
             [self.collectionView reloadData];
+            
+            self.collectionView.hidden = NO;
             
             
             self.collectionView.scrollsToTop = YES;
@@ -226,7 +235,7 @@
 -(void) collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row > collectionData.count - 3) {
-        printf("start to load more ");
+        NSLog(@"start to load more");
         [self loadMoreData];
     }
     

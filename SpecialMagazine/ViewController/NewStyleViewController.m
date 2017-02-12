@@ -189,12 +189,14 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
     cell.delegate = self;
     
     NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
     [cell loadingDataForCatalog:oneCatagory];
-
+    
     
     return cell;
 }
@@ -298,7 +300,7 @@
     
 //    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
     
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     
 }
