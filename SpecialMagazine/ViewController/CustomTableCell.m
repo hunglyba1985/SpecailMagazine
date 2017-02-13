@@ -88,13 +88,18 @@
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
+    
+    
     self.collectionView.hidden = YES;
+    
+ 
     activityIndicatorView.hidden = NO;
     [activityIndicatorView startAnimating];
     
   NSLog(@"one catagory is %@",catagoryInfo);
     
     collectionData = [NSMutableArray new];
+    [self.collectionView reloadData];
     
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)

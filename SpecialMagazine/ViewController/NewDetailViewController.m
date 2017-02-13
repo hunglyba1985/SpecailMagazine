@@ -256,7 +256,7 @@
         cell.label.text = self.article.titleArticle;
         cell.label.lineBreakMode = NSLineBreakByWordWrapping;
         cell.label.font = [UIFont boldSystemFontOfSize:20];
-        cell.label.textAlignment = NSTextAlignmentCenter;
+        cell.label.textAlignment = NSTextAlignmentLeft;
         
         return cell;
     }
