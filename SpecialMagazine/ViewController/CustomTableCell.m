@@ -34,7 +34,7 @@
     
     activityIndicatorView.frame = CGRectMake(0, 0, width, height);
     
-    activityIndicatorView.center = CGPointMake(self.center.x - 40, self.center.y - 20);
+    activityIndicatorView.center = CGPointMake(self.center.x - 30, self.center.y);
     
     
     [self addSubview:activityIndicatorView];
