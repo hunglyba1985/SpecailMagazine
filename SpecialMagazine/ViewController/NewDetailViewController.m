@@ -76,6 +76,7 @@
 {
     detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     [detailWebView loadHTMLString:self.article.content baseURL:nil];
+    detailWebView.scalesPageToFit = YES;
     detailWebView.delegate = self;
 
 }
