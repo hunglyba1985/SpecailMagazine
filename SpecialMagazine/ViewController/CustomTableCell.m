@@ -8,6 +8,8 @@
 
 #import "CustomTableCell.h"
 #import "CellCollectionView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @implementation CustomTableCell
 
@@ -34,7 +36,7 @@
     
     activityIndicatorView.frame = CGRectMake(0, 0, width, height);
     
-    activityIndicatorView.center = CGPointMake(self.center.x - 30, self.center.y);
+    activityIndicatorView.center = CGPointMake(self.center.x - 15, self.center.y);
     
     
     [self addSubview:activityIndicatorView];
@@ -205,7 +207,10 @@
     NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"laughingMinion.gif" ofType:nil]];
     FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:fileURL]];
     cell.loadingView.animatedImage = image;
-    cell.loadingView.hidden = NO;
+    cell.loadingView.hidden = YES;
+    
+//    [cell.image sd_setShowActivityIndicatorView:YES];
+//    [cell.image sd_setIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
     
     [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
