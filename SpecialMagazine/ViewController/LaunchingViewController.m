@@ -27,6 +27,8 @@
 {
 //    WeatherObject *weather;
     NSDictionary *weather;
+    BOOL haveInternet;
+    
     
 }
 
@@ -62,14 +64,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    NSLog(@"launching view did load");
+    NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
+
+    NSLog(@"launching view did load with old province is %@",oldProvince);
     
     
     [self loadingBeautifulAdvice];
     
     self.navigationController.navigationBarHidden = YES;
     
-    [self setYahooWeather];
+//    [self setYahooWeather];
     
     UITapGestureRecognizer *tapToView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToScreen)];
     [self.view addGestureRecognizer:tapToView];
@@ -147,17 +151,21 @@
     {
         //No internet
         NSLog(@"not connect to internet");
+        
+        [self setYahooWeather];
     }
     else if (status == ReachableViaWiFi)
     {
         //WiFi
         NSLog(@"connect to internet by wifi");
+        haveInternet = YES;
         
     }
     else if (status == ReachableViaWWAN)
     {
         //3G
         NSLog(@"connect to internet by 3G");
+        haveInternet = YES;
         
     }
 }
@@ -252,6 +260,8 @@
     
      weather = [[UserData sharedInstance] getOldForcast];
     
+//    NSLog(@"old weather forcast is %@",weather);
+    
     NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
     
     
@@ -273,7 +283,7 @@
 
 -(void) getLocalProvince:(NSNotification *) userData
 {
-//    NSLog(@"notification when get location -----------");
+    NSLog(@"notification when get location -----------");
     NSDictionary *localData = [userData userInfo];
     
 //    NSLog(@"local data is %@", localData);
@@ -286,6 +296,7 @@
 
 -(void) findWeatherForcastFromProvince:(NSString *) localProvince
 {
+    NSLog(@"findWeatherForcastFromProvince");
     if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
         
         [self setDataForWeatherView:[weather objectForKey:DANANG] inProvince:@"TP Đà Nẵng"];
@@ -296,6 +307,7 @@
     }
     else
     {
+        NSLog(@"find ha noi here");
         [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
     }
 
@@ -305,6 +317,7 @@
 -(void) setDataForWeatherView:(NSDictionary *) weatherDic inProvince:(NSString *) provinceName
 {
     if (weatherDic != nil) {
+        NSLog(@"run to setDataForWeatherView");
         NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
         self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
         self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
@@ -315,10 +328,17 @@
         self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
         self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
         
+        if (haveInternet) {
+            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
+    
+            self.weatherIcon.animatedImage = image;
+        }
+        else
+        {
+            self.weatherIcon.hidden = YES;
+        }
         
-        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
-        
-        self.weatherIcon.animatedImage = image;
+
         
         self.nameProvince.text = provinceName;
 

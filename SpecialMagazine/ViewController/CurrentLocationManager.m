@@ -115,7 +115,7 @@ static CurrentLocationManager *sharedLocationController = nil;
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//             
+             
 //             NSLog(@"get current location -------------------------- ");
 //             
 //             NSLog(@"get current postalCode %@",placemark.postalCode);

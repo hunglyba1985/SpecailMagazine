@@ -168,7 +168,17 @@
     
     CatalogRealm *websiteInfo = [tableData objectAtIndex:indexPath.row];
     
-    [cell.websiteIcon sd_setImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink]];
+//    [cell.websiteIcon sd_setImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink]];
+    
+    
+//    [cell.websiteIcon sd_setImageWithPreviousCachedImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink] placeholderImage:nil options:SDWebImageCacheMemoryOnly progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        if (image) {
+//            cell.websiteIcon.image = image;
+//        }
+//    }];
+    
+    [cell.websiteIcon sd_setImageWithURL:[NSURL URLWithString:websiteInfo.websiteIconLink] placeholderImage:nil options:SDWebImageCacheMemoryOnly];
     
     
     cell.websiteName.text = websiteInfo.websiteName;
