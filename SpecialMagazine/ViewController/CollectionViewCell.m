@@ -26,28 +26,28 @@ NSDictionary * catagoryInfor;
 //    UIColor *randomColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 //    self.backgroundColor = randomColor;
     
-    [self setupCollectionView];
-    
-//    self.collectionView.hidden = YES;
-    
-    [self checkConnectNetwork];
-    
-    int randomInt = arc4random_uniform(33);
-    
-    int randomColor = arc4random_uniform(14);
-
-    
-    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
-    CGFloat width = SCREEN_WIDTH / 5.0f;
-    CGFloat height = SCREEN_HEIGHT / 7.0f;
-    
-    activityIndicatorView.frame = CGRectMake(0, 0, width, height);
-    
-    activityIndicatorView.center = CGPointMake(self.center.x - 40, self.center.y - 20);
-    
-    
-    [self addSubview:activityIndicatorView];
-    [activityIndicatorView startAnimating];
+//    [self setupCollectionView];
+//    
+////    self.collectionView.hidden = YES;
+//    
+//    [self checkConnectNetwork];
+//    
+//    int randomInt = arc4random_uniform(33);
+//    
+//    int randomColor = arc4random_uniform(14);
+//
+//    
+//    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
+//    CGFloat width = SCREEN_WIDTH / 5.0f;
+//    CGFloat height = SCREEN_HEIGHT / 7.0f;
+//    
+//    activityIndicatorView.frame = CGRectMake(0, 0, width, height);
+//    
+//    activityIndicatorView.center = CGPointMake(self.center.x - 40, self.center.y - 20);
+//    
+//    
+//    [self addSubview:activityIndicatorView];
+//    [activityIndicatorView startAnimating];
     
 }
 

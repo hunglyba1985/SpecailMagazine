@@ -42,11 +42,11 @@
     self.navigationController.navigationBarHidden = YES;
     
     
-//    [self setUpCollectionView];
-    [self addVerticalSegment];
+    [self setUpCollectionView];
+//    [self addVerticalSegment];
     [self checkConnectNetwork];
     
-    [self setupTableView];
+//    [self setupTableView];
     
 }
 
@@ -128,15 +128,15 @@
 //
     
     
-    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT - 20, 30)];
+    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
     rotateView.backgroundColor = [UIColor yellowColor];
-    rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
+//    rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     [self.view addSubview:rotateView];
     
-    CGRect newFrame = rotateView.frame;
-    newFrame.origin = CGPointMake(0, 20);
-    rotateView.frame = newFrame;
+//    CGRect newFrame = rotateView.frame;
+//    newFrame.origin = CGPointMake(0, 20);
+//    rotateView.frame = newFrame;
     
     [rotateView addSubview:segmentedControl1];
 }
@@ -153,8 +153,8 @@
     
     
     UICollectionViewFlowLayout *layoutCollectionView = [[UICollectionViewFlowLayout alloc] init];
-    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionVertical;
-    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(5, 5, 5, 5)];
 //    layoutCollectionView.minimumInteritemSpacing = 0;
 //    layoutCollectionView.minimumLineSpacing = 0;
     
@@ -228,15 +228,16 @@
     [cell layoutIfNeeded];
     
     
-    cell.delegate = self;
+//    cell.delegate = self;
     
+    cell.backgroundColor = [self randomColor];
     
     
 #pragma mark - For have internet
-    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+//    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
 //    NSLog(@"one catagory is %@",oneCatagory);
 
-    [cell loadingDataForCatalog:oneCatagory];
+//    [cell loadingDataForCatalog:oneCatagory];
     
 #pragma mark - For not have internet
 //      [cell getDataLocal];
@@ -244,10 +245,18 @@
     return cell;
 }
 
+-(UIColor *)randomColor
+{
+    CGFloat hue = ( arc4random() % 256 / 256.0 );
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    return color;
+}
 
 #pragma mark CollectionView Delegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 10);
+    return CGSizeMake(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10);
 }
 
 
