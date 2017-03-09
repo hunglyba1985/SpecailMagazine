@@ -43,7 +43,7 @@
     
     
     [self setUpCollectionView];
-//    [self addVerticalSegment];
+    [self addVerticalSegment];
     [self checkConnectNetwork];
     
 //    [self setupTableView];
@@ -223,21 +223,17 @@
     
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-
-    
     [cell layoutIfNeeded];
     
+    cell.delegate = self;
     
-//    cell.delegate = self;
-    
-    cell.backgroundColor = [self randomColor];
     
     
 #pragma mark - For have internet
-//    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
 //    NSLog(@"one catagory is %@",oneCatagory);
 
-//    [cell loadingDataForCatalog:oneCatagory];
+    [cell loadingDataForCatalog:oneCatagory];
     
 #pragma mark - For not have internet
 //      [cell getDataLocal];
@@ -292,8 +288,8 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat pageWidth = scrollView.frame.size.height;
-    NSInteger page = scrollView.contentOffset.y / pageWidth;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger page = scrollView.contentOffset.x / pageWidth;
     
 //    NSLog(@"page of collection view is %i",(int) page);
     
@@ -307,13 +303,18 @@
  
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:segmentedControl.selectedSegmentIndex inSection:0];
     
-//    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
     
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     
 }
 
+- (IBAction)backClick:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

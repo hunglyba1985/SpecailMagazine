@@ -18,7 +18,7 @@
 @end
 
 
-@interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *collectionData;
     DGActivityIndicatorView *activityIndicatorView;
@@ -30,6 +30,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo;

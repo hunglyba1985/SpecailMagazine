@@ -8,6 +8,7 @@
 
 #import "CollectionViewCell.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
+#import "NewTableCellStyle.h"
 
 
 
@@ -18,68 +19,101 @@ NSDictionary * catagoryInfor;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+ 
+    [self setupTableView];
     
-    // Create random background color
-//    CGFloat hue = ( arc4random() % 256 / 256.0 );
-//    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    UIColor *randomColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-//    self.backgroundColor = randomColor;
-    
-//    [self setupCollectionView];
-//    
-////    self.collectionView.hidden = YES;
-//    
-//    [self checkConnectNetwork];
-//    
-//    int randomInt = arc4random_uniform(33);
-//    
-//    int randomColor = arc4random_uniform(14);
-//
-//    
-//    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
-//    CGFloat width = SCREEN_WIDTH / 5.0f;
-//    CGFloat height = SCREEN_HEIGHT / 7.0f;
-//    
-//    activityIndicatorView.frame = CGRectMake(0, 0, width, height);
-//    
-//    activityIndicatorView.center = CGPointMake(self.center.x - 40, self.center.y - 20);
-//    
-//    
-//    [self addSubview:activityIndicatorView];
-//    [activityIndicatorView startAnimating];
-    
+    [self addLoadingView];
 }
 
-
--(void) checkConnectNetwork
+-(void) addLoadingView
 {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+        self.tableView.hidden = YES;
+        int randomInt = arc4random_uniform(33);
+        int randomColor = arc4random_uniform(14);
+        activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
+        CGFloat width = SCREEN_WIDTH / 5.0f;
+        CGFloat height = SCREEN_HEIGHT / 7.0f;
+
+        activityIndicatorView.frame = CGRectMake(0, 0, width, height);
+
+        activityIndicatorView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+
+
+        [self addSubview:activityIndicatorView];
+        [activityIndicatorView startAnimating];
+}
+
+
+-(void) setupTableView
+{
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.pagingEnabled = YES;
+}
+
+
+#pragma mark - TableView Datasource
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return collectionData.count;
+}
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewTableCellStyle *cell = [tableView dequeueReusableCellWithIdentifier:@"NewStyleTableCell"];
     
-    NetworkStatus status = [reachability currentReachabilityStatus];
+    if (cell == nil) {
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewTableCellStyle" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
+    }
     
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
-    }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
-        
-    }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+    
+    cell.articleTitle.text = cellData.titleArticle;
+    
+    cell.articleDescription.text = cellData.descriptionArticle;
+    
+    
+    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
+    
+    
+    return cell;
+}
+
+#pragma mark - TableView Delegate
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (SCREEN_HEIGHT - 10);
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row > collectionData.count - 3) {
+        printf("start to load more ");
+        [self loadMoreData];
     }
 }
 
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"click table cell -------------- ");
+    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+    
+    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+    
+    if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
+        [strongDelegate selectedArticleWithInformation:cellData];
+    }
 
+}
+
+
+
+#pragma mark ------------------------------------------ OLD STYLE --------------------------------------------------------
 
 -(void) setupCollectionView
 {
@@ -130,6 +164,7 @@ NSDictionary * catagoryInfor;
     
 //    NSLog(@"one catagory is %@",catagoryInfor);
 
+    
     collectionData = [NSMutableArray new];
 
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
@@ -145,14 +180,16 @@ NSDictionary * catagoryInfor;
                 
             }];
             
-            [self.collectionView reloadData];
+//            [self.collectionView reloadData];
+//
+//            
+//            self.collectionView.scrollsToTop = YES;
+//            
+//            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+            
 
-            
-            self.collectionView.scrollsToTop = YES;
-            
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-            
-
+            [self.tableView reloadData];
+            self.tableView.hidden = NO;
             
             [activityIndicatorView stopAnimating];
             activityIndicatorView.hidden = YES;
@@ -183,7 +220,8 @@ NSDictionary * catagoryInfor;
                 [collectionData addObject:realmObject];
                 
             }];
-            [self.collectionView reloadData];
+//            [self.collectionView reloadData];
+            [self.tableView reloadData];
             
         }
     }];

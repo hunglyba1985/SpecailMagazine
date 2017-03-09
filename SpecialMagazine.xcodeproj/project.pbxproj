@@ -45,6 +45,8 @@
 		0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EEBAB5A1DA34CAC00D36D0E /* document.json */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
+		52586D5E1E70D5E2007C0169 /* NewTableCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 52586D5C1E70D5E2007C0169 /* NewTableCellStyle.m */; };
+		52586D5F1E70D5E2007C0169 /* NewTableCellStyle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52586D5D1E70D5E2007C0169 /* NewTableCellStyle.xib */; };
 		5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288D2151DBED940003A000D /* NewStyleViewController.m */; };
 		5288D21A1DBEDD19003A000D /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288D2181DBEDD19003A000D /* CollectionViewCell.m */; };
 		5288D21B1DBEDD19003A000D /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5288D2191DBEDD19003A000D /* CollectionViewCell.xib */; };
@@ -173,6 +175,9 @@
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
 		5225F8701D90B4A50079E151 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = Test/DetailViewController.m; sourceTree = "<group>"; };
+		52586D5B1E70D5E2007C0169 /* NewTableCellStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewTableCellStyle.h; path = ViewController/NewTableCellStyle.h; sourceTree = "<group>"; };
+		52586D5C1E70D5E2007C0169 /* NewTableCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewTableCellStyle.m; path = ViewController/NewTableCellStyle.m; sourceTree = "<group>"; };
+		52586D5D1E70D5E2007C0169 /* NewTableCellStyle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTableCellStyle.xib; path = ViewController/NewTableCellStyle.xib; sourceTree = "<group>"; };
 		5288D2141DBED940003A000D /* NewStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewStyleViewController.h; path = ViewController/NewStyleViewController.h; sourceTree = "<group>"; };
 		5288D2151DBED940003A000D /* NewStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewStyleViewController.m; path = ViewController/NewStyleViewController.m; sourceTree = "<group>"; };
 		5288D2171DBEDD19003A000D /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionViewCell.h; path = ViewController/CollectionViewCell.h; sourceTree = "<group>"; };
@@ -518,6 +523,9 @@
 				52BE47421E4A946B009AC489 /* CustomTableCell.h */,
 				52BE47431E4A946B009AC489 /* CustomTableCell.m */,
 				52BE47441E4A946C009AC489 /* CustomTableCell.xib */,
+				52586D5B1E70D5E2007C0169 /* NewTableCellStyle.h */,
+				52586D5C1E70D5E2007C0169 /* NewTableCellStyle.m */,
+				52586D5D1E70D5E2007C0169 /* NewTableCellStyle.xib */,
 			);
 			name = "Table Cell";
 			sourceTree = "<group>";
@@ -772,6 +780,7 @@
 				B21828441E2E0E770070B19D /* kissingMinion.gif in Resources */,
 				5288D21B1DBEDD19003A000D /* CollectionViewCell.xib in Resources */,
 				52BE47461E4A946C009AC489 /* CustomTableCell.xib in Resources */,
+				52586D5F1E70D5E2007C0169 /* NewTableCellStyle.xib in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
 				0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */,
 				B21828891E2E16AA0070B19D /* laughingMinion.gif in Resources */,
@@ -895,6 +904,7 @@
 				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				B223098A1E35BA5A0092CD1A /* DGActivityIndicatorDoubleBounceAnimation.m in Sources */,
+				52586D5E1E70D5E2007C0169 /* NewTableCellStyle.m in Sources */,
 				B22309991E35BA5A0092CD1A /* DGActivityIndicatorView.m in Sources */,
 				B22309901E35BA5A0092CD1A /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				0E1C782B1E1E491400B2A41D /* NewDetailViewController.m in Sources */,

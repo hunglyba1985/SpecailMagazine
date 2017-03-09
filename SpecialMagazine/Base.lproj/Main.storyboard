@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -417,11 +418,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SC0-ym-aPd">
+                                <rect key="frame" x="16" y="494" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="1Sx-Dq-0lr"/>
+                                    <constraint firstAttribute="height" constant="30" id="PvG-L9-PWw"/>
+                                </constraints>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backClick:" destination="SPX-hN-dsU" eventType="touchUpInside" id="TCD-im-coq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qSO-tq-6vX" firstAttribute="leading" secondItem="6O7-Bt-md0" secondAttribute="leading" id="I1j-mR-cS4"/>
                             <constraint firstAttribute="trailing" secondItem="qSO-tq-6vX" secondAttribute="trailing" id="eSt-rY-Z1G"/>
+                            <constraint firstItem="6ie-Xs-k2j" firstAttribute="top" secondItem="SC0-ym-aPd" secondAttribute="bottom" constant="44" id="ejk-tt-uDM"/>
+                            <constraint firstItem="SC0-ym-aPd" firstAttribute="leading" secondItem="6O7-Bt-md0" secondAttribute="leadingMargin" id="iyp-Ks-2w9"/>
                             <constraint firstItem="qSO-tq-6vX" firstAttribute="top" secondItem="6O7-Bt-md0" secondAttribute="top" id="rqn-ac-Jft"/>
                             <constraint firstItem="6ie-Xs-k2j" firstAttribute="top" secondItem="qSO-tq-6vX" secondAttribute="bottom" id="wDK-D3-fdA"/>
                         </constraints>
@@ -524,7 +538,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kLL-dk-sOF" id="ICV-Mb-gx8">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gKi-hR-KYa">
