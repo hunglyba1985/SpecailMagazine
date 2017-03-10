@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="506"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="505.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8gq-V3-xiR">
@@ -29,24 +29,31 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="m6g-re-7g6"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bvK-hY-dy3">
                         <rect key="frame" x="8" y="320" width="304" height="177"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4o6-4H-o3g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="4o6-4H-o3g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0ox-4u-gtg"/>
                     <constraint firstItem="8gq-V3-xiR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9O5-Iq-LiD"/>
                     <constraint firstAttribute="trailing" secondItem="bvK-hY-dy3" secondAttribute="trailing" constant="8" id="BbH-2M-Cqc"/>
+                    <constraint firstAttribute="bottom" secondItem="4o6-4H-o3g" secondAttribute="bottom" id="G7f-2I-u5x"/>
                     <constraint firstItem="bvK-hY-dy3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Lgc-ud-jLZ"/>
                     <constraint firstAttribute="bottom" secondItem="bvK-hY-dy3" secondAttribute="bottom" constant="8" id="Zhp-Jl-DSU"/>
+                    <constraint firstAttribute="trailing" secondItem="4o6-4H-o3g" secondAttribute="trailing" id="dkN-rZ-o9I"/>
                     <constraint firstAttribute="trailing" secondItem="I3E-m9-mac" secondAttribute="trailing" constant="8" id="f0l-nw-DQi"/>
                     <constraint firstItem="8gq-V3-xiR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gq8-cy-cmI"/>
+                    <constraint firstItem="4o6-4H-o3g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hSV-sn-3Jd"/>
                     <constraint firstAttribute="trailing" secondItem="8gq-V3-xiR" secondAttribute="trailing" id="hp7-Mj-BWh"/>
                     <constraint firstItem="bvK-hY-dy3" firstAttribute="top" secondItem="I3E-m9-mac" secondAttribute="bottom" constant="8" id="naP-gM-Xvp"/>
                     <constraint firstItem="I3E-m9-mac" firstAttribute="top" secondItem="8gq-V3-xiR" secondAttribute="bottom" constant="16" id="qiV-ec-yuu"/>
@@ -57,6 +64,7 @@
                 <outlet property="articleDescription" destination="bvK-hY-dy3" id="0VD-n2-Zol"/>
                 <outlet property="articleImage" destination="8gq-V3-xiR" id="hPy-zb-0O6"/>
                 <outlet property="articleTitle" destination="I3E-m9-mac" id="gNP-hT-B58"/>
+                <outlet property="clickButton" destination="4o6-4H-o3g" id="dI8-pW-FcA"/>
             </connections>
             <point key="canvasLocation" x="-193" y="-21"/>
         </tableViewCell>

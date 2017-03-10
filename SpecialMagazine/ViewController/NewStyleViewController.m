@@ -106,10 +106,10 @@
     // Segmented control with scrolling
     segmentedControl1 = [[HMSegmentedControl alloc] initWithSectionTitles:listNameOfCatalog];
     segmentedControl1.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    segmentedControl1.frame = CGRectMake(0, 0, SCREEN_HEIGHT - 20, 30);
+    segmentedControl1.frame = CGRectMake(0, 20, SCREEN_WIDTH, 30);
     segmentedControl1.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
-    segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationUp;
+    segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl1.verticalDividerEnabled = YES;
     segmentedControl1.verticalDividerColor = UIColorFromRGB(0xc0392b);
     segmentedControl1.selectionIndicatorColor = UIColorFromRGB(0x9A12B3);
@@ -128,8 +128,8 @@
 //
     
     
-    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 30, SCREEN_WIDTH, 30)];
-    rotateView.backgroundColor = [UIColor yellowColor];
+    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    rotateView.backgroundColor = UIColorFromRGB(0x2ecc71);
 //    rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     [self.view addSubview:rotateView];
@@ -252,7 +252,7 @@
 
 #pragma mark CollectionView Delegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10);
+    return CGSizeMake(SCREEN_WIDTH - 10, self.collectionView.frame.size.height - 10);
 }
 
 
@@ -303,7 +303,7 @@
  
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:segmentedControl.selectedSegmentIndex inSection:0];
     
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
 //    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     

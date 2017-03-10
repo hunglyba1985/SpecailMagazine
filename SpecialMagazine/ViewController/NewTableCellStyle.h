@@ -16,4 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *articleDescription;
 
+@property (weak, nonatomic) IBOutlet UIButton *clickButton;
+
+
 @end

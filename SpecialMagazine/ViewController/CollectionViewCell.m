@@ -79,6 +79,10 @@ NSDictionary * catagoryInfor;
     
     [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
     
+    cell.clickButton.tag = indexPath.row;
+    
+    [cell.clickButton addTarget:self action:@selector(clickToCell:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     return cell;
 }
@@ -86,7 +90,7 @@ NSDictionary * catagoryInfor;
 #pragma mark - TableView Delegate
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (SCREEN_HEIGHT - 10);
+    return (SCREEN_HEIGHT - 60);
 }
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,10 +104,22 @@ NSDictionary * catagoryInfor;
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"click table cell -------------- ");
+//    NSLog(@"click table cell -------------- ");
+//    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+//    
+//    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+//    
+//    if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
+//        [strongDelegate selectedArticleWithInformation:cellData];
+//    }
+
+}
+
+-(void) clickToCell:(UIButton *) button
+{
     id<CollectionViewCellDelegate> strongDelegate = self.delegate;
     
-    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+    ArticleRealm *cellData = [collectionData objectAtIndex:button.tag];
     
     if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
         [strongDelegate selectedArticleWithInformation:cellData];
