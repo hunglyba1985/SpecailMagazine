@@ -12,6 +12,8 @@
 #import "FLAnimatedImage.h"
 #import "CurrentLocationManager.h"
 #import "Reachability.h"
+#import "NewStyleViewController.h"
+
 
 #import "TFHpple.h"
 
@@ -20,6 +22,9 @@
 #define DANANGCITY @""
 
 #import "JHChainableAnimations.h"
+#import "CatalogRealm.h"
+
+
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
 
 
@@ -28,8 +33,9 @@
 //    WeatherObject *weather;
     NSDictionary *weather;
     BOOL haveInternet;
-    
-    
+    BOOL firstTime;
+    NSArray *defaultWebsite;
+    NSMutableArray *tempArray;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *meaningfulSentence;
@@ -82,6 +88,7 @@
     
     [self checkConnectNetwork];
     
+    [self getDataFromLocal];
     
     
 }
@@ -94,10 +101,95 @@
     self.cloud1.hidden = NO;
     self.sunImageView.hidden = NO;
     
-    
     [self testAnimation];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
- }
+    [self getCatagories];
+}
+
+
+-(void) getDataFromLocal
+{
+    NSArray *allLocalData = (NSArray*)[CatalogRealm allObjects];
+//    NSLog(@"load local data  %i",(int)allLocalData.count);
+    
+    if (allLocalData.count > 0) {
+        for (CatalogRealm *object in allLocalData) {
+            NSLog(@"website name is %@",object.websiteName);
+//            [tableData addObject:object];
+            
+            if ([object.websiteName isEqualToString:@"Báo mới"]) {
+                defaultWebsite = [self convertRealmDataToArray:object];
+            }
+            
+        }
+        
+//        [self.tableView reloadData];
+    }
+    else
+    {
+        [self getCatagories];
+    }
+    
+    
+    
+}
+
+-(void) getCatagories
+{
+    
+    tempArray = [NSMutableArray new];
+    
+    [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
+        
+        if (dataResponse != nil) {
+            NSArray *temp = (NSArray*)dataResponse;
+            
+            [temp enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
+                
+                if ([websiteRealm.websiteName isEqualToString:@"Báo mới"]) {
+                    
+                    defaultWebsite = [self convertRealmDataToArray:websiteRealm];
+                }
+                
+                    [tempArray addObject:websiteRealm];
+            }];
+        }
+        
+        [self addDataToRealm:tempArray];
+
+        
+    }];
+    
+}
+
+
+-(NSArray *) convertRealmDataToArray:(CatalogRealm *) catalogRealm
+{
+    NSArray *catalogWebsite =[NSKeyedUnarchiver unarchiveObjectWithData:catalogRealm.categories];
+    
+    NSMutableArray *categoriesInWebsite = [NSMutableArray new];
+    
+    for (NSDictionary *dic in catalogWebsite) {
+        
+        NSMutableDictionary *tempDic = [NSMutableDictionary new];
+        [tempDic setObject:[NSString stringWithFormat:@"%li",(long)catalogRealm.id] forKey:WEBSITE_ID];
+        [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+        [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
+        [categoriesInWebsite addObject:tempDic];
+        
+    }
+
+    return categoriesInWebsite;
+}
+
 
 
 -(void) testHtmlString
@@ -222,12 +314,7 @@
 
 
 
--(void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-}
+
 
 
 
@@ -372,9 +459,16 @@
 
 -(void) tapToScreen
 {
-    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+//    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+//    
+//    [self.navigationController pushViewController:listWebsites animated:YES];
     
-    [self.navigationController pushViewController:listWebsites animated:YES];
+    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
+    newStyleController.listCatagories = defaultWebsite;
+    [newStyleController reloadCatagories];
+    
+    [self.navigationController pushViewController:newStyleController animated:YES];
+
 
 }
 
@@ -396,6 +490,8 @@
 
 -(void) testAnimation
 {
+    NSLog(@"any mation run");
+    
     self.cloud1.moveX(300).animate(2);
     self.cloud2.moveX(- 300).animate(2);
     
@@ -432,6 +528,28 @@
     
 }
 
+-(void) addDataToRealm:(NSArray*) data
+{
+    NSLog(@"add catalog to realm");
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+        
+        [data enumerateObjectsUsingBlock:^(CatalogRealm * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            [realm beginWriteTransaction];
+            [realm addOrUpdateObject:obj];
+            [realm commitWriteTransaction];
+            
+            
+        }];
+        
+    });
+}
 
 
 

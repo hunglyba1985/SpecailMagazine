@@ -192,6 +192,8 @@
 #pragma mark - TableView Delegate
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     CatalogRealm *websiteInfo = [tableData objectAtIndex:indexPath.row];
     
     NSArray *catalogWebsite =[NSKeyedUnarchiver unarchiveObjectWithData:websiteInfo.categories];
@@ -209,19 +211,19 @@
         
     }
     
-//    ContainViewController *containView = [self.storyboard instantiateViewControllerWithIdentifier:@"ContainViewController"];
-//    containView.listCatagories = categoriesInWebsite;
-//    [containView reloadPagerTabStripView];
-//    [self.navigationController pushViewController:containView animated:YES];
+    id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
+
+    if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
+        [strongDelegate selectWebsiteWithInfo:categoriesInWebsite];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 
     
-    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
-    newStyleController.listCatagories = categoriesInWebsite;
-    [newStyleController reloadCatagories];
-    
-//    [self presentViewController:newStyleController animated:YES completion:nil];
-    
-    [self.navigationController pushViewController:newStyleController animated:YES];
+//    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
+//    newStyleController.listCatagories = categoriesInWebsite;
+//    [newStyleController reloadCatagories];
+//    [self.navigationController pushViewController:newStyleController animated:YES];
     
 }
 

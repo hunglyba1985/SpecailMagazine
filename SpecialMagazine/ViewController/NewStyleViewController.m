@@ -12,15 +12,15 @@
 #import "HMSegmentedControl.h"
 #import "NewDetailViewController.h"
 #import "CustomTableCell.h"
+#import "ListWebsitesController.h"
 
 
-@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate>
+@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate,ListWebsitesControllerDelegate>
 {
     NSMutableArray *collectionData;
-    HMSegmentedControl *segmentedControl1;
-    
+    UIView *topNavigationView;
     BOOL haveInternet;
-    
+    HMSegmentedControl*    segmentedControl1;
     
 }
 
@@ -38,18 +38,21 @@
     
 //    self.view.backgroundColor = [UIColor yellowColor];
     
-    NSLog(@"new style view controller did load");
     self.navigationController.navigationBarHidden = YES;
     
-    
     [self setUpCollectionView];
-    [self addVerticalSegment];
     [self checkConnectNetwork];
-    
-//    [self setupTableView];
+    [self addTopNavigationView];
     
 }
 
+-(void) addTopNavigationView
+{
+    topNavigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    topNavigationView.backgroundColor = UIColorFromRGB(0x2ecc71);
+    [self.view addSubview:topNavigationView];
+    [self addVerticalSegment];
+}
 
 -(void) setupTableView
 {
@@ -94,8 +97,12 @@
 
 }
 
+
+
 -(void) addVerticalSegment
 {
+    [segmentedControl1 removeFromSuperview];
+    
 //    NSLog(@"list catalog is %@",self.listCatagories);
     NSMutableArray *listNameOfCatalog = [NSMutableArray new];
     [self.listCatagories enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -128,18 +135,37 @@
 //
     
     
-    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-    rotateView.backgroundColor = UIColorFromRGB(0x2ecc71);
-//    rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
-    
-    [self.view addSubview:rotateView];
     
 //    CGRect newFrame = rotateView.frame;
 //    newFrame.origin = CGPointMake(0, 20);
 //    rotateView.frame = newFrame;
     
-    [rotateView addSubview:segmentedControl1];
+    [topNavigationView addSubview:segmentedControl1];
 }
+
+- (IBAction)showListWebsite:(id)sender {
+    
+    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+    listWebsites.delegate = self;
+    [self presentViewController:listWebsites animated:YES completion:nil];
+    
+    
+}
+
+#pragma mark - ListWebsiteViewDelegate
+-(void) selectWebsiteWithInfo:(NSArray *)websiteData
+{
+    self.collectionView.hidden = YES;
+    self.listCatagories = websiteData;
+    [self addVerticalSegment];
+    [self.collectionView reloadData];
+    
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+    self.collectionView.hidden = NO;
+}
+
+
 
 -(void) setUpCollectionView
 {
