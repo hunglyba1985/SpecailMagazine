@@ -9,6 +9,7 @@
 #import "CollectionViewCell.h"
 #import <FLAnimatedImage/FLAnimatedImage.h>
 #import "NewTableCellStyle.h"
+#import "ODRefreshControl.h"
 
 
 
@@ -49,6 +50,23 @@ NSDictionary * catagoryInfor;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.pagingEnabled = YES;
+    
+    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+
+}
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+    NSLog(@"start refresh data ----------  ");
+//    double delayInSeconds = 3.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [refreshControl endRefreshing];
+//    });
+    
+    [self loadingDataForCatalog:self.cellCatagoryInfo];
+    
 }
 
 
@@ -186,6 +204,7 @@ NSDictionary * catagoryInfor;
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
+            NSLog(@"getting new data here ");
             NSArray *gettingArray = dataResponse;
             
             [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
