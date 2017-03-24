@@ -28,6 +28,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
+
 @end
 
 @implementation NewStyleViewController
@@ -41,9 +43,23 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self setUpCollectionView];
-    [self checkConnectNetwork];
     [self addTopNavigationView];
     
+
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+
+}
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
 }
 
 -(void) addTopNavigationView
@@ -61,41 +77,30 @@
 }
 
 
--(void) checkConnectNetwork
+
+- (void) reachabilityChanged:(NSNotification *)note
 {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+    NSLog(@"NewStyleViewController internet chagne satatt");
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
     
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
+    if (netStatus == NotReachable) {
+        NSLog(@"don't have internet");
+        [JDStatusBarNotification showWithStatus:@"Bạn đang không kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
         
     }
-    else if (status == ReachableViaWiFi)
+    else
     {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
-        
+        NSLog(@" have internet");
+        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        [self reloadCatagories];
     }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
-    }
+
 }
 
 
 
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-}
 
 
 

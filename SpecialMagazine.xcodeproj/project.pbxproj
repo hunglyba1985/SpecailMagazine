@@ -23,7 +23,6 @@
 		0E514FCC1E273DB9003BB550 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E514FCB1E273DB9003BB550 /* UserData.m */; };
 		0E604CF71DEC32A3006A5346 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */; };
 		0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75931E1CE01B00092056 /* ArticleRealm.m */; };
-		0E6B75981E1CEF9600092056 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6B75971E1CEF9600092056 /* Reachability.m */; };
 		0E9AD5381DBF1B3800F6A666 /* CellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */; };
 		0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */; };
 		0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED628621DF01B6400898D15 /* TKNaviViewController.m */; };
@@ -111,6 +110,7 @@
 		B2D31C051E85150500344864 /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C001E85150500344864 /* JDStatusBarNotification.m */; };
 		B2D31C061E85150500344864 /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C021E85150500344864 /* JDStatusBarStyle.m */; };
 		B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C041E85150500344864 /* JDStatusBarView.m */; };
+		B2D31C0E1E851FD900344864 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C0D1E851FD900344864 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,8 +143,6 @@
 		0E604CF61DEC32A3006A5346 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		0E6B75921E1CE01B00092056 /* ArticleRealm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleRealm.h; path = Model/ArticleRealm.h; sourceTree = "<group>"; };
 		0E6B75931E1CE01B00092056 /* ArticleRealm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleRealm.m; path = Model/ArticleRealm.m; sourceTree = "<group>"; };
-		0E6B75961E1CEF9600092056 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		0E6B75971E1CEF9600092056 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0E9AD5351DBF1B3800F6A666 /* CellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellCollectionView.h; path = ViewController/CellCollectionView.h; sourceTree = "<group>"; };
 		0E9AD5361DBF1B3800F6A666 /* CellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellCollectionView.m; path = ViewController/CellCollectionView.m; sourceTree = "<group>"; };
 		0E9AD5371DBF1B3800F6A666 /* CellCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CellCollectionView.xib; path = ViewController/CellCollectionView.xib; sourceTree = "<group>"; };
@@ -305,6 +303,8 @@
 		B2D31C021E85150500344864 /* JDStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarStyle.m; sourceTree = "<group>"; };
 		B2D31C031E85150500344864 /* JDStatusBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarView.h; sourceTree = "<group>"; };
 		B2D31C041E85150500344864 /* JDStatusBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarView.m; sourceTree = "<group>"; };
+		B2D31C0C1E851FD900344864 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B2D31C0D1E851FD900344864 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -379,8 +379,8 @@
 		0E6B75951E1CEF9600092056 /* Check network */ = {
 			isa = PBXGroup;
 			children = (
-				0E6B75961E1CEF9600092056 /* Reachability.h */,
-				0E6B75971E1CEF9600092056 /* Reachability.m */,
+				B2D31C0C1E851FD900344864 /* Reachability.h */,
+				B2D31C0D1E851FD900344864 /* Reachability.m */,
 			);
 			path = "Check network";
 			sourceTree = "<group>";
@@ -963,6 +963,7 @@
 				0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */,
 				0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */,
 				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
+				B2D31C0E1E851FD900344864 /* Reachability.m in Sources */,
 				B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				B223098A1E35BA5A0092CD1A /* DGActivityIndicatorDoubleBounceAnimation.m in Sources */,
@@ -971,7 +972,6 @@
 				B22309901E35BA5A0092CD1A /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				0E1C782B1E1E491400B2A41D /* NewDetailViewController.m in Sources */,
 				B22309941E35BA5A0092CD1A /* DGActivityIndicatorThreeDotsAnimation.m in Sources */,
-				0E6B75981E1CEF9600092056 /* Reachability.m in Sources */,
 				0E1C78311E1E55D900B2A41D /* DetailCell2.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
 				B22309791E35BA5A0092CD1A /* DGActivityIndicatorBallClipRotateAnimation.m in Sources */,

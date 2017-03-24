@@ -67,6 +67,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;
 
+@property (nonatomic) Reachability *internetReachability;
 
 
 @end
@@ -93,12 +94,35 @@
     
     [self setDayOfCalendar];
     
-    [self checkConnectNetwork];
-    
     [self getDataFromLocal];
+    
+    [self setCheckingConnectNetwork];
+ 
+    
+}
+
+-(void) setCheckingConnectNetwork
+{
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+    
+    [self updateInterfaceWithReachability:self.internetReachability];
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
+    
+    //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
     
     
 }
+
 
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -197,84 +221,6 @@
     return categoriesInWebsite;
 }
 
-
-
--(void) testHtmlString
-{
-    NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
-    
-    ArticleRealm *oneObject = [allLocalData firstObject];
-    
-//    NSLog(@"content article is %@",oneObject.content);
-    
-    
-    NSData* data = [oneObject.content dataUsingEncoding:NSUTF8StringEncoding];
-   
-    
-    TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
-
-    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
-    NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
-    
-//    NSMutableArray *arrayContent = [NSMutableArray new];
-    
-    for (TFHppleElement *element in tutorialsNodes) {
-      
-        NSLog(@"------------------------------------------------------------");
-        
- 
-        
-        NSLog(@"get content --------------------%@",element.firstChild.content);
-        if (element.firstChild.content == nil) {
-            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
-
-        }
-
-    }
-
-
-}
-
-
-
-
-
--(void) checkConnectNetwork
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
-    
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
-        
-        [JDStatusBarNotification showWithStatus:@"Bạn đang bị mất mạng." dismissAfter:3.0 styleName:JDStatusBarStyleWarning];
-
-        [self setYahooWeather];
-    }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
-        haveInternet = YES;
-        
-
-        
-    }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        haveInternet = YES;
-        
-    }
-}
-
-
-
 -(void) setDayOfCalendar
 {
     NSDate * today = [NSDate date];
@@ -306,27 +252,6 @@
     
     
 }
-
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
-
-//        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
-
-    
-}
-
-
-
-
-
-
 
 
 -(void) loadingBeautifulAdvice
@@ -444,28 +369,31 @@
  
 }
 
+#pragma mark - CheckConnectNetwork Delegate
 
 - (void) reachabilityChanged:(NSNotification *)note
 {
-    
-    NSLog(@"connection change status");
-    
     Reachability* curReach = [note object];
+    [self updateInterfaceWithReachability:curReach];
     
-    NetworkStatus netStatus = [curReach currentReachabilityStatus];
-    
+}
+- (void)updateInterfaceWithReachability:(Reachability *)reachability
+{
+    NSLog(@"LaunchingViewController connection change status");
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
     if (netStatus == NotReachable) {
-        
         NSLog(@"don't have internet");
-        
+        [JDStatusBarNotification showWithStatus:@"Bạn đang không kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
     }
     else
     {
         NSLog(@" have internet");
-        
+        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
     }
-    
+
 }
+
 
 
 -(void) tapToScreen

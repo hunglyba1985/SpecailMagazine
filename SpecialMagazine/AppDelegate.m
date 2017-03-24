@@ -11,6 +11,7 @@
 #import "Reachability.h"
 
 @interface AppDelegate () <UIAlertViewDelegate>
+@property (nonatomic) Reachability *internetReachability;
 
 @end
 
@@ -29,10 +30,16 @@
     [self getWeatherForcast];
 
     [self changeModelOfDatabase];
+    [self setCheckingConnectNetwork];
     
     return YES;
 }
 
+-(void) setCheckingConnectNetwork
+{
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+}
 
 -(void) changeModelOfDatabase
 {
