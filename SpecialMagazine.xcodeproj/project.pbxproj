@@ -108,6 +108,9 @@
 		B22309981E35BA5A0092CD1A /* DGActivityIndicatorTwoDotsAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B22309731E35BA5A0092CD1A /* DGActivityIndicatorTwoDotsAnimation.m */; };
 		B22309991E35BA5A0092CD1A /* DGActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22309761E35BA5A0092CD1A /* DGActivityIndicatorView.m */; };
 		B22F92661E7FE4F2009E8CD1 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B22F92651E7FE4F2009E8CD1 /* ODRefreshControl.m */; };
+		B2D31C051E85150500344864 /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C001E85150500344864 /* JDStatusBarNotification.m */; };
+		B2D31C061E85150500344864 /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C021E85150500344864 /* JDStatusBarStyle.m */; };
+		B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C041E85150500344864 /* JDStatusBarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -296,6 +299,12 @@
 		B22309761E35BA5A0092CD1A /* DGActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGActivityIndicatorView.m; sourceTree = "<group>"; };
 		B22F92641E7FE4F2009E8CD1 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		B22F92651E7FE4F2009E8CD1 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		B2D31BFF1E85150500344864 /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
+		B2D31C001E85150500344864 /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
+		B2D31C011E85150500344864 /* JDStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarStyle.h; sourceTree = "<group>"; };
+		B2D31C021E85150500344864 /* JDStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarStyle.m; sourceTree = "<group>"; };
+		B2D31C031E85150500344864 /* JDStatusBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarView.h; sourceTree = "<group>"; };
+		B2D31C041E85150500344864 /* JDStatusBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarView.m; sourceTree = "<group>"; };
 		C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -396,6 +405,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B2D31BFE1E85150500344864 /* JDStatusBarNotification */,
 				B22F92631E7FE4F2009E8CD1 /* ODRefreshControl */,
 				B223092E1E35BA5A0092CD1A /* DGActivityIndicatorView */,
 				0E514FC31E24A3A2003BB550 /* UIImageViewAligned */,
@@ -743,6 +753,19 @@
 			path = ODRefreshControl;
 			sourceTree = "<group>";
 		};
+		B2D31BFE1E85150500344864 /* JDStatusBarNotification */ = {
+			isa = PBXGroup;
+			children = (
+				B2D31BFF1E85150500344864 /* JDStatusBarNotification.h */,
+				B2D31C001E85150500344864 /* JDStatusBarNotification.m */,
+				B2D31C011E85150500344864 /* JDStatusBarStyle.h */,
+				B2D31C021E85150500344864 /* JDStatusBarStyle.m */,
+				B2D31C031E85150500344864 /* JDStatusBarView.h */,
+				B2D31C041E85150500344864 /* JDStatusBarView.m */,
+			);
+			path = JDStatusBarNotification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -909,6 +932,7 @@
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
 				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
 				B22309931E35BA5A0092CD1A /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
+				B2D31C051E85150500344864 /* JDStatusBarNotification.m in Sources */,
 				B223097A1E35BA5A0092CD1A /* DGActivityIndicatorBallClipRotateMultipleAnimation.m in Sources */,
 				0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */,
 				5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */,
@@ -917,6 +941,7 @@
 				0E514FCC1E273DB9003BB550 /* UserData.m in Sources */,
 				B22309821E35BA5A0092CD1A /* DGActivityIndicatorBallScaleMultipleAnimation.m in Sources */,
 				B223098D1E35BA5A0092CD1A /* DGActivityIndicatorLineScalePartyAnimation.m in Sources */,
+				B2D31C061E85150500344864 /* JDStatusBarStyle.m in Sources */,
 				0E1F12031D8BB200007F77EC /* ArticleObject.m in Sources */,
 				0EE72E941D9E23B0009C087A /* ContainViewController.m in Sources */,
 				B22309781E35BA5A0092CD1A /* DGActivityIndicatorBallBeatAnimation.m in Sources */,
@@ -938,6 +963,7 @@
 				0ED763601DA24A390065F881 /* ListWebsitesController.m in Sources */,
 				0E6B75941E1CE01B00092056 /* ArticleRealm.m in Sources */,
 				0EEBAB581DA24CA700D36D0E /* ListWebsiteCell.m in Sources */,
+				B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */,
 				0EE72EB11D9E2F75009C087A /* XLButtonBarPagerTabStripViewController.m in Sources */,
 				B223098A1E35BA5A0092CD1A /* DGActivityIndicatorDoubleBounceAnimation.m in Sources */,
 				52586D5E1E70D5E2007C0169 /* NewTableCellStyle.m in Sources */,

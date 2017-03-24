@@ -342,25 +342,13 @@
                                     <action selector="downloadClick:" destination="Evc-xo-A5w" eventType="touchUpInside" id="WrS-kk-g9U"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show nice animation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b7-FM-H8I">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show nice animation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3b7-FM-H8I">
                                 <rect key="frame" x="76" y="463" width="218" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sunny_128" translatesAutoresizingMaskIntoConstraints="NO" id="rBn-Fs-rAK">
-                                <rect key="frame" x="-4" y="329" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud2" translatesAutoresizingMaskIntoConstraints="NO" id="3mq-ce-YUl">
-                                <rect key="frame" x="218" y="218" width="86" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud1" translatesAutoresizingMaskIntoConstraints="NO" id="80U-pe-4J9">
-                                <rect key="frame" x="0.0" y="262" width="73" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -375,18 +363,16 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="oCr-TC-DtO"/>
                     <connections>
-                        <outlet property="cloud1" destination="80U-pe-4J9" id="fRx-XQ-nal"/>
-                        <outlet property="cloud2" destination="3mq-ce-YUl" id="FSR-Ly-MOR"/>
                         <outlet property="currentDegree" destination="vnq-Rh-Yub" id="0NL-HD-Msz"/>
                         <outlet property="dateLabel" destination="5i9-Ek-nvj" id="1Sm-3k-JS2"/>
                         <outlet property="dayLabel" destination="8iM-u6-5p8" id="mfs-gQ-r5P"/>
+                        <outlet property="downloadButton" destination="eJk-qr-r1s" id="8rP-aO-1wg"/>
                         <outlet property="forcastWeather" destination="6df-eE-pMR" id="mLh-AR-EMS"/>
                         <outlet property="highDegree" destination="Nho-eO-zMn" id="DA2-Ig-BPw"/>
                         <outlet property="lowDegree" destination="PEb-MO-Udu" id="I9j-w2-zc5"/>
                         <outlet property="meaningfulSentence" destination="daf-Mv-3z8" id="kiw-51-g58"/>
                         <outlet property="monthLabel" destination="gxf-Ew-5Od" id="aF1-fJ-AZi"/>
                         <outlet property="nameProvince" destination="NXK-UO-Hkd" id="zj2-PN-DKE"/>
-                        <outlet property="sunImageView" destination="rBn-Fs-rAK" id="nBJ-mh-fpr"/>
                         <outlet property="weatherIcon" destination="sK2-sn-bzq" id="fqT-VL-G9m"/>
                         <outlet property="wellcomeLabel" destination="fsJ-pb-2Kd" id="GVr-ZI-eYu"/>
                     </connections>
@@ -604,9 +590,6 @@
         <image name="Downloads-icon" width="512" height="512"/>
         <image name="SunShine" width="64" height="64"/>
         <image name="bg1" width="810" height="1440"/>
-        <image name="cloud1" width="800" height="535"/>
-        <image name="cloud2" width="296" height="156"/>
         <image name="menu-icon" width="225" height="225"/>
-        <image name="sunny_128" width="128" height="128"/>
     </resources>
 </document>

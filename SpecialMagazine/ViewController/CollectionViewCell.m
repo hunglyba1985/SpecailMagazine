@@ -94,6 +94,7 @@ NSDictionary * catagoryInfor;
     
     cell.articleDescription.text = cellData.descriptionArticle;
     
+    cell.articleImage.alignTop = YES;
     
     [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
     
@@ -178,6 +179,8 @@ NSDictionary * catagoryInfor;
     collectionData = [NSMutableArray new];
     NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
     
+    NSLog(@"all local data in realm is %i",(int)allLocalData.count);
+    
     for (ArticleRealm *object in allLocalData) {
         
         [collectionData addObject:object];
@@ -186,9 +189,22 @@ NSDictionary * catagoryInfor;
     
 //    NSLog(@"all data in local is %@",collectionData);
     
+    if (collectionData.count > 0) {
+        
+        [self startShowArticle];
+        
+    }
     
-    [self.collectionView reloadData];
+}
+
+
+-(void) startShowArticle
+{
+    [self.tableView reloadData];
+    self.tableView.hidden = NO;
     
+    [activityIndicatorView stopAnimating];
+    activityIndicatorView.hidden = YES;
 
 }
 
@@ -223,16 +239,13 @@ NSDictionary * catagoryInfor;
 //            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
             
 
-            [self.tableView reloadData];
-            self.tableView.hidden = NO;
-            
-            [activityIndicatorView stopAnimating];
-            activityIndicatorView.hidden = YES;
+            [self startShowArticle];
             
             
         }
         else
         {
+            NSLog(@"getting local data");
             [self getDataLocal];
         }
     }];

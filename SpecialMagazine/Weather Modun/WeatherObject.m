@@ -108,7 +108,7 @@
         [temp setObject:[NSString stringWithFormat:@"%i",cTemp] forKey:@"temp"];
         
         NSString *forecastWeather = [converForecast objectForKey:[current objectForKey:CODE]];
-        NSLog(@"show explain for forecast weather is %@",forecastWeather);
+//        NSLog(@"show explain for forecast weather is %@",forecastWeather);
         if (forecastWeather) {
             [temp setObject:forecastWeather forKey:FORECAST];
         }

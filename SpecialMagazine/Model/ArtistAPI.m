@@ -7,6 +7,9 @@
 //
 
 #import "ArtistAPI.h"
+#import "SDWebImagePrefetcher.h"
+#import "SDWebImageManager.h"
+
 
 @implementation ArtistAPI
 
@@ -96,6 +99,13 @@ static ArtistAPI  *sharedController = nil;
         
         [data enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
             ArticleRealm *article = [[ArticleRealm alloc] initWithDictionary:obj];
+            
+            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:article.coverImageUrl] options:SDWebImageContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+//                if (image != nil) {
+//                    NSLog(@"loading image success");
+//                }
+            }];
+            
             [realm beginWriteTransaction];
             [realm addObject:article];
             [realm commitWriteTransaction];

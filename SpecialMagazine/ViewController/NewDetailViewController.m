@@ -21,7 +21,8 @@
     NSMutableArray *heightCell;
     UIWebView *detailWebView;
     UIImage *iamge;
-    
+    BOOL getFbAd;
+    UILabel *titleArtitcle;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -68,7 +69,6 @@
 
     [self loadingFbAd];
     
-    
 }
 
 
@@ -84,7 +84,7 @@
     // Configure native ad to wait to call nativeAdDidLoad: until all ad assets are loaded
     nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
     
-    [FBAdSettings addTestDevice:[FBAdSettings testDeviceHash]];
+ //   [FBAdSettings addTestDevice:[FBAdSettings testDeviceHash]];
     
     
     // When testing on a device, add its hashed ID to force test ads.
@@ -104,8 +104,39 @@
     }
     
     self._nativeAd = nativeAd;
+    getFbAd = YES;
+    [self.tableView reloadData];
+    
+    [self addFbAdToWebview];
+    
 
 }
+
+
+-(void) addFbAdToWebview
+{
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"AdTableCell" owner:self options:nil];
+    AdTableCell * cell = (AdTableCell*)[topLevelObjects objectAtIndex:0];
+
+    [cell setUpAdWithData:self._nativeAd];
+    
+    
+    [self._nativeAd registerViewForInteraction:cell
+                            withViewController:self];
+    
+    float heightCurrentContentWebview = detailWebView.scrollView.contentSize.height;
+    
+    [cell setFrame:CGRectMake(0, heightCurrentContentWebview + 20, SCREEN_WIDTH, 350)];
+    
+    
+    [detailWebView.scrollView addSubview:cell];
+    
+    detailWebView.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, heightCurrentContentWebview + 420);
+    
+    
+
+}
+
 
 - (void)nativeAd:(FBNativeAd *)nativeAd didFailWithError:(NSError *)error
 {
@@ -123,9 +154,23 @@
 
 -(void) createWebViewForCaseFailLoadTable
 {
-    detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    CGFloat heightTitle = [self getHeightString:self.article.titleArticle withFont:[UIFont boldSystemFontOfSize:20]];
+
+    detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20 + heightTitle + 10, SCREEN_WIDTH, SCREEN_HEIGHT - 30 - heightTitle)];
     detailWebView.backgroundColor = [UIColor whiteColor];
     [detailWebView loadHTMLString:self.article.content baseURL:nil];
+    detailWebView.scrollView.showsVerticalScrollIndicator = NO;
+    
+
+    titleArtitcle = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH - 20, heightTitle + 10)];
+    titleArtitcle.backgroundColor = [UIColor whiteColor];
+    titleArtitcle.textColor = [UIColor blackColor];
+    titleArtitcle.font = [UIFont boldSystemFontOfSize:20];
+    titleArtitcle.lineBreakMode = NSLineBreakByWordWrapping;
+    titleArtitcle.numberOfLines = 0;
+    titleArtitcle.text = self.article.titleArticle;
+    
+    
     detailWebView.delegate = self;
 
 }
@@ -136,10 +181,21 @@
     
     NSArray *listVideo = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listVideos];
     
+    
     if (tableData.count < 3 || listVideo.count > 0 ) {
-        [self.view addSubview:detailWebView];
+
+//        [self.view addSubview:detailWebView];
+        [self showWebViewInsteadOfTableView];
+
     }
    
+}
+
+-(void) showWebViewInsteadOfTableView
+{
+    self.tableView.hidden = YES;
+    [self.view addSubview:titleArtitcle];
+    [self.view addSubview:detailWebView];
 }
 
 
@@ -149,21 +205,18 @@
 {
     [webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://' + a}"];
     
+    NSLog(@"scroll view in web view %f",webView.scrollView.contentSize.height);
+    
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 
 {
     NSURL *action = request.URL;
-    
     if ([[action scheme] isEqualToString:@"img"]) {
-        
         //        NSLog(@"string get from click on image is %@",action);
-        
         [self showArrayImagesFrom:action.absoluteString];
-        
         return NO;
-        
     }
     
     return YES;
@@ -263,7 +316,7 @@
         
     }];
     
-    [heightCell addObject:[NSString stringWithFormat:@"%f",300.0]];
+    [heightCell addObject:[NSString stringWithFormat:@"%f",350.0]];
     
     [self.tableView reloadData];
     
@@ -292,7 +345,14 @@
 #pragma mark - TableView Datasource
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return tableData.count + 2;
+    if (getFbAd) {
+        return tableData.count + 2;
+
+    }
+    else
+    {
+        return tableData.count + 1;
+    }
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

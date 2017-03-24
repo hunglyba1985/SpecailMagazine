@@ -107,7 +107,7 @@ static CurrentLocationManager *sharedLocationController = nil;
 {
     currentLocation = [locations objectAtIndex:0];
     
-    [_locationManager stopUpdatingLocation];
+//    [_locationManager stopUpdatingLocation];
 
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
@@ -129,6 +129,7 @@ static CurrentLocationManager *sharedLocationController = nil;
 //             NSLog(@"current province is %@",currentProvince);
              
              [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_LOCAITON object:nil userInfo:currentProvince];
+             
              
              [[UserData sharedInstance] setCurrentProvince:placemark.administrativeArea];
              

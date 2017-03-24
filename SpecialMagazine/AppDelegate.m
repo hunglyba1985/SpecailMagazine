@@ -20,11 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSLog(@"application did finish launching with option --");
+//    NSLog(@"application did finish launching with option --");
 
     [self getCurrentLocation];
     
-//    NSLog(@"get document path: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
+//   NSLog(@"get document path: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
     
     [self getWeatherForcast];
 
@@ -37,9 +37,12 @@
 -(void) changeModelOfDatabase
 {
     
-    NSLog(@"change model of database");
+//    NSLog(@"change model of database");
     
     RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
+    
+//    NSLog(@"realm local data %@",config.fileURL);
+    
     // Set the new schema version. This must be greater than the previously used
     // version (if you've never set a schema version before, the version is 0).
     config.schemaVersion = 1;
@@ -50,7 +53,7 @@
         // We haven’t migrated anything yet, so oldSchemaVersion == 0
         if (oldSchemaVersion < 1) {
             
-            NSLog(@"change model of database just one time");
+//            NSLog(@"change model of database just one time");
             
             
             // Nothing to do!

@@ -23,6 +23,7 @@
 
 #import "JHChainableAnimations.h"
 #import "CatalogRealm.h"
+#import "JDStatusBarNotification.h"
 
 
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
@@ -36,6 +37,8 @@
     BOOL firstTime;
     NSArray *defaultWebsite;
     NSMutableArray *tempArray;
+    BOOL downloadDataStatus;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *meaningfulSentence;
@@ -62,6 +65,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cloud1;
 @property (weak, nonatomic) IBOutlet UIImageView *cloud2;
 
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+
+
+
 @end
 
 @implementation LaunchingViewController
@@ -70,9 +77,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
+//    NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
 
-    NSLog(@"launching view did load with old province is %@",oldProvince);
+//    NSLog(@"launching view did load with old province is %@",oldProvince);
     
     
     [self loadingBeautifulAdvice];
@@ -97,11 +104,11 @@
 {
     [super viewDidAppear:animated];
     
-    self.cloud2.hidden = NO;
-    self.cloud1.hidden = NO;
-    self.sunImageView.hidden = NO;
+    self.cloud2.hidden = YES;
+    self.cloud1.hidden = YES;
+    self.sunImageView.hidden = YES;
     
-    [self testAnimation];
+   // [self testAnimation];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -116,11 +123,11 @@
 -(void) getDataFromLocal
 {
     NSArray *allLocalData = (NSArray*)[CatalogRealm allObjects];
-//    NSLog(@"load local data  %i",(int)allLocalData.count);
+    NSLog(@"load local data  %i",(int)allLocalData.count);
     
     if (allLocalData.count > 0) {
         for (CatalogRealm *object in allLocalData) {
-            NSLog(@"website name is %@",object.websiteName);
+//            NSLog(@"website name is %@",object.websiteName);
 //            [tableData addObject:object];
             
             if ([object.websiteName isEqualToString:@"Báo mới"]) {
@@ -244,6 +251,8 @@
         //No internet
         NSLog(@"not connect to internet");
         
+        [JDStatusBarNotification showWithStatus:@"Bạn đang bị mất mạng." dismissAfter:3.0 styleName:JDStatusBarStyleWarning];
+
         [self setYahooWeather];
     }
     else if (status == ReachableViaWiFi)
@@ -251,6 +260,8 @@
         //WiFi
         NSLog(@"connect to internet by wifi");
         haveInternet = YES;
+        
+
         
     }
     else if (status == ReachableViaWWAN)
@@ -329,7 +340,7 @@
     
     NSString *randomSentence = [json objectAtIndex:randomInt];
     
-    NSLog(@" nice advices:  %@",randomSentence);
+//    NSLog(@" nice advices:  %@",randomSentence);
     
     self.meaningfulSentence.text = randomSentence;
     
@@ -338,7 +349,7 @@
 
 -(void) setYahooWeather
 {
-    NSLog(@"notification when get weather ---------");
+//    NSLog(@"notification when get weather ---------");
 //     weather = [[WeatherObject alloc] getWeatherForecast];
     
 //    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
@@ -370,7 +381,7 @@
 
 -(void) getLocalProvince:(NSNotification *) userData
 {
-    NSLog(@"notification when get location -----------");
+//    NSLog(@"notification when get location -----------");
     NSDictionary *localData = [userData userInfo];
     
 //    NSLog(@"local data is %@", localData);
@@ -383,7 +394,7 @@
 
 -(void) findWeatherForcastFromProvince:(NSString *) localProvince
 {
-    NSLog(@"findWeatherForcastFromProvince");
+//    NSLog(@"findWeatherForcastFromProvince");
     if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
         
         [self setDataForWeatherView:[weather objectForKey:DANANG] inProvince:@"TP Đà Nẵng"];
@@ -394,7 +405,7 @@
     }
     else
     {
-        NSLog(@"find ha noi here");
+//        NSLog(@"find ha noi here");
         [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
     }
 
@@ -404,7 +415,7 @@
 -(void) setDataForWeatherView:(NSDictionary *) weatherDic inProvince:(NSString *) provinceName
 {
     if (weatherDic != nil) {
-        NSLog(@"run to setDataForWeatherView");
+//        NSLog(@"run to setDataForWeatherView");
         NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
         self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
         self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
@@ -472,18 +483,20 @@
 
 }
 
+#pragma mark - Download Function
 - (IBAction)downloadClick:(id)sender {
     
     NSLog(@"download click");
     
-    [self deleteAllOldData];
+//    [self deleteAllOldData];
     
     
-    [ARTIST_API downloadForNoInternet];
+//    [ARTIST_API downloadForNoInternet];
     
 //    [self testAnimation];
     
-    
+//    [JDStatusBarNotification showWithStatus:@"Connect to internet by wifi" dismissAfter:2.0 styleName:JDStatusBarStyleWarning];
+
     
 }
 
