@@ -11,8 +11,11 @@
 #import "DetailCell2.h"
 #import "TFHpple.h"
 #import "IDMPhotoBrowser.h"
+#import "AdTableCell.h"
+#import <FBAudienceNetwork/FBAudienceNetwork.h>
 
-@interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
+
+@interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,FBNativeAdDelegate>
 {
     NSArray *tableData;
     NSMutableArray *heightCell;
@@ -24,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *articleTitle;
 @property (weak, nonatomic) IBOutlet UILabel *fromNewPaper;
+@property (strong, nonatomic) FBNativeAd *_nativeAd;
 
 
 @end
@@ -62,8 +66,53 @@
     
     [self.tableView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
 
+    [self loadingFbAd];
+    
     
 }
+
+
+-(void) loadingFbAd
+{
+    // Create a native ad request with a unique placement ID (generate your own on the Facebook app settings).
+    // Use different ID for each ad placement in your app.
+    FBNativeAd *nativeAd = [[FBNativeAd alloc] initWithPlacementID:@"403196480057246_403499533360274"];
+    
+    // Set a delegate to get notified when the ad was loaded.
+    nativeAd.delegate = self;
+    
+    // Configure native ad to wait to call nativeAdDidLoad: until all ad assets are loaded
+    nativeAd.mediaCachePolicy = FBNativeAdsCachePolicyAll;
+    
+    [FBAdSettings addTestDevice:[FBAdSettings testDeviceHash]];
+    
+    
+    // When testing on a device, add its hashed ID to force test ads.
+    // The hash ID is printed to console when running on a device.
+    // [FBAdSettings addTestDevice:@"THE HASHED ID AS PRINTED TO CONSOLE"];
+    
+    // Initiate a request to load an ad.
+    [nativeAd loadAd];
+}
+
+
+#pragma mark Facebook Ad Delegate
+- (void)nativeAdDidLoad:(FBNativeAd *)nativeAd
+{
+    if (self._nativeAd) {
+        [self._nativeAd unregisterView];
+    }
+    
+    self._nativeAd = nativeAd;
+
+}
+
+- (void)nativeAd:(FBNativeAd *)nativeAd didFailWithError:(NSError *)error
+{
+    NSLog(@"Native ad failed to load with error: %@", error);
+}
+
+
 
 -(void) setTitleAndSourceForArticle
 {
@@ -75,6 +124,7 @@
 -(void) createWebViewForCaseFailLoadTable
 {
     detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
+    detailWebView.backgroundColor = [UIColor whiteColor];
     [detailWebView loadHTMLString:self.article.content baseURL:nil];
     detailWebView.delegate = self;
 
@@ -87,8 +137,6 @@
     NSArray *listVideo = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listVideos];
     
     if (tableData.count < 3 || listVideo.count > 0 ) {
-        
-        
         [self.view addSubview:detailWebView];
     }
    
@@ -215,6 +263,8 @@
         
     }];
     
+    [heightCell addObject:[NSString stringWithFormat:@"%f",300.0]];
+    
     [self.tableView reloadData];
     
 }
@@ -242,7 +292,7 @@
 #pragma mark - TableView Datasource
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return tableData.count + 1;
+    return tableData.count + 2;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -260,7 +310,7 @@
         
         return cell;
     }
-    else
+    else if (indexPath.row > 0 && indexPath.row < (tableData.count + 1))
     {
         id  cellData = [tableData objectAtIndex:(indexPath.row -1)];
 
@@ -302,6 +352,24 @@
             return cell;
             
         }
+    }
+    else
+    {
+        AdTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AdTableCell"];
+        if (cell == nil) {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"AdTableCell" owner:self options:nil];
+            cell = [topLevelObjects objectAtIndex:0];
+        }
+        
+        [cell setUpAdWithData:self._nativeAd];
+        
+        
+        [self._nativeAd registerViewForInteraction:cell
+                                 withViewController:self];
+        
+
+        return cell;
+
     }
     
   

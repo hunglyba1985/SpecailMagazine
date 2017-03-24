@@ -45,6 +45,11 @@
 		0EEBAB5B1DA34CAC00D36D0E /* document.json in Resources */ = {isa = PBXBuildFile; fileRef = 0EEBAB5A1DA34CAC00D36D0E /* document.json */; };
 		5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F86D1D8F69F20079E151 /* TableViewCell.m */; };
 		5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5225F8701D90B4A50079E151 /* DetailViewController.m */; };
+		5236D2E11E849D50006757AD /* AdTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5236D2DF1E849D50006757AD /* AdTableCell.m */; };
+		5236D2E21E849D50006757AD /* AdTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5236D2E01E849D50006757AD /* AdTableCell.xib */; };
+		5236D2E41E849E29006757AD /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5236D2E31E849E29006757AD /* FBAudienceNetwork.framework */; };
+		5236D2E61E849E5B006757AD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5236D2E51E849E5B006757AD /* FBSDKCoreKit.framework */; };
+		5236D2E81E84A56C006757AD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5236D2E71E84A56C006757AD /* Bolts.framework */; };
 		52586D5E1E70D5E2007C0169 /* NewTableCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 52586D5C1E70D5E2007C0169 /* NewTableCellStyle.m */; };
 		52586D5F1E70D5E2007C0169 /* NewTableCellStyle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52586D5D1E70D5E2007C0169 /* NewTableCellStyle.xib */; };
 		5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288D2151DBED940003A000D /* NewStyleViewController.m */; };
@@ -176,6 +181,12 @@
 		5225F86D1D8F69F20079E151 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5225F86F1D90B4A50079E151 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = Test/DetailViewController.h; sourceTree = "<group>"; };
 		5225F8701D90B4A50079E151 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = Test/DetailViewController.m; sourceTree = "<group>"; };
+		5236D2DE1E849D50006757AD /* AdTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdTableCell.h; path = ViewController/AdTableCell.h; sourceTree = "<group>"; };
+		5236D2DF1E849D50006757AD /* AdTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdTableCell.m; path = ViewController/AdTableCell.m; sourceTree = "<group>"; };
+		5236D2E01E849D50006757AD /* AdTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdTableCell.xib; path = ViewController/AdTableCell.xib; sourceTree = "<group>"; };
+		5236D2E31E849E29006757AD /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		5236D2E51E849E5B006757AD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		5236D2E71E84A56C006757AD /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		52586D5B1E70D5E2007C0169 /* NewTableCellStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewTableCellStyle.h; path = ViewController/NewTableCellStyle.h; sourceTree = "<group>"; };
 		52586D5C1E70D5E2007C0169 /* NewTableCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewTableCellStyle.m; path = ViewController/NewTableCellStyle.m; sourceTree = "<group>"; };
 		52586D5D1E70D5E2007C0169 /* NewTableCellStyle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewTableCellStyle.xib; path = ViewController/NewTableCellStyle.xib; sourceTree = "<group>"; };
@@ -295,9 +306,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E1C78281E1E3FBD00B2A41D /* libxml2.2.tbd in Frameworks */,
+				5236D2E61E849E5B006757AD /* FBSDKCoreKit.framework in Frameworks */,
 				0E1C78261E1E3F9E00B2A41D /* libxml2.tbd in Frameworks */,
 				0E28EFBD1DF6A497000F2176 /* CoreLocation.framework in Frameworks */,
+				5236D2E41E849E29006757AD /* FBAudienceNetwork.framework in Frameworks */,
 				5647DA2B772D13103B5E2016 /* libPods-SpecialMagazine.a in Frameworks */,
+				5236D2E81E84A56C006757AD /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +516,9 @@
 				0E1C782A1E1E491400B2A41D /* NewDetailViewController.m */,
 				0E1C782C1E1E55C600B2A41D /* DetailCell1.h */,
 				0E1C782D1E1E55C600B2A41D /* DetailCell1.m */,
+				5236D2DE1E849D50006757AD /* AdTableCell.h */,
+				5236D2DF1E849D50006757AD /* AdTableCell.m */,
+				5236D2E01E849D50006757AD /* AdTableCell.xib */,
 				0E1C782F1E1E55D900B2A41D /* DetailCell2.h */,
 				0E1C78301E1E55D900B2A41D /* DetailCell2.m */,
 				52AB659D1D7DBA670032C527 /* DrawInView.h */,
@@ -620,6 +637,9 @@
 		A35584569E7FC49EA69331E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5236D2E71E84A56C006757AD /* Bolts.framework */,
+				5236D2E51E849E5B006757AD /* FBSDKCoreKit.framework */,
+				5236D2E31E849E29006757AD /* FBAudienceNetwork.framework */,
 				0E1C78271E1E3FBD00B2A41D /* libxml2.2.tbd */,
 				0E1C78251E1E3F9E00B2A41D /* libxml2.tbd */,
 				0E28EFBC1DF6A497000F2176 /* CoreLocation.framework */,
@@ -802,6 +822,7 @@
 				52AB65CC1D7F94A10032C527 /* WeatherForecast.plist in Resources */,
 				0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
+				5236D2E21E849D50006757AD /* AdTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,6 +886,7 @@
 				B223097B1E35BA5A0092CD1A /* DGActivityIndicatorBallClipRotatePulseAnimation.m in Sources */,
 				B22309911E35BA5A0092CD1A /* DGActivityIndicatorRotatingSandglassAnimation.m in Sources */,
 				5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */,
+				5236D2E11E849D50006757AD /* AdTableCell.m in Sources */,
 				B22309981E35BA5A0092CD1A /* DGActivityIndicatorTwoDotsAnimation.m in Sources */,
 				0E1C782E1E1E55C600B2A41D /* DetailCell1.m in Sources */,
 				B22309921E35BA5A0092CD1A /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
@@ -1055,6 +1077,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1084,6 +1110,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 988D2L6XZT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SpecialMagazine/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
