@@ -402,10 +402,23 @@
             //        cell.imageCell.alignLeft = YES;
             //        cell.imageCell.alignRight = YES;
             
+            cell.activityIndicatorView.center = cell.imageCell.center;
             
+            cell.activityIndicatorView.hidden = NO;
+            [cell.activityIndicatorView startAnimating];
             
-            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
-                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (image) {
+                    [cell.imageCell setImage:image];
+                    [cell.activityIndicatorView stopAnimating];
+                    cell.activityIndicatorView.hidden = YES;
+                }
+                
+                
+            }];
+            
+//            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
+//                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             
             

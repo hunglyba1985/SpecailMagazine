@@ -32,12 +32,7 @@ NSDictionary * catagoryInfor;
         int randomInt = arc4random_uniform(33);
         int randomColor = arc4random_uniform(14);
         activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
-        CGFloat width = SCREEN_WIDTH / 5.0f;
-        CGFloat height = SCREEN_HEIGHT / 7.0f;
-
-        activityIndicatorView.frame = CGRectMake(0, 0, width, height);
-
-        activityIndicatorView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 20);
+        activityIndicatorView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
         [self addSubview:activityIndicatorView];
@@ -96,7 +91,27 @@ NSDictionary * catagoryInfor;
     
     cell.articleImage.alignTop = YES;
     
-    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
+    cell.activityIndicatorView.hidden = NO;
+    [cell.activityIndicatorView startAnimating];
+    
+    cell.activityIndicatorView.center = cell.articleImage.center;
+    
+    
+//    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
+    
+    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image) {
+            [cell.articleImage setImage:image];
+            [cell.activityIndicatorView stopAnimating];
+            cell.activityIndicatorView.hidden = YES;
+        }
+        else
+        {
+            
+        }
+        
+    }];
+    
     
     cell.clickButton.tag = indexPath.row;
     

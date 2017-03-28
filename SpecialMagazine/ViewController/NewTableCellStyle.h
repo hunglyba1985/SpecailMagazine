@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "UIImageViewAligned.h"
+#import "DGActivityIndicatorView.h"
+
 
 
 @interface NewTableCellStyle : UITableViewCell
+{
+   
+
+}
 
 @property (weak, nonatomic) IBOutlet UIImageViewAligned *articleImage;
 
@@ -20,5 +26,5 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *clickButton;
 
-
+@property (nonatomic,strong)  DGActivityIndicatorView *activityIndicatorView;
 @end
