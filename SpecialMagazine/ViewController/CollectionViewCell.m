@@ -101,7 +101,14 @@ NSDictionary * catagoryInfor;
     
     [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (image) {
-            [cell.articleImage setImage:image];
+            cell.articleImage.alpha = 0;
+            [UIView animateWithDuration:1 animations:^{
+                [cell.articleImage setImage:image];
+                cell.articleImage.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
+            
             [cell.activityIndicatorView stopAnimating];
             cell.activityIndicatorView.hidden = YES;
         }

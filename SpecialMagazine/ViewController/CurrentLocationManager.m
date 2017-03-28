@@ -107,7 +107,7 @@ static CurrentLocationManager *sharedLocationController = nil;
 {
     currentLocation = [locations objectAtIndex:0];
     
-//    [_locationManager stopUpdatingLocation];
+    [_locationManager stopUpdatingLocation];
 
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
     [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)

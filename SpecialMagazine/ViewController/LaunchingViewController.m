@@ -24,6 +24,7 @@
 #import "JHChainableAnimations.h"
 #import "CatalogRealm.h"
 #import "JDStatusBarNotification.h"
+#import "FBShimmeringView.h"
 
 
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
@@ -70,6 +71,9 @@
 @property (nonatomic) Reachability *internetReachability;
 
 
+@property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
+
+
 @end
 
 @implementation LaunchingViewController
@@ -104,14 +108,6 @@
 
 }
 
--(void) setCheckingConnectNetwork
-{
-    self.internetReachability = [Reachability reachabilityForInternetConnection];
-    [self.internetReachability startNotifier];
-    
-    [self updateInterfaceWithReachability:self.internetReachability];
-    
-}
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -120,7 +116,8 @@
     
     //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
     
-    
+    [self showShimmerView];
+
 }
 
 
@@ -143,6 +140,27 @@
     [self getCatagories];
 }
 
+-(void) showShimmerView
+{
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:self.shimmeringView.bounds];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = @"Bắt đầu";
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.shimmeringView.shimmeringEndFadeDuration = 3;
+    self.shimmeringView.contentView = loadingLabel;
+    
+    self.shimmeringView.shimmering = YES;
+    
+}
+
+-(void) setCheckingConnectNetwork
+{
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+    [self updateInterfaceWithReachability:self.internetReachability];
+    
+}
 
 -(void) getDataFromLocal
 {
@@ -418,10 +436,10 @@
     
     NSLog(@"download click");
     
-//    [self deleteAllOldData];
+    [self deleteAllOldData];
     
     
-//    [ARTIST_API downloadForNoInternet];
+    [ARTIST_API downloadForNoInternet];
     
 //    [self testAnimation];
     
