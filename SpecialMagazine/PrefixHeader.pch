@@ -24,6 +24,7 @@
 #import "Reachability.h"
 #import "UserData.h"
 #import <UIImageView+RJLoader.h>
+#import "JDStatusBarNotification.h"
 
 
 

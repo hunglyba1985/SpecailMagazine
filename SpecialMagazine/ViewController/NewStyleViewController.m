@@ -100,10 +100,6 @@
 }
 
 
-
-
-
-
 -(void) addVerticalSegment
 {
     [segmentedControl1 removeFromSuperview];

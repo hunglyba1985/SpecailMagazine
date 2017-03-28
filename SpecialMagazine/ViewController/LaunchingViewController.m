@@ -98,7 +98,10 @@
     
     [self setCheckingConnectNetwork];
  
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
+
 }
 
 -(void) setCheckingConnectNetwork
@@ -114,9 +117,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
     
     //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
     
@@ -384,11 +384,13 @@
     if (netStatus == NotReachable) {
         NSLog(@"don't have internet");
         [JDStatusBarNotification showWithStatus:@"Bạn đang không kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        haveInternet = NO;
     }
     else
     {
         NSLog(@" have internet");
-        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+//        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        haveInternet = YES;
 
     }
 
@@ -471,7 +473,7 @@
 
 -(void) addDataToRealm:(NSArray*) data
 {
-    NSLog(@"add catalog to realm");
+//    NSLog(@"add catalog to realm");
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     

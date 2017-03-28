@@ -37,7 +37,7 @@ NSDictionary * catagoryInfor;
 
         activityIndicatorView.frame = CGRectMake(0, 0, width, height);
 
-        activityIndicatorView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+        activityIndicatorView.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 20);
 
 
         [self addSubview:activityIndicatorView];
@@ -220,7 +220,7 @@ NSDictionary * catagoryInfor;
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
-            NSLog(@"getting new data here ");
+//            NSLog(@"getting new data here ");
             NSArray *gettingArray = dataResponse;
             
             [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
