@@ -15,12 +15,16 @@
 #import "ListWebsitesController.h"
 
 
+
 @interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate,ListWebsitesControllerDelegate>
 {
     NSMutableArray *collectionData;
     UIView *topNavigationView;
     BOOL haveInternet;
     HMSegmentedControl*    segmentedControl1;
+    UIColor *categoryBarColor;
+    UIColor *indicateBarColor;
+    
     
 }
 
@@ -43,10 +47,18 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self setUpCollectionView];
+    [self setCategoryColor];
     [self addTopNavigationView];
     
+}
 
+-(void) setCategoryColor
+{
+    int randomColor = arc4random_uniform(14);
+    categoryBarColor = FLAT_COLOR[randomColor];
     
+    int anotherRandomColor = arc4random_uniform(14);
+    indicateBarColor = FLAT_COLOR[anotherRandomColor];
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -65,7 +77,7 @@
 -(void) addTopNavigationView
 {
     topNavigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-    topNavigationView.backgroundColor = UIColorFromRGB(0x2ecc71);
+    topNavigationView.backgroundColor = categoryBarColor;
     [self.view addSubview:topNavigationView];
     [self addVerticalSegment];
 }
@@ -119,9 +131,9 @@
     segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl1.verticalDividerEnabled = YES;
-    segmentedControl1.verticalDividerColor = UIColorFromRGB(0xc0392b);
-    segmentedControl1.selectionIndicatorColor = UIColorFromRGB(0x9A12B3);
-    segmentedControl1.backgroundColor = UIColorFromRGB(0x2ecc71);
+    segmentedControl1.verticalDividerColor = [UIColor whiteColor];
+    segmentedControl1.selectionIndicatorColor = indicateBarColor;
+    segmentedControl1.backgroundColor = categoryBarColor;
     segmentedControl1.verticalDividerWidth = 1.0f;
     [segmentedControl1 setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:16]}];
