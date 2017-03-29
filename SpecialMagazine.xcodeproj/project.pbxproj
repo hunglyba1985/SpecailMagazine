@@ -113,6 +113,10 @@
 		B2D31C061E85150500344864 /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C021E85150500344864 /* JDStatusBarStyle.m */; };
 		B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C041E85150500344864 /* JDStatusBarView.m */; };
 		B2D31C0E1E851FD900344864 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C0D1E851FD900344864 /* Reachability.m */; };
+		B2D7D4011E8BC15900F96845 /* ASJTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D7D3FC1E8BC15900F96845 /* ASJTag.m */; };
+		B2D7D4021E8BC15900F96845 /* ASJTag.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D7D3FD1E8BC15900F96845 /* ASJTag.xib */; };
+		B2D7D4031E8BC15900F96845 /* ASJTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D7D3FF1E8BC15900F96845 /* ASJTagsView.m */; };
+		B2D7D4041E8BC15900F96845 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B2D7D4001E8BC15900F96845 /* Resources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -313,6 +317,12 @@
 		B2D31C041E85150500344864 /* JDStatusBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarView.m; sourceTree = "<group>"; };
 		B2D31C0C1E851FD900344864 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B2D31C0D1E851FD900344864 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B2D7D3FB1E8BC15900F96845 /* ASJTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASJTag.h; sourceTree = "<group>"; };
+		B2D7D3FC1E8BC15900F96845 /* ASJTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASJTag.m; sourceTree = "<group>"; };
+		B2D7D3FD1E8BC15900F96845 /* ASJTag.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASJTag.xib; sourceTree = "<group>"; };
+		B2D7D3FE1E8BC15900F96845 /* ASJTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASJTagsView.h; sourceTree = "<group>"; };
+		B2D7D3FF1E8BC15900F96845 /* ASJTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASJTagsView.m; sourceTree = "<group>"; };
+		B2D7D4001E8BC15900F96845 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		C2BC8731ADCDA1B918B71EE7 /* Pods-SpecialMagazine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A2E99C89D7B129D80B683B /* Pods-SpecialMagazine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpecialMagazine.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpecialMagazine/Pods-SpecialMagazine.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -413,6 +423,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B2D7D3FA1E8BC15900F96845 /* ASJTagsView */,
 				B291B5FD1E8A43E500C3FA02 /* FBShimmering */,
 				B2D31BFE1E85150500344864 /* JDStatusBarNotification */,
 				B22F92631E7FE4F2009E8CD1 /* ODRefreshControl */,
@@ -788,6 +799,19 @@
 			path = JDStatusBarNotification;
 			sourceTree = "<group>";
 		};
+		B2D7D3FA1E8BC15900F96845 /* ASJTagsView */ = {
+			isa = PBXGroup;
+			children = (
+				B2D7D3FB1E8BC15900F96845 /* ASJTag.h */,
+				B2D7D3FC1E8BC15900F96845 /* ASJTag.m */,
+				B2D7D3FD1E8BC15900F96845 /* ASJTag.xib */,
+				B2D7D3FE1E8BC15900F96845 /* ASJTagsView.h */,
+				B2D7D3FF1E8BC15900F96845 /* ASJTagsView.m */,
+				B2D7D4001E8BC15900F96845 /* Resources.bundle */,
+			);
+			path = ASJTagsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -858,6 +882,7 @@
 				52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */,
 				B21828441E2E0E770070B19D /* kissingMinion.gif in Resources */,
 				5288D21B1DBEDD19003A000D /* CollectionViewCell.xib in Resources */,
+				B2D7D4041E8BC15900F96845 /* Resources.bundle in Resources */,
 				52BE47461E4A946C009AC489 /* CustomTableCell.xib in Resources */,
 				52586D5F1E70D5E2007C0169 /* NewTableCellStyle.xib in Resources */,
 				52EBA9931D7A667600273548 /* Assets.xcassets in Resources */,
@@ -869,6 +894,7 @@
 				0E9AD5391DBF1B3800F6A666 /* CellCollectionView.xib in Resources */,
 				52EBA9911D7A667500273548 /* Main.storyboard in Resources */,
 				5236D2E21E849D50006757AD /* AdTableCell.xib in Resources */,
+				B2D7D4021E8BC15900F96845 /* ASJTag.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +981,7 @@
 				0ED628631DF01B6400898D15 /* TKNaviViewController.m in Sources */,
 				0EE72EB21D9E2F75009C087A /* XLPagerTabStripViewController.m in Sources */,
 				0EE72EB61D9E2F75009C087A /* FXPageControl.m in Sources */,
+				B2D7D4011E8BC15900F96845 /* ASJTag.m in Sources */,
 				52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */,
 				B22309871E35BA5A0092CD1A /* DGActivityIndicatorBallZigZagAnimation.m in Sources */,
 				0EE72EB41D9E2F75009C087A /* XLTwitterPagerTabStripViewController.m in Sources */,
@@ -1009,6 +1036,7 @@
 				B22309991E35BA5A0092CD1A /* DGActivityIndicatorView.m in Sources */,
 				B22309901E35BA5A0092CD1A /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
 				0E1C782B1E1E491400B2A41D /* NewDetailViewController.m in Sources */,
+				B2D7D4031E8BC15900F96845 /* ASJTagsView.m in Sources */,
 				B22309941E35BA5A0092CD1A /* DGActivityIndicatorThreeDotsAnimation.m in Sources */,
 				0E1C78311E1E55D900B2A41D /* DetailCell2.m in Sources */,
 				52AB65CA1D7F948F0032C527 /* YQL.m in Sources */,
