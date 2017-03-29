@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "CurrentLocationManager.h"
 #import "Reachability.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate () <UIAlertViewDelegate>
 @property (nonatomic) Reachability *internetReachability;
@@ -23,6 +25,8 @@
     
 //    NSLog(@"application did finish launching with option --");
 
+        [Fabric with:@[[Crashlytics class]]];
+    
     [self getCurrentLocation];
     
 //   NSLog(@"get document path: %@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]);
