@@ -12,4 +12,7 @@ pod "RJImageLoader"
 pod 'Realm'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'AMTagListView'
+
+
 end
