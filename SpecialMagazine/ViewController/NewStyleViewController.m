@@ -57,7 +57,7 @@
     int randomColor = arc4random_uniform(14);
     categoryBarColor = FLAT_COLOR[randomColor];
     
-    int anotherRandomColor = arc4random_uniform(14);
+    int anotherRandomColor = arc4random_uniform(8);
     indicateBarColor = FLAT_COLOR[anotherRandomColor];
 }
 
@@ -128,7 +128,7 @@
     segmentedControl1.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     segmentedControl1.frame = CGRectMake(0, 20, SCREEN_WIDTH, 30);
     segmentedControl1.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleBox;
     segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl1.verticalDividerEnabled = YES;
     segmentedControl1.verticalDividerColor = [UIColor whiteColor];
