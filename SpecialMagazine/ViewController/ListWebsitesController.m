@@ -11,7 +11,9 @@
 #import "ContainViewController.h"
 #import "NewStyleViewController.h"
 #import "CatalogRealm.h"
+#import <AMTagListView.h>
 
+#define TagInfo  @"Tag Information"
 
 @interface ListWebsitesController () <UITableViewDelegate,UITableViewDataSource>
 {
@@ -22,6 +24,9 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet AMTagListView *listTagView;
+
 
 
 @end
@@ -40,6 +45,13 @@
 
 }
 
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self getCatagories];
+    
+}
+
 - (void)setStatusBarBackgroundColor:(UIColor *)color {
     
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
@@ -53,6 +65,81 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
+-(void) setListWebsiteForTagView:(NSArray *) list
+{
+    [[AMTagView appearance] setTextPadding:CGPointMake(14, 14)];
+    [[AMTagView appearance] setTextFont:[UIFont fontWithName:@"Futura" size:14]];
+
+    [list enumerateObjectsUsingBlock:^(CatalogRealm *websiteRealm, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        CatalogRealm *websiteInfo = [tableData objectAtIndex:idx];
+        
+        NSArray *catalogWebsite =[NSKeyedUnarchiver unarchiveObjectWithData:websiteInfo.categories];
+        
+        NSMutableArray *categoriesInWebsite = [NSMutableArray new];
+        
+        for (NSDictionary *dic in catalogWebsite) {
+            
+            NSMutableDictionary *tempDic = [NSMutableDictionary new];
+            [tempDic setObject:[NSString stringWithFormat:@"%li",(long)websiteInfo.id] forKey:WEBSITE_ID];
+            [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+            [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
+            
+            [categoriesInWebsite addObject:tempDic];
+            
+        }
+
+        NSDictionary *infoForTag = @{TagInfo:categoriesInWebsite};
+        
+        AMTagView * tagView = [[AMTagView alloc] init];
+        tagView.userInfo = infoForTag;
+        tagView.tagText = websiteRealm.websiteName;
+        int randomColor = arc4random_uniform(14);
+        tagView.tagColor = FLAT_COLOR[randomColor];
+
+        
+//        [self.listTagView addTag:websiteRealm.websiteName];
+        
+        [self.listTagView addTagView:tagView];
+        
+    }];
+    
+    AMTagView * tagView = [[AMTagView alloc] init];
+    tagView.userInfo = @{TagInfo:@"Close"};
+    tagView.tagText = @"Close";
+    int randomColor = arc4random_uniform(14);
+    tagView.tagColor = FLAT_COLOR[randomColor];
+
+    [self.listTagView addTagView:tagView];
+    
+    
+    [self.listTagView setTapHandler:^(AMTagView * tagView) {
+        
+        NSArray *realData = [tagView.userInfo objectForKey:TagInfo];
+        NSLog(@"tag view info is %@",realData);
+
+        if ([realData isKindOfClass:[NSString class]]) {
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else
+        {
+            id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
+            
+            if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
+                [strongDelegate selectWebsiteWithInfo:realData];
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+     
+        
+    }];
+    
+}
+
 
 -(void) getCatagories
 {
@@ -81,7 +168,9 @@
             }];
             
             if (firstTime) {
-                [self.tableView reloadData];
+//                [self.tableView reloadData];
+                
+                [self setListWebsiteForTagView:tableData];
                 firstTime = NO;
             }
             else
@@ -95,12 +184,7 @@
     
 }
 
--(void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-        [self getCatagories];
 
-}
 
 
 
@@ -116,7 +200,10 @@
             
         }
         
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
+        
+        [self setListWebsiteForTagView:tableData];
+        
 
     }
     else
