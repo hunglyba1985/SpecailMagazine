@@ -39,6 +39,7 @@
 
 
 @property (nonatomic,strong) NSDictionary *cellCatagoryInfo;
+@property (nonatomic,strong) NSString *websiteName;
 
 
 

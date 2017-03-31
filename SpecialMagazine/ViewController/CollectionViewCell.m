@@ -87,6 +87,20 @@ NSDictionary * catagoryInfor;
     
     cell.articleTitle.text = cellData.titleArticle;
     
+//    NSMutableAttributedString *attributeString = [NSMutableAttributedString new];
+//    NSAttributedString *nextLine = [[NSAttributedString alloc] initWithString:@" \n "];
+//    NSAttributedString *desArticel = [[NSAttributedString alloc] initWithString:cellData.descriptionArticle];
+//    [attributeString appendAttributedString:titleWebsite];
+//    [attributeString appendAttributedString:nextLine];
+//    [attributeString appendAttributedString:desArticel];
+//    
+//    cell.articleDescription.attributedText = attributeString;
+    
+    
+//    cell.articleDescription.text = [NSString stringWithFormat:@"%@ \n %@",self.websiteName,cellData.descriptionArticle];
+    
+    NSAttributedString *titleWebsite = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ",self.websiteName] attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}];
+    cell.websiteName.attributedText = titleWebsite;
     cell.articleDescription.text = cellData.descriptionArticle;
     
     cell.articleImage.alignTop = YES;

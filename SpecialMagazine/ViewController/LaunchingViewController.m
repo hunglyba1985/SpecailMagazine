@@ -28,6 +28,7 @@
 
 
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
+#define  DefaultWebsiteName @"Báo mới"
 
 
 @interface LaunchingViewController ()
@@ -172,7 +173,7 @@
 //            NSLog(@"website name is %@",object.websiteName);
 //            [tableData addObject:object];
             
-            if ([object.websiteName isEqualToString:@"Báo mới"]) {
+            if ([object.websiteName isEqualToString:DefaultWebsiteName]) {
                 defaultWebsite = [self convertRealmDataToArray:object];
             }
             
@@ -203,7 +204,7 @@
                 
                 CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
                 
-                if ([websiteRealm.websiteName isEqualToString:@"Báo mới"]) {
+                if ([websiteRealm.websiteName isEqualToString:DefaultWebsiteName]) {
                     
                     defaultWebsite = [self convertRealmDataToArray:websiteRealm];
                 }
@@ -424,6 +425,7 @@
     
     NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
     newStyleController.listCatagories = defaultWebsite;
+    newStyleController.nameOfWebsite = DefaultWebsiteName;
     [newStyleController reloadCatagories];
     
     [self.navigationController pushViewController:newStyleController animated:YES];

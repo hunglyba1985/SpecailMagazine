@@ -74,7 +74,8 @@ static ArtistAPI  *sharedController = nil;
             NSDictionary *dic = dataResponse;
             NSArray *listArticle = [dic objectForKey:LINFOS];
             
-            
+//            NSLog(@"artiscle data is %@",listArticle);
+
             result(listArticle,nil);
         }
         else

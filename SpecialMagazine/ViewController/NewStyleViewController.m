@@ -173,10 +173,11 @@
 }
 
 #pragma mark - ListWebsiteViewDelegate
--(void) selectWebsiteWithInfo:(NSArray *)websiteData
+-(void) selectWebsiteWithInfo:(NSArray *)websiteData andWebsiteName:(NSString *)websiteName
 {
     self.collectionView.hidden = YES;
     self.listCatagories = websiteData;
+    self.nameOfWebsite = websiteName;
     [self addVerticalSegment];
     [self.collectionView reloadData];
     
@@ -272,7 +273,7 @@
     [cell layoutIfNeeded];
     
     cell.delegate = self;
-    
+    cell.websiteName = self.nameOfWebsite;
     
     
 #pragma mark - For have internet

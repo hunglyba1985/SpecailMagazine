@@ -19,10 +19,10 @@
     if (self = [super init]) {
         
      
-        self.id = [[dictionary objectForKey:WEBSITE_ID] integerValue];
-        self.websiteName = [dictionary objectForKey:WEBSITE_NAME];
-        self.websiteIconLink = [dictionary objectForKey:WEBSITE_ICON];
-        NSArray *catalog = [dictionary objectForKey:WEBSITE_CATEGORY];
+        self.id = [[dictionary objectForKeyNotNull:WEBSITE_ID] integerValue];
+        self.websiteName = [dictionary objectForKeyNotNull:WEBSITE_NAME];
+        self.websiteIconLink = [dictionary objectForKeyNotNull:WEBSITE_ICON];
+        NSArray *catalog = [dictionary objectForKeyNotNull:WEBSITE_CATEGORY];
         self.categories = [NSKeyedArchiver archivedDataWithRootObject:catalog];
         
         

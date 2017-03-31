@@ -26,5 +26,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *clickButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *websiteName;
+
+
 @property (nonatomic,strong)  DGActivityIndicatorView *activityIndicatorView;
 @end

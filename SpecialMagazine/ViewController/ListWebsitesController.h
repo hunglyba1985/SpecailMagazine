@@ -11,7 +11,7 @@
 @protocol ListWebsitesControllerDelegate <NSObject>
 @optional
 
--(void) selectWebsiteWithInfo:(NSArray*) websiteData;
+-(void) selectWebsiteWithInfo:(NSArray*) websiteData andWebsiteName:(NSString *) websiteName;
 
 
 @end

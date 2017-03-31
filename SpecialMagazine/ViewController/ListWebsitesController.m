@@ -91,7 +91,7 @@
             
         }
 
-        NSDictionary *infoForTag = @{TagInfo:categoriesInWebsite};
+        NSDictionary *infoForTag = @{TagInfo:categoriesInWebsite,WEBSITE_NAME:websiteInfo.websiteName};
 
         AMTagView * tagView = [[AMTagView alloc] init];
         tagView.userInfo = infoForTag;
@@ -134,10 +134,11 @@
         else
         {
             NSArray *realData = [tagView.userInfo objectForKey:TagInfo];
+            
             id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
             
-            if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
-                [strongDelegate selectWebsiteWithInfo:realData];
+            if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:andWebsiteName:)]) {
+                [strongDelegate selectWebsiteWithInfo:realData andWebsiteName:[tagView.userInfo objectForKey:WEBSITE_NAME]];
             }
             
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -315,14 +316,14 @@
         
     }
     
-    id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
-
-    if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
-        [strongDelegate selectWebsiteWithInfo:categoriesInWebsite];
-    }
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-
+//    id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
+//
+//    if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
+//        [strongDelegate selectWebsiteWithInfo:categoriesInWebsite];
+//    }
+//    
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//
     
 //    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
 //    newStyleController.listCatagories = categoriesInWebsite;

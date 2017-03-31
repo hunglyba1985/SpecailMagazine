@@ -11,6 +11,7 @@
 @interface NewStyleViewController : UIViewController
 
 @property (nonatomic,strong) NSArray* listCatagories;
+@property (nonatomic,strong) NSString* nameOfWebsite;
 
 -(void) reloadCatagories;
 

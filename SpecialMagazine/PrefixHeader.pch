@@ -25,6 +25,7 @@
 #import "UserData.h"
 #import <UIImageView+RJLoader.h>
 #import "JDStatusBarNotification.h"
+#import "NSDictionary+NotNull.h"
 
 
 
