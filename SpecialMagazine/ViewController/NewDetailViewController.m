@@ -23,6 +23,8 @@
     UIImage *iamge;
     BOOL getFbAd;
     UILabel *titleArtitcle;
+    BOOL webFinishLoad;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -107,9 +109,10 @@
     getFbAd = YES;
     [self.tableView reloadData];
     
-    [self addFbAdToWebview];
+    if (webFinishLoad) {
+        [self addFbAdToWebview];
+    }
     
-
 }
 
 
@@ -206,6 +209,12 @@
     [webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://' + a}"];
     
     NSLog(@"scroll view in web view %f",webView.scrollView.contentSize.height);
+    
+    webFinishLoad = true;
+    
+    if (getFbAd) {
+        [self addFbAdToWebview];
+    }
     
 }
 

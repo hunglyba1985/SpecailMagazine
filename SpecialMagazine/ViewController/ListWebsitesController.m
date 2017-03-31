@@ -14,6 +14,7 @@
 #import <AMTagListView.h>
 
 #define TagInfo  @"Tag Information"
+#define CloseTagStr @"Close   "
 
 @interface ListWebsitesController () <UITableViewDelegate,UITableViewDataSource>
 {
@@ -91,7 +92,7 @@
         }
 
         NSDictionary *infoForTag = @{TagInfo:categoriesInWebsite};
-        
+
         AMTagView * tagView = [[AMTagView alloc] init];
         tagView.userInfo = infoForTag;
         tagView.tagText = websiteRealm.websiteName;
@@ -105,26 +106,34 @@
         
     }];
     
+    
+//    [[AMTagView appearance] setAccessoryImage:[UIImage imageNamed:@"close"]];
+//    [[AMTagView appearance] setTextPadding:CGPointMake(14, 14)];
+//    [[AMTagView appearance] setTextFont:[UIFont fontWithName:@"Futura" size:14]];
+
     AMTagView * tagView = [[AMTagView alloc] init];
     tagView.userInfo = @{TagInfo:@"Close"};
-    tagView.tagText = @"Close";
+    tagView.tagText = CloseTagStr;
     int randomColor = arc4random_uniform(14);
-    tagView.tagColor = FLAT_COLOR[randomColor];
-
-    [self.listTagView addTagView:tagView];
+    [tagView setAccessoryImage:[UIImage imageNamed:@"close"]];
     
+    tagView.tagColor = FLAT_COLOR[randomColor];
+    [[AMTagView appearance] setAccessoryImage:[UIImage imageNamed:@"close"]];
+
+//    [self.listTagView addTagView:tagView];
+    
+    [self.listTagView addTag:CloseTagStr];
     
     [self.listTagView setTapHandler:^(AMTagView * tagView) {
         
-        NSArray *realData = [tagView.userInfo objectForKey:TagInfo];
-        NSLog(@"tag view info is %@",realData);
-
-        if ([realData isKindOfClass:[NSString class]]) {
-            
+        
+        if ([tagView.tagText isEqualToString:CloseTagStr]) {
             [self dismissViewControllerAnimated:YES completion:nil];
+
         }
         else
         {
+            NSArray *realData = [tagView.userInfo objectForKey:TagInfo];
             id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
             
             if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:)]) {
@@ -133,6 +142,7 @@
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }
+        
         
      
         
@@ -158,11 +168,15 @@
                 CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
                 
                 if (firstTime) {
-                    [tableData addObject:websiteRealm];
+                    if (![websiteRealm.websiteName containsString:@"Muvik"]) {
+                        [tableData addObject:websiteRealm];
+                    }
                 }
                 else
                 {
-                    [tempArray addObject:websiteRealm];
+                    if (![websiteRealm.websiteName containsString:@"Muvik"]) {
+                        [tempArray addObject:websiteRealm];
+                    }
 
                 }
             }];
@@ -196,7 +210,10 @@
     if (allLocalData.count > 0) {
         for (CatalogRealm *object in allLocalData) {
             
-            [tableData addObject:object];
+            if (![object.websiteName containsString:@"Muvik"]) {
+                [tableData addObject:object];
+            }
+            
             
         }
         

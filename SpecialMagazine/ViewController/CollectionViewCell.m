@@ -46,9 +46,9 @@ NSDictionary * catagoryInfor;
     self.tableView.delegate = self;
     self.tableView.pagingEnabled = YES;
     
-    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
-    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
-
+//    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+//    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+//
 }
 
 - (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
@@ -230,13 +230,21 @@ NSDictionary * catagoryInfor;
 
 }
 
+-(void) startLoadingData
+{
+    self.tableView.hidden = YES;
+    [activityIndicatorView startAnimating];
+    activityIndicatorView.hidden = NO;
+    
+}
+
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
     
 //    NSLog(@"one catagory is %@",catagoryInfor);
 
-    
+    [self startLoadingData];
     collectionData = [NSMutableArray new];
 
     [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {

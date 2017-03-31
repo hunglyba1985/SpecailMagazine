@@ -25,7 +25,7 @@
     UIColor *categoryBarColor;
     UIColor *indicateBarColor;
     
-    
+    ListWebsitesController *listWebsites;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -158,9 +158,16 @@
 
 - (IBAction)showListWebsite:(id)sender {
     
-    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
-    listWebsites.delegate = self;
-    [self presentViewController:listWebsites animated:YES completion:nil];
+    if (listWebsites == nil) {
+        listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+        listWebsites.delegate = self;
+        [self presentViewController:listWebsites animated:YES completion:nil];
+    }
+    else
+    {
+        [self presentViewController:listWebsites animated:YES completion:nil];
+    }
+  
     
     
 }
