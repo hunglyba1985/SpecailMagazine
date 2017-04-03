@@ -24,6 +24,8 @@
     BOOL getFbAd;
     UILabel *titleArtitcle;
     BOOL webFinishLoad;
+    DGActivityIndicatorView *activityIndicatorView;
+
     
 }
 
@@ -159,24 +161,35 @@
 {
     CGFloat heightTitle = [self getHeightString:self.article.titleArticle withFont:[UIFont boldSystemFontOfSize:20]];
 
-    detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20 + heightTitle + 10, SCREEN_WIDTH, SCREEN_HEIGHT - 30 - heightTitle)];
+    detailWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     detailWebView.backgroundColor = [UIColor whiteColor];
-    [detailWebView loadHTMLString:self.article.content baseURL:nil];
-    detailWebView.scrollView.showsVerticalScrollIndicator = NO;
     
-
-    titleArtitcle = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, SCREEN_WIDTH - 20, heightTitle + 10)];
-    titleArtitcle.backgroundColor = [UIColor whiteColor];
-    titleArtitcle.textColor = [UIColor blackColor];
-    titleArtitcle.font = [UIFont boldSystemFontOfSize:20];
-    titleArtitcle.lineBreakMode = NSLineBreakByWordWrapping;
-    titleArtitcle.numberOfLines = 0;
-    titleArtitcle.text = self.article.titleArticle;
+    NSString *htmlTitleStr =[NSString stringWithFormat:@"<h2> %@ </h2>",self.article.titleArticle];
+    
+    NSString *htmlEntailArticle = [NSString stringWithFormat:@"%@ \n %@",htmlTitleStr,self.article.content];
+    
+    [detailWebView loadHTMLString:htmlEntailArticle baseURL:nil];
+    detailWebView.scrollView.showsVerticalScrollIndicator = NO;
     
     
     detailWebView.delegate = self;
 
+    [self addLoadingView];
+    
 }
+
+
+-(void) addLoadingView
+{
+    int randomInt = arc4random_uniform(33);
+    int randomColor = arc4random_uniform(14);
+    activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
+    activityIndicatorView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    activityIndicatorView.center = self.view.center;
+    
+
+}
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -184,21 +197,24 @@
     
     NSArray *listVideo = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listVideos];
     
-    
-    if (tableData.count < 3 || listVideo.count > 0 ) {
+    [self showWebViewInsteadOfTableView];
 
-//        [self.view addSubview:detailWebView];
-        [self showWebViewInsteadOfTableView];
-
-    }
+//    if (tableData.count < 3 || listVideo.count > 0 ) {
+//
+////        [self.view addSubview:detailWebView];
+//        [self showWebViewInsteadOfTableView];
+//
+//    }
    
 }
 
 -(void) showWebViewInsteadOfTableView
 {
-    self.tableView.hidden = YES;
-    [self.view addSubview:titleArtitcle];
+     self.tableView.hidden = YES;
     [self.view addSubview:detailWebView];
+    [self.view addSubview:activityIndicatorView];
+    [activityIndicatorView startAnimating];
+    
 }
 
 
@@ -206,6 +222,10 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 
 {
+    [activityIndicatorView stopAnimating];
+    activityIndicatorView.hidden = YES;
+    
+    
     [webView stringByEvaluatingJavaScriptFromString:@"function showImageArticle(a){window.location = 'img://' + a}"];
     
     NSLog(@"scroll view in web view %f",webView.scrollView.contentSize.height);
