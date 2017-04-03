@@ -110,7 +110,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
 
-    [self addMotionBackgroundView];
+//    [self addMotionBackgroundView];
     
 }
 
@@ -123,6 +123,7 @@
     //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
     
     [self showShimmerView];
+    [self addMotionBackgroundView];
 
 }
 
@@ -136,6 +137,7 @@
     self.sunImageView.hidden = YES;
     
    // [self testAnimation];
+    
 }
 
 -(void) viewDidDisappear:(BOOL)animated
