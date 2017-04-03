@@ -99,7 +99,8 @@ NSDictionary * catagoryInfor;
     
 //    cell.articleDescription.text = [NSString stringWithFormat:@"%@ \n %@",self.websiteName,cellData.descriptionArticle];
     
-    NSAttributedString *titleWebsite = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ",self.websiteName] attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}];
+    NSAttributedString *titleWebsite = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ",self.websiteName] attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                                                                                                                                    NSFontAttributeName:[UIFont italicSystemFontOfSize:16]}];
     cell.websiteName.attributedText = titleWebsite;
     cell.articleDescription.text = cellData.descriptionArticle;
     
