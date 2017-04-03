@@ -9,5 +9,6 @@
   "otherAppName":"name",
   "otherAppMessage":"We glad to introduce you an amazing new app. ",
   "otherAppImage":"linkImage",
-  "otherAppUrl":"linkApp"
+  "otherAppUrl":"linkApp",
+  "background_image": ["image 1","image 2"],
 }
