@@ -232,7 +232,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg1" translatesAutoresizingMaskIntoConstraints="NO" id="jUu-bl-DUE">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOt-pw-lqE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jUu-bl-DUE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show meaningful sentence" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daf-Mv-3z8">
@@ -395,22 +399,27 @@
                             <constraint firstItem="jUu-bl-DUE" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" id="Grv-VM-tIn"/>
                             <constraint firstAttribute="trailing" secondItem="daf-Mv-3z8" secondAttribute="trailing" constant="16" id="Kiw-g6-VIM"/>
                             <constraint firstItem="daf-Mv-3z8" firstAttribute="top" secondItem="6df-eE-pMR" secondAttribute="bottom" constant="8" id="PA9-SB-XKC"/>
+                            <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="hOt-pw-lqE" secondAttribute="bottom" id="UpB-US-0Rm"/>
                             <constraint firstItem="eJk-qr-r1s" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" constant="16" id="VyD-Ot-MzR"/>
                             <constraint firstAttribute="trailing" secondItem="fsJ-pb-2Kd" secondAttribute="trailing" constant="16" id="YzX-n6-0eF"/>
                             <constraint firstItem="lni-Sb-oQi" firstAttribute="top" secondItem="iIw-D2-XCc" secondAttribute="bottom" constant="25" id="a8e-f4-bAD"/>
                             <constraint firstItem="jUu-bl-DUE" firstAttribute="top" secondItem="cFV-ZV-NOP" secondAttribute="top" id="abc-aM-fwF"/>
                             <constraint firstAttribute="trailing" secondItem="jUu-bl-DUE" secondAttribute="trailing" id="cak-Q0-xYC"/>
                             <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="jUu-bl-DUE" secondAttribute="bottom" id="cf7-bb-KeK"/>
+                            <constraint firstItem="hOt-pw-lqE" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" id="gCV-XM-Khv"/>
                             <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="FXn-vf-0qA" secondAttribute="bottom" constant="48" id="gVG-LN-M2x"/>
                             <constraint firstItem="6df-eE-pMR" firstAttribute="leading" secondItem="cFV-ZV-NOP" secondAttribute="leading" id="h3h-Cn-OFk"/>
                             <constraint firstItem="6df-eE-pMR" firstAttribute="top" secondItem="fsJ-pb-2Kd" secondAttribute="bottom" constant="17" id="l3n-wZ-qGO"/>
+                            <constraint firstAttribute="trailing" secondItem="hOt-pw-lqE" secondAttribute="trailing" id="uc4-a5-SDH"/>
                             <constraint firstAttribute="trailing" secondItem="6df-eE-pMR" secondAttribute="trailing" id="wDY-ja-WVJ"/>
                             <constraint firstItem="QD8-EV-psl" firstAttribute="top" secondItem="eJk-qr-r1s" secondAttribute="bottom" constant="20" id="xT9-ZP-3BJ"/>
+                            <constraint firstItem="hOt-pw-lqE" firstAttribute="top" secondItem="cFV-ZV-NOP" secondAttribute="top" id="yMF-jT-4KU"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="oCr-TC-DtO"/>
                     <connections>
+                        <outlet property="backgroundView" destination="hOt-pw-lqE" id="vQo-Sj-bmv"/>
                         <outlet property="currentDegree" destination="vnq-Rh-Yub" id="0NL-HD-Msz"/>
                         <outlet property="dateLabel" destination="5i9-Ek-nvj" id="1Sm-3k-JS2"/>
                         <outlet property="dayLabel" destination="8iM-u6-5p8" id="mfs-gQ-r5P"/>
@@ -607,7 +616,6 @@
     <resources>
         <image name="Downloads-icon" width="512" height="512"/>
         <image name="SunShine" width="64" height="64"/>
-        <image name="bg1" width="810" height="1440"/>
         <image name="menu-icon" width="225" height="225"/>
     </resources>
 </document>

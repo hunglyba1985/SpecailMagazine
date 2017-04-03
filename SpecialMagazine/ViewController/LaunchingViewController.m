@@ -25,6 +25,7 @@
 #import "CatalogRealm.h"
 #import "JDStatusBarNotification.h"
 #import "FBShimmeringView.h"
+#import "CRMotionView.h"
 
 
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
@@ -74,6 +75,8 @@
 
 @property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
 
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+
 
 @end
 
@@ -107,6 +110,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
 
+    [self addMotionBackgroundView];
+    
 }
 
 
@@ -153,6 +158,22 @@
     
     self.shimmeringView.shimmering = YES;
     
+}
+
+-(void) addMotionBackgroundView
+{
+    CRMotionView *motionView = [[CRMotionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT)];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg1"]];
+    [motionView setContentView:imageView];
+    motionView.zoomEnabled = NO;
+    motionView.scrollIndicatorEnabled = NO;
+    
+    
+    [self.backgroundView addSubview:motionView];
+    
+  
+    
+
 }
 
 -(void) setCheckingConnectNetwork

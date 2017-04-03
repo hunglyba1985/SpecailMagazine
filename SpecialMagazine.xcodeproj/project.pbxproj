@@ -110,6 +110,10 @@
 		B291B6041E8A43E500C3FA02 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B291B6011E8A43E500C3FA02 /* FBShimmeringLayer.m */; };
 		B291B6051E8A43E500C3FA02 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = B291B6031E8A43E500C3FA02 /* FBShimmeringView.m */; };
 		B295B52B1E8E395700316154 /* NSDictionary+NotNull.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B52A1E8E395700316154 /* NSDictionary+NotNull.m */; };
+		B295B5311E9233C400316154 /* ConfigureFile.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B5301E9233C400316154 /* ConfigureFile.m */; };
+		B295B5431E92409B00316154 /* CRMotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B53E1E92409B00316154 /* CRMotionView.m */; };
+		B295B5441E92409B00316154 /* CRZoomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B5401E92409B00316154 /* CRZoomScrollView.m */; };
+		B295B5451E92409B00316154 /* UIScrollView+CRScrollIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B5421E92409B00316154 /* UIScrollView+CRScrollIndicator.m */; };
 		B2D31C051E85150500344864 /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C001E85150500344864 /* JDStatusBarNotification.m */; };
 		B2D31C061E85150500344864 /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C021E85150500344864 /* JDStatusBarStyle.m */; };
 		B2D31C071E85150500344864 /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D31C041E85150500344864 /* JDStatusBarView.m */; };
@@ -308,6 +312,14 @@
 		B291B6031E8A43E500C3FA02 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
 		B295B5291E8E395700316154 /* NSDictionary+NotNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NotNull.h"; sourceTree = "<group>"; };
 		B295B52A1E8E395700316154 /* NSDictionary+NotNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NotNull.m"; sourceTree = "<group>"; };
+		B295B52F1E9233C400316154 /* ConfigureFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigureFile.h; path = Model/ConfigureFile.h; sourceTree = "<group>"; };
+		B295B5301E9233C400316154 /* ConfigureFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigureFile.m; path = Model/ConfigureFile.m; sourceTree = "<group>"; };
+		B295B53D1E92409B00316154 /* CRMotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMotionView.h; sourceTree = "<group>"; };
+		B295B53E1E92409B00316154 /* CRMotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMotionView.m; sourceTree = "<group>"; };
+		B295B53F1E92409B00316154 /* CRZoomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRZoomScrollView.h; sourceTree = "<group>"; };
+		B295B5401E92409B00316154 /* CRZoomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRZoomScrollView.m; sourceTree = "<group>"; };
+		B295B5411E92409B00316154 /* UIScrollView+CRScrollIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+CRScrollIndicator.h"; sourceTree = "<group>"; };
+		B295B5421E92409B00316154 /* UIScrollView+CRScrollIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+CRScrollIndicator.m"; sourceTree = "<group>"; };
 		B2D31BFF1E85150500344864 /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
 		B2D31C001E85150500344864 /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
 		B2D31C011E85150500344864 /* JDStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarStyle.h; sourceTree = "<group>"; };
@@ -416,6 +428,7 @@
 		0ED628641DF01B7600898D15 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B295B53C1E92409B00316154 /* CRMotionView */,
 				B295B52C1E8E395C00316154 /* Extent Dictionary */,
 				B291B5FD1E8A43E500C3FA02 /* FBShimmering */,
 				B2D31BFE1E85150500344864 /* JDStatusBarNotification */,
@@ -644,6 +657,8 @@
 				0E514FC81E25E267003BB550 /* CatalogRealm.m */,
 				0E514FCA1E273DB9003BB550 /* UserData.h */,
 				0E514FCB1E273DB9003BB550 /* UserData.m */,
+				B295B52F1E9233C400316154 /* ConfigureFile.h */,
+				B295B5301E9233C400316154 /* ConfigureFile.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -786,6 +801,19 @@
 				B295B52A1E8E395700316154 /* NSDictionary+NotNull.m */,
 			);
 			name = "Extent Dictionary";
+			sourceTree = "<group>";
+		};
+		B295B53C1E92409B00316154 /* CRMotionView */ = {
+			isa = PBXGroup;
+			children = (
+				B295B53D1E92409B00316154 /* CRMotionView.h */,
+				B295B53E1E92409B00316154 /* CRMotionView.m */,
+				B295B53F1E92409B00316154 /* CRZoomScrollView.h */,
+				B295B5401E92409B00316154 /* CRZoomScrollView.m */,
+				B295B5411E92409B00316154 /* UIScrollView+CRScrollIndicator.h */,
+				B295B5421E92409B00316154 /* UIScrollView+CRScrollIndicator.m */,
+			);
+			path = CRMotionView;
 			sourceTree = "<group>";
 		};
 		B2D31BFE1E85150500344864 /* JDStatusBarNotification */ = {
@@ -981,10 +1009,12 @@
 				52EBA9881D7A667500273548 /* main.m in Sources */,
 				52BE47451E4A946C009AC489 /* CustomTableCell.m in Sources */,
 				52AB65C91D7F948F0032C527 /* WeatherObject.m in Sources */,
+				B295B5441E92409B00316154 /* CRZoomScrollView.m in Sources */,
 				5225F86E1D8F69F20079E151 /* TableViewCell.m in Sources */,
 				B291B6051E8A43E500C3FA02 /* FBShimmeringView.m in Sources */,
 				B22309931E35BA5A0092CD1A /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
 				B2D31C051E85150500344864 /* JDStatusBarNotification.m in Sources */,
+				B295B5311E9233C400316154 /* ConfigureFile.m in Sources */,
 				B223097A1E35BA5A0092CD1A /* DGActivityIndicatorBallClipRotateMultipleAnimation.m in Sources */,
 				0EE72EB81D9E2F75009C087A /* XLButtonBarView.m in Sources */,
 				5225F8711D90B4A50079E151 /* DetailViewController.m in Sources */,
@@ -1007,7 +1037,9 @@
 				B22309841E35BA5A0092CD1A /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
 				B22309891E35BA5A0092CD1A /* DGActivityIndicatorCookieTerminatorAnimation.m in Sources */,
 				0E1C78241E1E3EC800B2A41D /* XPathQuery.m in Sources */,
+				B295B5431E92409B00316154 /* CRMotionView.m in Sources */,
 				B223097C1E35BA5A0092CD1A /* DGActivityIndicatorBallGridBeatAnimation.m in Sources */,
+				B295B5451E92409B00316154 /* UIScrollView+CRScrollIndicator.m in Sources */,
 				52EBA9A11D7A6ED700273548 /* ArtistAPI.m in Sources */,
 				B22309971E35BA5A0092CD1A /* DGActivityIndicatorTripleRingsAnimation.m in Sources */,
 				B22309881E35BA5A0092CD1A /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,

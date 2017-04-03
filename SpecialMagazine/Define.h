@@ -89,6 +89,10 @@
 #define NOTIFICATION_FOR_WEATHER @"Notification for weather"
 #define NOTIFICATION_FOR_LOCAITON @"Notification for location"
 
+#define CONFIGURE_FILE @"Configure file"
+#define BACKGROUND_IMAGES @"Background images"
+
+
 
 #endif /* Define_h */
 
