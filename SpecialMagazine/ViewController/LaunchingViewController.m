@@ -164,6 +164,34 @@
 
 -(void) addMotionBackgroundView
 {
+    
+    NSDictionary *fileConfigure =[[UserData sharedInstance] getFileConfigure];
+    NSString *imageUrlStr = [fileConfigure objectForKeyNotNull:BG_IMG_URL_STR];
+    if (imageUrlStr) {
+        UIImage *storeImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageUrlStr];
+        if (storeImage) {
+            CRMotionView *motionView = [[CRMotionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT)];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:storeImage];
+            [motionView setContentView:imageView];
+            motionView.zoomEnabled = NO;
+            motionView.scrollIndicatorEnabled = NO;
+            
+            [self.backgroundView addSubview:motionView];
+
+        }
+        else
+        {
+            [self addDefaultBackgroundImage];
+        }
+    }
+    else
+    {
+        [self addDefaultBackgroundImage];
+    }
+}
+
+-(void) addDefaultBackgroundImage
+{
     CRMotionView *motionView = [[CRMotionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT)];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg1"]];
     [motionView setContentView:imageView];
@@ -172,9 +200,6 @@
     
     
     [self.backgroundView addSubview:motionView];
-    
-  
-    
 
 }
 

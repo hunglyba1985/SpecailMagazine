@@ -197,14 +197,12 @@
     
     NSArray *listVideo = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listVideos];
     
-    [self showWebViewInsteadOfTableView];
 
-//    if (tableData.count < 3 || listVideo.count > 0 ) {
-//
-////        [self.view addSubview:detailWebView];
-//        [self showWebViewInsteadOfTableView];
-//
-//    }
+    if (tableData.count < 3 || listVideo.count > 0 ) {
+
+        [self showWebViewInsteadOfTableView];
+
+    }
    
 }
 

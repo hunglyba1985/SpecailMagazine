@@ -89,8 +89,11 @@
 #define NOTIFICATION_FOR_WEATHER @"Notification for weather"
 #define NOTIFICATION_FOR_LOCAITON @"Notification for location"
 
+
+#pragma mark - DEFINE CONFIGURE
 #define CONFIGURE_FILE @"Configure file"
 #define BACKGROUND_IMAGES @"Background images"
+#define BG_IMG_URL_STR  @"background_image"
 
 
 

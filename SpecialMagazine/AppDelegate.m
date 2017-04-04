@@ -36,6 +36,8 @@
     [self changeModelOfDatabase];
     [self setCheckingConnectNetwork];
     
+    [[UserData sharedInstance] setFileConfigure];
+    
     return YES;
 }
 
@@ -122,17 +124,45 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    self.bgTask = [application beginBackgroundTaskWithExpirationHandler: ^{
+    NSLog(@"applicationDidEnterBackground");
+    
+    NSDictionary *fileConfigure = [[UserData sharedInstance] getFileConfigure];
+    NSString *imageUrlStr = [fileConfigure objectForKeyNotNull:BG_IMG_URL_STR];
+    if (imageUrlStr) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [application endBackgroundTask:self.bgTask];
-            
-            self.bgTask = UIBackgroundTaskInvalid;
-            
-        });
+        UIImage *storeImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageUrlStr];
         
-    }];
+        if (!storeImage) {
+            NSLog(@"don't have image start download");
+            [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageUrlStr] options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+                if (image && finished) {
+                    // Cache image to disk or memory
+                    NSLog(@"down image comlete and store in disk");
+                    //                [[SDImageCache sharedImageCache] storeImage:image forKey:CUSTOM_KEY toDisk:YES];
+                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlStr completion:nil];
+                    
+                }
+            }];
+            
+        }
+        
+    }
+
+    
+//    self.bgTask = [application beginBackgroundTaskWithExpirationHandler: ^{
+//        
+//     
+//        
+////        dispatch_async(dispatch_get_main_queue(), ^{
+////            
+////            
+////            [application endBackgroundTask:self.bgTask];
+////            
+////            self.bgTask = UIBackgroundTaskInvalid;
+////            
+////        });
+//        
+//    }];
 
 }
 
