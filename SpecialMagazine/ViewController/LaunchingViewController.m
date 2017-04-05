@@ -279,8 +279,8 @@
         
         NSMutableDictionary *tempDic = [NSMutableDictionary new];
         [tempDic setObject:[NSString stringWithFormat:@"%li",(long)catalogRealm.id] forKey:WEBSITE_ID];
-        [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
-        [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_NAME] forKey:WEBSITE_NAME];
         [categoriesInWebsite addObject:tempDic];
         
     }
@@ -367,7 +367,7 @@
     }
     else
     {
-        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HANOI] inProvince:@"TP Hà Nội"];
     }
 }
 
@@ -378,7 +378,7 @@
     
 //    NSLog(@"local data is %@", localData);
     
-    NSString *localProvince = [localData objectForKey:PROVINCE];
+    NSString *localProvince = [localData objectForKeyNotNull:PROVINCE];
     
     [self findWeatherForcastFromProvince:localProvince];
     
@@ -389,16 +389,16 @@
 //    NSLog(@"findWeatherForcastFromProvince");
     if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
         
-        [self setDataForWeatherView:[weather objectForKey:DANANG] inProvince:@"TP Đà Nẵng"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:DANANG] inProvince:@"TP Đà Nẵng"];
     }
     else if ([localProvince isEqualToString:@"Ho Chi Minh City"])
     {
-        [self setDataForWeatherView:[weather objectForKey:HOCHIMINH] inProvince:@"TP Hồ Chí Minh"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HOCHIMINH] inProvince:@"TP Hồ Chí Minh"];
     }
     else
     {
 //        NSLog(@"find ha noi here");
-        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HANOI] inProvince:@"TP Hà Nội"];
     }
 
 }
@@ -408,18 +408,18 @@
 {
     if (weatherDic != nil) {
 //        NSLog(@"run to setDataForWeatherView");
-        NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
-        self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
-        self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
+        NSDictionary *currentWeather = [weatherDic objectForKeyNotNull:CURRENT_CONDITION_WEATHER];
+        self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKeyNotNull:TEMP]];
+        self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKeyNotNull:FORECAST]];
         
-        NSArray *forecast = [weatherDic objectForKey:FORECAST_WEATHER];
+        NSArray *forecast = [weatherDic objectForKeyNotNull:FORECAST_WEATHER];
         NSDictionary *object1 = [forecast firstObject];
         
-        self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
-        self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
+        self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKeyNotNull:HIGH]];
+        self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKeyNotNull:LOW]];
         
         if (haveInternet) {
-            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
+            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKeyNotNull:@"code"]]]]];
     
             self.weatherIcon.animatedImage = image;
         }

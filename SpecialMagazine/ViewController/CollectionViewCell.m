@@ -262,7 +262,7 @@ NSDictionary * catagoryInfor;
     [self startLoadingData];
     collectionData = [NSMutableArray new];
 
-    [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[catagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
 //            NSLog(@"getting new data here ");
@@ -301,7 +301,7 @@ NSDictionary * catagoryInfor;
 {
     ArticleRealm *lastArticle = [collectionData lastObject];
     
-    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:lastArticle.lid successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:lastArticle.lid successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
             NSArray *gettingArray = dataResponse;
@@ -387,7 +387,7 @@ NSDictionary * catagoryInfor;
     
     cell.descriptionLabel.text = cellData.descriptionArticle;
     
-//    cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
+//    cell.catagory.text = [self.cellCatagoryInfo objectForKeyNotNull:@"name"];
     cell.catagory.hidden = YES;
     
     

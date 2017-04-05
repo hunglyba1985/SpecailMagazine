@@ -119,7 +119,7 @@
 //    NSLog(@"list catalog is %@",self.listCatagories);
     NSMutableArray *listNameOfCatalog = [NSMutableArray new];
     [self.listCatagories enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [listNameOfCatalog addObject:[obj objectForKey:@"name"]];
+        [listNameOfCatalog addObject:[obj objectForKeyNotNull:@"name"]];
     }];
     
     

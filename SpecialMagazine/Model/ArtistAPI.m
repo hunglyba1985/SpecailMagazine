@@ -49,7 +49,7 @@ static ArtistAPI  *sharedController = nil;
     [self baseGetDataFromEndPoint:endPoint andParameter:parameters hasResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil) {
             NSDictionary *dic = dataResponse;
-            NSArray *listWebsites = [dic objectForKey:WEBSITE];
+            NSArray *listWebsites = [dic objectForKeyNotNull:WEBSITE];
             result(listWebsites,nil);
         }
         else
@@ -72,7 +72,7 @@ static ArtistAPI  *sharedController = nil;
        
         if (dataResponse != nil) {
             NSDictionary *dic = dataResponse;
-            NSArray *listArticle = [dic objectForKey:LINFOS];
+            NSArray *listArticle = [dic objectForKeyNotNull:LINFOS];
             
 //            NSLog(@"artiscle data is %@",listArticle);
 
@@ -171,7 +171,7 @@ static ArtistAPI  *sharedController = nil;
     if (self.downloadData.count < 150) {
         NSDictionary *lastArticle = [self.downloadData lastObject];
         
-        [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+        [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKeyNotNull:LID] successResult:^(id dataResponse, NSError *error) {
             if (dataResponse != nil)
             {
                 

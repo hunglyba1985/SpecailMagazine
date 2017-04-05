@@ -298,10 +298,10 @@
         }
         
         if (element.firstChild.content == nil) {
-//                        NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
+//                        NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKeyNotNull:@"src"]);
             
-            if ([element.firstChild.attributes objectForKey:@"src"] != nil) {
-                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
+            if ([element.firstChild.attributes objectForKeyNotNull:@"src"] != nil) {
+                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKeyNotNull:@"src"]};
                 [temp addObject:linkImage];
             }
             
@@ -434,7 +434,7 @@
             cell.activityIndicatorView.hidden = NO;
             [cell.activityIndicatorView startAnimating];
             
-            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKeyNotNull:LINK_IMAGE]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                 if (image) {
                     [cell.imageCell setImage:image];
                     [cell.activityIndicatorView stopAnimating];
@@ -444,7 +444,7 @@
                 
             }];
             
-//            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:LINK_IMAGE]]
+//            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKeyNotNull:LINK_IMAGE]]
 //                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
             
             
@@ -495,7 +495,7 @@
             
             IDMPhotoBrowser *browser = [[IDMPhotoBrowser alloc] initWithPhotoURLs:arrayImages];
             
-            [browser setInitialPageIndex:[arrayImages indexOfObject:[dic objectForKey:LINK_IMAGE]]];
+            [browser setInitialPageIndex:[arrayImages indexOfObject:[dic objectForKeyNotNull:LINK_IMAGE]]];
             
             [self presentViewController:browser animated:YES completion:nil];
             
