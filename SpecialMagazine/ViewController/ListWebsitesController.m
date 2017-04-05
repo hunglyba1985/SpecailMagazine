@@ -12,6 +12,8 @@
 #import "NewStyleViewController.h"
 #import "CatalogRealm.h"
 #import <AMTagListView.h>
+#import "FBShimmeringView.h"
+#import "UIImageViewAligned.h"
 
 #define TagInfo  @"Tag Information"
 #define CloseTagStr @"Close   "
@@ -28,6 +30,8 @@
 
 @property (weak, nonatomic) IBOutlet AMTagListView *listTagView;
 
+@property (weak, nonatomic) IBOutlet UIImageViewAligned *navBarImage;
+@property (weak, nonatomic) IBOutlet UIView *navBarView;
 
 
 @end
@@ -43,12 +47,73 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self getDataFromLocal];
+    
+//    [self setBackgroundImageForNavBar];
+    
+//    self.listTagView.marginX = 30;
+//    self.listTagView.marginY = 50;
+    
+    self.listTagView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    
+
+}
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.navBarImage.backgroundColor = UIColorFromRGB(0x2574A9);
+    [self setShimmeringViewForNavBar];
+    [self.listTagView scrollRectToVisible:CGRectZero animated:NO];
+
+
+}
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
+
+-(void) setBackgroundImageForNavBar
+{
+    NSDictionary *fileConfigure = [[UserData sharedInstance] getFileConfigure];
+    NSString *bgImageUrl = [fileConfigure objectForKeyNotNull:BG_IMG_URL_STR];
+    UIImage *bgImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:bgImageUrl];
+    if (bgImage) {
+        [self.navBarImage setImage:bgImage];
+    }
+    else
+    {
+        [self.navBarImage setImage:[UIImage imageNamed:@"bg1"]];
+    }
+
+    self.navBarImage.alignTop = YES;
+    self.navBarImage.contentMode = UIViewContentModeScaleAspectFill;
+    
+}
+
+-(void) setShimmeringViewForNavBar
+{
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 38)];
+    
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 38)];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = @"Trang báo";
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.font = [UIFont boldSystemFontOfSize:20];
+    shimmeringView.shimmeringEndFadeDuration = 3;
+    shimmeringView.contentView = loadingLabel;
+    
+    shimmeringView.shimmering = YES;
+    
+    
+    [self.navBarView addSubview:shimmeringView];
 
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
     [self getCatagories];
     
 }
@@ -69,6 +134,13 @@
 
 -(void) setListWebsiteForTagView:(NSArray *) list
 {
+    self.listTagView.marginX = 8;
+    self.listTagView.marginY = 8;
+    self.listTagView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+
+    
+    self.listTagView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
     [[AMTagView appearance] setTextPadding:CGPointMake(14, 14)];
     [[AMTagView appearance] setTextFont:[UIFont fontWithName:@"Futura" size:14]];
 
@@ -84,8 +156,8 @@
             
             NSMutableDictionary *tempDic = [NSMutableDictionary new];
             [tempDic setObject:[NSString stringWithFormat:@"%li",(long)websiteInfo.id] forKey:WEBSITE_ID];
-            [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
-            [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
+            [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+            [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_NAME] forKey:WEBSITE_NAME];
             
             [categoriesInWebsite addObject:tempDic];
             
@@ -98,6 +170,7 @@
         tagView.tagText = websiteRealm.websiteName;
         int randomColor = arc4random_uniform(14);
         tagView.tagColor = FLAT_COLOR[randomColor];
+        [tagView setAccessoryImage:nil];
 
         
 //        [self.listTagView addTag:websiteRealm.websiteName];
@@ -124,6 +197,10 @@
     
     [self.listTagView addTag:CloseTagStr];
     
+    self.listTagView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+
+    [self.listTagView scrollRectToVisible:CGRectZero animated:NO];
+    
     [self.listTagView setTapHandler:^(AMTagView * tagView) {
         
         
@@ -133,12 +210,12 @@
         }
         else
         {
-            NSArray *realData = [tagView.userInfo objectForKey:TagInfo];
+            NSArray *realData = [tagView.userInfo objectForKeyNotNull:TagInfo];
             
             id<ListWebsitesControllerDelegate> strongDelegate = self.delegate;
             
             if ([strongDelegate respondsToSelector:@selector(selectWebsiteWithInfo:andWebsiteName:)]) {
-                [strongDelegate selectWebsiteWithInfo:realData andWebsiteName:[tagView.userInfo objectForKey:WEBSITE_NAME]];
+                [strongDelegate selectWebsiteWithInfo:realData andWebsiteName:[tagView.userInfo objectForKeyNotNull:WEBSITE_NAME]];
             }
             
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -309,8 +386,8 @@
         
         NSMutableDictionary *tempDic = [NSMutableDictionary new];
         [tempDic setObject:[NSString stringWithFormat:@"%li",(long)websiteInfo.id] forKey:WEBSITE_ID];
-        [tempDic setObject:[dic objectForKey:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
-        [tempDic setObject:[dic objectForKey:WEBSITE_NAME] forKey:WEBSITE_NAME];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_NAME] forKey:WEBSITE_NAME];
         
         [categoriesInWebsite addObject:tempDic];
         

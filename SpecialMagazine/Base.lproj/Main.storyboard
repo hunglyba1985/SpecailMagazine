@@ -571,22 +571,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZu-9R-SpM" customClass="AMTagListView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="68" width="320" height="500"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3or-Hw-IRK">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HCU-fJ-WHq" customClass="UIImageViewAligned">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="68" id="h6L-Fm-4Lw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTZ-sW-Vus">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="60H-4f-gP6"/>
+                                    <constraint firstItem="HCU-fJ-WHq" firstAttribute="top" secondItem="3or-Hw-IRK" secondAttribute="top" id="NQs-6X-2Rv"/>
+                                    <constraint firstAttribute="trailing" secondItem="PTZ-sW-Vus" secondAttribute="trailing" id="Riw-u7-u8F"/>
+                                    <constraint firstItem="HCU-fJ-WHq" firstAttribute="leading" secondItem="3or-Hw-IRK" secondAttribute="leading" id="SPJ-85-qFg"/>
+                                    <constraint firstAttribute="trailing" secondItem="HCU-fJ-WHq" secondAttribute="trailing" id="fbB-KV-MM6"/>
+                                    <constraint firstAttribute="bottom" secondItem="PTZ-sW-Vus" secondAttribute="bottom" id="ozs-5g-bZ8"/>
+                                    <constraint firstItem="PTZ-sW-Vus" firstAttribute="top" secondItem="3or-Hw-IRK" secondAttribute="top" id="uBf-PE-EFY"/>
+                                    <constraint firstItem="PTZ-sW-Vus" firstAttribute="leading" secondItem="3or-Hw-IRK" secondAttribute="leading" id="yVr-20-ZzT"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WZu-9R-SpM" firstAttribute="top" secondItem="mbg-bS-Uyk" secondAttribute="top" constant="20" id="Vch-Ev-pCe"/>
-                            <constraint firstItem="mcj-nz-kdK" firstAttribute="top" secondItem="WZu-9R-SpM" secondAttribute="bottom" id="aVT-ix-rV9"/>
-                            <constraint firstItem="WZu-9R-SpM" firstAttribute="leading" secondItem="mbg-bS-Uyk" secondAttribute="leading" id="bUb-No-aOm"/>
-                            <constraint firstAttribute="trailing" secondItem="WZu-9R-SpM" secondAttribute="trailing" id="ulR-jG-Qo8"/>
+                            <constraint firstItem="mcj-nz-kdK" firstAttribute="top" secondItem="WZu-9R-SpM" secondAttribute="bottom" id="B8b-fx-O0N"/>
+                            <constraint firstAttribute="trailing" secondItem="3or-Hw-IRK" secondAttribute="trailing" id="L4Y-Xk-tzH"/>
+                            <constraint firstItem="3or-Hw-IRK" firstAttribute="top" secondItem="mbg-bS-Uyk" secondAttribute="top" id="d2o-kH-cHT"/>
+                            <constraint firstItem="WZu-9R-SpM" firstAttribute="leading" secondItem="mbg-bS-Uyk" secondAttribute="leading" id="e03-Cf-qWv"/>
+                            <constraint firstItem="WZu-9R-SpM" firstAttribute="top" secondItem="3or-Hw-IRK" secondAttribute="bottom" id="efG-v4-1zT"/>
+                            <constraint firstItem="3or-Hw-IRK" firstAttribute="leading" secondItem="mbg-bS-Uyk" secondAttribute="leading" id="rfR-3v-CJw"/>
+                            <constraint firstAttribute="trailing" secondItem="WZu-9R-SpM" secondAttribute="trailing" id="vO7-HZ-ZvV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="HwW-do-k0s"/>
                     <connections>
                         <outlet property="listTagView" destination="WZu-9R-SpM" id="zav-jc-0l4"/>
+                        <outlet property="navBarImage" destination="HCU-fJ-WHq" id="Vx5-71-FrM"/>
+                        <outlet property="navBarView" destination="3or-Hw-IRK" id="q3t-Cd-Cd9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a34-Hj-sVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -611,6 +642,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wQD-BR-dcf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-260.625" y="464.78873239436621"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aZu-tB-n8s">
+            <objects>
+                <viewController id="kh3-IL-WuJ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tQF-hh-FxW"/>
+                        <viewControllerLayoutGuide type="bottom" id="00x-9c-AUd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kkg-mc-mkp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iO9-7X-rth" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
