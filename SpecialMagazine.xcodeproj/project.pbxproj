@@ -62,7 +62,6 @@
 		52BE47461E4A946C009AC489 /* CustomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52BE47441E4A946C009AC489 /* CustomTableCell.xib */; };
 		52EBA9881D7A667500273548 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA9871D7A667500273548 /* main.m */; };
 		52EBA98B1D7A667500273548 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98A1D7A667500273548 /* AppDelegate.m */; };
-		52EBA98E1D7A667500273548 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EBA98D1D7A667500273548 /* ViewController.m */; };
 		52EBA9911D7A667500273548 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA98F1D7A667500273548 /* Main.storyboard */; };
 		52EBA9931D7A667600273548 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA9921D7A667600273548 /* Assets.xcassets */; };
 		52EBA9961D7A667600273548 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52EBA9941D7A667600273548 /* LaunchScreen.storyboard */; };
@@ -216,8 +215,6 @@
 		52EBA9871D7A667500273548 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52EBA9891D7A667500273548 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52EBA98A1D7A667500273548 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		52EBA98C1D7A667500273548 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		52EBA98D1D7A667500273548 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		52EBA9901D7A667500273548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52EBA9921D7A667600273548 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52EBA9951D7A667600273548 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -607,8 +604,6 @@
 			children = (
 				0ED628641DF01B7600898D15 /* Lib */,
 				0ED628651DF01B7E00898D15 /* App Delegate */,
-				52EBA98C1D7A667500273548 /* ViewController.h */,
-				52EBA98D1D7A667500273548 /* ViewController.m */,
 				0EE72E961D9E2CC8009C087A /* TestChildViewController.h */,
 				0EE72E971D9E2CC8009C087A /* TestChildViewController.m */,
 				5225F86C1D8F69F20079E151 /* TableViewCell.h */,
@@ -977,7 +972,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E1C78231E1E3EC800B2A41D /* TFHppleElement.m in Sources */,
-				52EBA98E1D7A667500273548 /* ViewController.m in Sources */,
 				B223097B1E35BA5A0092CD1A /* DGActivityIndicatorBallClipRotatePulseAnimation.m in Sources */,
 				B22309911E35BA5A0092CD1A /* DGActivityIndicatorRotatingSandglassAnimation.m in Sources */,
 				5288D2161DBED940003A000D /* NewStyleViewController.m in Sources */,
