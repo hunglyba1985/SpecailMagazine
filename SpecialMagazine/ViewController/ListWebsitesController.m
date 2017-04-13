@@ -100,7 +100,7 @@
     loadingLabel.text = @"Trang báo";
     loadingLabel.textColor = [UIColor whiteColor];
     loadingLabel.font = [UIFont boldSystemFontOfSize:20];
-    shimmeringView.shimmeringEndFadeDuration = 3;
+//    shimmeringView.shimmeringEndFadeDuration = 3;
     shimmeringView.contentView = loadingLabel;
     
     shimmeringView.shimmering = YES;
@@ -261,12 +261,13 @@
             
             if (firstTime) {
 //                [self.tableView reloadData];
-                
+                [tableData addObject:[self favoriteWebsite]];
                 [self setListWebsiteForTagView:tableData];
                 firstTime = NO;
             }
             else
             {
+                [tempArray addObject:[self favoriteWebsite]];
                 [self addDataToRealm:tempArray];
 
             }
@@ -277,6 +278,15 @@
 }
 
 
+-(CatalogRealm * ) favoriteWebsite
+{
+    CatalogRealm *websiteRealm = [[CatalogRealm alloc] init];
+    websiteRealm.websiteName = FAVORITE_WEBSITE;
+    websiteRealm.id = 1000;
+    NSArray *catalog = @[@{@"id":@"1",@"name":@"Favorite"}];
+    websiteRealm.categories = [NSKeyedArchiver archivedDataWithRootObject:catalog];
+    return websiteRealm;
+}
 
 
 

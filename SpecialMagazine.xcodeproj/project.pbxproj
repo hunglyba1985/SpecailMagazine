@@ -106,6 +106,7 @@
 		B22309981E35BA5A0092CD1A /* DGActivityIndicatorTwoDotsAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B22309731E35BA5A0092CD1A /* DGActivityIndicatorTwoDotsAnimation.m */; };
 		B22309991E35BA5A0092CD1A /* DGActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22309761E35BA5A0092CD1A /* DGActivityIndicatorView.m */; };
 		B22F92661E7FE4F2009E8CD1 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B22F92651E7FE4F2009E8CD1 /* ODRefreshControl.m */; };
+		B2576F131E9757B000FF5A07 /* FavoriteArticles.m in Sources */ = {isa = PBXBuildFile; fileRef = B2576F121E9757B000FF5A07 /* FavoriteArticles.m */; };
 		B291B6041E8A43E500C3FA02 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B291B6011E8A43E500C3FA02 /* FBShimmeringLayer.m */; };
 		B291B6051E8A43E500C3FA02 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = B291B6031E8A43E500C3FA02 /* FBShimmeringView.m */; };
 		B295B52B1E8E395700316154 /* NSDictionary+NotNull.m in Sources */ = {isa = PBXBuildFile; fileRef = B295B52A1E8E395700316154 /* NSDictionary+NotNull.m */; };
@@ -300,6 +301,8 @@
 		B22309761E35BA5A0092CD1A /* DGActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGActivityIndicatorView.m; sourceTree = "<group>"; };
 		B22F92641E7FE4F2009E8CD1 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
 		B22F92651E7FE4F2009E8CD1 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
+		B2576F111E9757B000FF5A07 /* FavoriteArticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteArticles.h; path = Model/FavoriteArticles.h; sourceTree = "<group>"; };
+		B2576F121E9757B000FF5A07 /* FavoriteArticles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteArticles.m; path = Model/FavoriteArticles.m; sourceTree = "<group>"; };
 		B291B5FE1E8A43E500C3FA02 /* FBShimmering-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBShimmering-Prefix.pch"; sourceTree = "<group>"; };
 		B291B5FF1E8A43E500C3FA02 /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
 		B291B6001E8A43E500C3FA02 /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 				0E6B75931E1CE01B00092056 /* ArticleRealm.m */,
 				0E514FC71E25E267003BB550 /* CatalogRealm.h */,
 				0E514FC81E25E267003BB550 /* CatalogRealm.m */,
+				B2576F111E9757B000FF5A07 /* FavoriteArticles.h */,
+				B2576F121E9757B000FF5A07 /* FavoriteArticles.m */,
 				0E514FCA1E273DB9003BB550 /* UserData.h */,
 				0E514FCB1E273DB9003BB550 /* UserData.m */,
 			);
@@ -992,6 +997,7 @@
 				B223097F1E35BA5A0092CD1A /* DGActivityIndicatorBallPulseSyncAnimation.m in Sources */,
 				B22309801E35BA5A0092CD1A /* DGActivityIndicatorBallRotateAnimation.m in Sources */,
 				B295B52B1E8E395700316154 /* NSDictionary+NotNull.m in Sources */,
+				B2576F131E9757B000FF5A07 /* FavoriteArticles.m in Sources */,
 				B223098C1E35BA5A0092CD1A /* DGActivityIndicatorLineScaleAnimation.m in Sources */,
 				0E514FC61E24A3A2003BB550 /* UIImageViewAligned.m in Sources */,
 				0EE72EB91D9E2F75009C087A /* XLButtonBarViewCell.m in Sources */,

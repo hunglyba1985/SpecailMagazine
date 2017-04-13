@@ -65,6 +65,9 @@
 {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    if ([self.nameOfWebsite isEqualToString:FAVORITE_WEBSITE]) {
+        [self.collectionView reloadData];
+    }
 
 }
 -(void) viewWillDisappear:(BOOL)animated

@@ -151,10 +151,13 @@ NSDictionary * catagoryInfor;
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row > collectionData.count - 3) {
-        printf("start to load more ");
-        [self loadMoreData];
-    }
+     if (![self.websiteName isEqualToString:FAVORITE_WEBSITE]) {
+         if (indexPath.row > collectionData.count - 3) {
+             printf("start to load more ");
+             [self loadMoreData];
+         }
+     }
+   
 }
 
 
@@ -231,6 +234,12 @@ NSDictionary * catagoryInfor;
         [self startShowArticle];
         
     }
+    else
+    {
+        [self hideLoadingView];
+        [JDStatusBarNotification showWithStatus:@"Không có dữ liệu" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
+    }
     
 }
 
@@ -240,9 +249,14 @@ NSDictionary * catagoryInfor;
     [self.tableView reloadData];
     self.tableView.hidden = NO;
     
+    [self hideLoadingView];
+
+}
+
+-(void) hideLoadingView
+{
     [activityIndicatorView stopAnimating];
     activityIndicatorView.hidden = YES;
-
 }
 
 -(void) startLoadingData
@@ -253,47 +267,74 @@ NSDictionary * catagoryInfor;
     
 }
 
+#pragma mark - GET DATA
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
     
-//    NSLog(@"one catagory is %@",catagoryInfor);
+    NSLog(@"one catagory is %@",catagoryInfor);
 
     [self startLoadingData];
     collectionData = [NSMutableArray new];
-
-    [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[catagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
-        if (dataResponse != nil)
-        {
-//            NSLog(@"getting new data here ");
-            NSArray *gettingArray = dataResponse;
+    
+    if ([self.websiteName isEqualToString:FAVORITE_WEBSITE]) {
+        
+        NSArray *allFavData = (NSArray*)[FavoriteArticles allObjects];
+        
+        for (FavoriteArticles *favArticle in allFavData) {
+            [collectionData addObject:favArticle.favoriteArticle];
+        }
+        
+        if (collectionData.count > 0) {
             
-            [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
-                
-                [collectionData addObject:realmObject];
-                
-            }];
-            
-//            [self.collectionView reloadData];
-//
-//            
-//            self.collectionView.scrollsToTop = YES;
-//            
-//            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-            
-
             [self startShowArticle];
-            
             
         }
         else
         {
-            NSLog(@"getting local data");
-            [self getDataLocal];
+            [self hideLoadingView];
+            [JDStatusBarNotification showWithStatus:@"Không có dữ liệu" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
         }
-    }];
+        
+    }
+    else
+    {
+        [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[catagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
+            if (dataResponse != nil)
+            {
+                //            NSLog(@"getting new data here ");
+                NSArray *gettingArray = dataResponse;
+                
+                [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
+                    
+                    [collectionData addObject:realmObject];
+                    
+                }];
+                
+                //            [self.collectionView reloadData];
+                //
+                //
+                //            self.collectionView.scrollsToTop = YES;
+                //
+                //            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                
+                
+                [self startShowArticle];
+                
+                
+            }
+            else
+            {
+                NSLog(@"getting local data");
+                [self getDataLocal];
+            }
+        }];
+    }
+
+  
 
 }
 

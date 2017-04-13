@@ -26,6 +26,8 @@
 #import <UIImageView+RJLoader.h>
 #import "JDStatusBarNotification.h"
 #import "NSDictionary+NotNull.h"
+#import "FavoriteArticles.h"
+#import "DGActivityIndicatorView.h"
 
 
 

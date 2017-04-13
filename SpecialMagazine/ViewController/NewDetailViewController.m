@@ -13,6 +13,9 @@
 #import "IDMPhotoBrowser.h"
 #import "AdTableCell.h"
 #import <FBAudienceNetwork/FBAudienceNetwork.h>
+#import "FavoriteArticles.h"
+#import <SDWebImagePrefetcher.h>
+#import "DGActivityIndicatorView.h"
 
 
 @interface NewDetailViewController () <UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,FBNativeAdDelegate>
@@ -25,7 +28,8 @@
     UILabel *titleArtitcle;
     BOOL webFinishLoad;
     DGActivityIndicatorView *activityIndicatorView;
-
+    BOOL favoriteStatus;
+    FavoriteArticles *deleteFav;
     
 }
 
@@ -33,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *articleTitle;
 @property (weak, nonatomic) IBOutlet UILabel *fromNewPaper;
 @property (strong, nonatomic) FBNativeAd *_nativeAd;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
 
 @end
@@ -73,6 +78,10 @@
 
     [self loadingFbAd];
     
+    [self setFavoriteButtonImage];
+    
+    
+    
 }
 
 
@@ -98,6 +107,8 @@
     // Initiate a request to load an ad.
     [nativeAd loadAd];
 }
+
+
 
 
 #pragma mark Facebook Ad Delegate
@@ -434,15 +445,27 @@
             cell.activityIndicatorView.hidden = NO;
             [cell.activityIndicatorView startAnimating];
             
-            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKeyNotNull:LINK_IMAGE]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-                if (image) {
-                    [cell.imageCell setImage:image];
-                    [cell.activityIndicatorView stopAnimating];
-                    cell.activityIndicatorView.hidden = YES;
-                }
-                
-                
-            }];
+            UIImage *storeImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[dic objectForKeyNotNull:LINK_IMAGE]];
+            
+            if (storeImage) {
+                [cell.imageCell setImage:storeImage];
+                [cell.activityIndicatorView stopAnimating];
+                cell.activityIndicatorView.hidden = YES;
+            }
+            else
+            {
+                [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKeyNotNull:LINK_IMAGE]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    if (image) {
+                        [cell.imageCell setImage:image];
+                        [cell.activityIndicatorView stopAnimating];
+                        cell.activityIndicatorView.hidden = YES;
+                    }
+                    
+                    
+                }];
+
+            }
+
             
 //            [cell.imageCell sd_setImageWithURL:[NSURL URLWithString:[dic objectForKeyNotNull:LINK_IMAGE]]
 //                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -503,6 +526,144 @@
     }
   
 }
+
+#pragma mark - Favorite Function
+-(void) setFavoriteButtonImage
+{
+//    UIImage *image = [[UIImage imageNamed:@"favorite"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+//    [self.favoriteButton setBackgroundImage:image forState:UIControlStateNormal];
+    
+    NSArray *allFavArticles = (NSArray *) [FavoriteArticles allObjects];
+    
+    if (allFavArticles.count > 0) {
+        
+        for (FavoriteArticles *favArticle in allFavArticles) {
+            ArticleRealm *article = favArticle.favoriteArticle;
+            
+//            NSLog(@"favorite article title is: %@",article.titleArticle);
+//            
+//            NSLog(@"find same article tile is: %@",self.article.titleArticle);
+            
+            if ([article.titleArticle isEqualToString:self.article.titleArticle]) {
+                
+//                NSLog(@"find same artistcle --------  ");
+                //            self.favoriteButton.tintColor = [UIColor redColor];
+                [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"closeFav"] forState:UIControlStateNormal];
+                deleteFav = favArticle;
+                favoriteStatus = YES;
+                break;
+            }
+            else
+            {
+                [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+                favoriteStatus = NO;
+            }
+        }
+    }
+    else
+    {
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+        favoriteStatus = NO;
+    }
+    
+    
+    
+}
+
+- (IBAction)addFavoriteClick:(UIButton*)sender {
+
+    if (!favoriteStatus) {
+//        NSLog(@"button selected");
+        sender.tintColor = [UIColor redColor];
+        favoriteStatus = YES;
+        
+        [self addArticleToFavoriteData];
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"closeFav"] forState:UIControlStateNormal];
+
+        
+    }
+    else
+    {
+//        NSLog(@"button unselected");
+        sender.tintColor = [UIColor greenColor];
+        favoriteStatus = NO;
+        [self deleteFavArticle];
+        [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+
+    }
+}
+
+
+-(void) addArticleToFavoriteData
+{
+    NSArray *allData = (NSArray*) [FavoriteArticles allObjects];
+    
+    NSInteger articleId = 0;
+    
+    if (allData.count > 0) {
+        FavoriteArticles *favAritcle = [allData lastObject];
+        articleId = favAritcle.id + 1;
+        
+    }
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+            FavoriteArticles *favArticle = [[FavoriteArticles alloc] init];
+            favArticle.favoriteArticle = self.article;
+            favArticle.id = articleId;
+            [realm beginWriteTransaction];
+            [realm addObject:favArticle];
+            [realm commitWriteTransaction];
+            
+        
+    });
+    
+    NSLog(@"favorite id is %i",(int)articleId);
+    
+    
+    NSArray *arrayImages = [NSKeyedUnarchiver unarchiveObjectWithData:self.article.listImages] ;
+    
+    __block int numberOfDownloadImage = 0;
+    
+    for (NSString *imgUrlStr in arrayImages) {
+        
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imgUrlStr] options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, BOOL finished) {
+            if (image && finished) {
+                
+                numberOfDownloadImage ++;
+                // Cache image to disk or memory
+                [[SDImageCache sharedImageCache] storeImage:image forKey:imgUrlStr completion:nil];
+                
+                if (numberOfDownloadImage == arrayImages.count) {
+                       [JDStatusBarNotification showWithStatus:@"Lưu bài báo thành công vào Favorite" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+                }
+            }
+        }];
+
+    }
+    
+}
+
+-(void) deleteFavArticle
+{
+   
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    // You only need to do this once (per thread)
+    
+    [realm beginWriteTransaction];
+    [realm deleteObject:deleteFav];
+    [realm commitWriteTransaction];
+
+    
+    [JDStatusBarNotification showWithStatus:@"Xoá bài báo thành công trong Favorite" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
+}
+
 
 
 - (void)didReceiveMemoryWarning {

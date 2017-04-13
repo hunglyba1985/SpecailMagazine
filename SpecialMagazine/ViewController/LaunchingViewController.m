@@ -261,12 +261,25 @@
             }];
         }
         
+        [tempArray addObject:[self favoriteWebsite]];
+        
         [self addDataToRealm:tempArray];
 
         
     }];
     
 }
+
+-(CatalogRealm * ) favoriteWebsite
+{
+    CatalogRealm *websiteRealm = [[CatalogRealm alloc] init];
+    websiteRealm.websiteName = FAVORITE_WEBSITE;
+    websiteRealm.id = 1000;
+    NSArray *catalog = @[@{@"id":@"1",@"name":@"Favorite"}];
+    websiteRealm.categories = [NSKeyedArchiver archivedDataWithRootObject:catalog];
+    return websiteRealm;
+}
+
 
 
 -(NSArray *) convertRealmDataToArray:(CatalogRealm *) catalogRealm

@@ -48,6 +48,7 @@ static ArtistAPI  *sharedController = nil;
     
     [self baseGetDataFromEndPoint:endPoint andParameter:parameters hasResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil) {
+//            NSLog(@"list all webiste %@",dataResponse);
             NSDictionary *dic = dataResponse;
             NSArray *listWebsites = [dic objectForKeyNotNull:WEBSITE];
             result(listWebsites,nil);

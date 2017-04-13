@@ -38,6 +38,7 @@
 #define WEBSITE_NAME @"name"
 #define WEBSITE_ICON @"icon_url"
 
+#define FAVORITE_WEBSITE @"Favorite"
 
 #define LINFOS @"linfos"
 

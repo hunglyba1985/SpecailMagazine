@@ -200,12 +200,24 @@
                                     <constraint firstAttribute="width" constant="25" id="Be5-Ri-khv"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6J-oF-w2H">
+                                <rect key="frame" x="20" y="500" width="38" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="az2-mq-Y40"/>
+                                    <constraint firstAttribute="width" constant="38" id="dMM-Z7-oDC"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="addFavoriteClick:" destination="0Ir-Nb-ve2" eventType="touchUpInside" id="gED-A9-BrY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Nyd-gq-Khw" firstAttribute="leading" secondItem="JZ7-Pp-p4Y" secondAttribute="leading" id="0LB-Wi-mhc"/>
                             <constraint firstAttribute="trailing" secondItem="Nyd-gq-Khw" secondAttribute="trailing" id="C9J-bD-qtW"/>
                             <constraint firstItem="0H6-Wn-plI" firstAttribute="top" secondItem="JZ7-Pp-p4Y" secondAttribute="top" id="HuP-sf-7fS"/>
+                            <constraint firstItem="o2X-AT-dT8" firstAttribute="top" secondItem="N6J-oF-w2H" secondAttribute="bottom" constant="30" id="L0d-Gs-fYe"/>
+                            <constraint firstItem="N6J-oF-w2H" firstAttribute="leading" secondItem="JZ7-Pp-p4Y" secondAttribute="leading" constant="20" id="LJ2-GD-Oa2"/>
                             <constraint firstItem="Nyd-gq-Khw" firstAttribute="top" secondItem="JZ7-Pp-p4Y" secondAttribute="top" constant="20" id="MtS-ZM-Vrc"/>
                             <constraint firstItem="o2X-AT-dT8" firstAttribute="top" secondItem="0H6-Wn-plI" secondAttribute="bottom" id="Pm6-TQ-6AV"/>
                             <constraint firstItem="0H6-Wn-plI" firstAttribute="leading" secondItem="JZ7-Pp-p4Y" secondAttribute="leading" id="Yjv-6c-sDZ"/>
@@ -213,6 +225,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="favoriteButton" destination="N6J-oF-w2H" id="VM1-8Z-RIT"/>
                         <outlet property="tableView" destination="Nyd-gq-Khw" id="PYU-8V-fCI"/>
                     </connections>
                 </viewController>
@@ -512,31 +525,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f23-Rk-F0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2358.75" y="464.78873239436621"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="WMV-md-n6X">
-            <objects>
-                <viewController id="5ZE-nX-aRY" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="GA6-KI-eL8"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zh0-eo-8L9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5e8-4Z-8QC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRf-vp-tJe">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0yo-s7-NBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2975.625" y="1306.6901408450703"/>
         </scene>
         <!--Black and White-->
         <scene sceneID="C9c-RM-9VD">
