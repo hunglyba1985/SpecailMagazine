@@ -220,7 +220,8 @@
 -(void) showWebViewInsteadOfTableView
 {
      self.tableView.hidden = YES;
-    [self.view addSubview:detailWebView];
+//    [self.view addSubview:detailWebView];
+    [self.view insertSubview:detailWebView belowSubview:self.favoriteButton];
     [self.view addSubview:activityIndicatorView];
     [activityIndicatorView startAnimating];
     
