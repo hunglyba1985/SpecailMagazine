@@ -11,5 +11,5 @@
   "otherAppImage":"linkImage",
   "otherAppUrl":"linkApp",
   "background_image": "https://c.tadst.com/gfx/750w/sunrise-sunset-sun-calculator.jpg?1",
-  "inReviewState":"Yes"
+  "reviewState":"No"
 }
