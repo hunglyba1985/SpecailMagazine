@@ -641,12 +641,20 @@
                 [[SDImageCache sharedImageCache] storeImage:image forKey:imgUrlStr completion:nil];
                 
                 if (numberOfDownloadImage == arrayImages.count) {
-                       [JDStatusBarNotification showWithStatus:@"Lưu bài báo thành công vào Favorite" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [JDStatusBarNotification showWithStatus:@"Lưu bài báo thành công vào Favorite" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
+                    });
                 }
+                
+               
+                
             }
         }];
 
     }
+    
+   
     
 }
 
