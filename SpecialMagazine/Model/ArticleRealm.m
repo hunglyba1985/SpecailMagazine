@@ -19,9 +19,9 @@
 {
     if (self = [super init]) {
         
-        self.sid = [[dictionary objectForKey:SID] intValue];
-        self.content = [dictionary objectForKey:CONTENT];
-        self.coverImageUrl = [dictionary objectForKey:COVER_IMAGE];
+        self.sid = [[dictionary objectForKeyNotNull:SID] intValue];
+        self.content = [dictionary objectForKeyNotNull:CONTENT];
+        self.coverImageUrl = [dictionary objectForKeyNotNull:COVER_IMAGE];
         
         if ([NSURL URLWithString:self.coverImageUrl] != nil) {
             [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:@[[NSURL URLWithString:self.coverImageUrl]]];
@@ -29,25 +29,25 @@
         }
       
 
-        self.descriptionArticle = [dictionary objectForKey:DESC];
-        self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKey:HAS_VIDEOS] boolValue]];
-        self.lid = [dictionary objectForKey:LID] ;
+        self.descriptionArticle = [dictionary objectForKeyNotNull:DESC];
+        self.hasVideos =[NSNumber numberWithBool: [[dictionary objectForKeyNotNull:HAS_VIDEOS] boolValue]];
+        self.lid = [dictionary objectForKeyNotNull:LID] ;
         
-        NSArray *listPictures = [dictionary objectForKey:LIST_IMAGES];
+        NSArray *listPictures = [dictionary objectForKeyNotNull:LIST_IMAGES];
         [self preLoadImageForArticle:listPictures];
         if (listPictures != nil) {
             self.listImages = [NSKeyedArchiver archivedDataWithRootObject:listPictures];
         }
         
-        NSArray *listMp4 = [dictionary objectForKey:LIST_VIDEOS];
+        NSArray *listMp4 = [dictionary objectForKeyNotNull:LIST_VIDEOS];
         if (listMp4 != nil) {
             self.listVideos =  [NSKeyedArchiver archivedDataWithRootObject:listMp4];
         }
         
-        self.postTime = [[dictionary objectForKey:POST_TIME] doubleValue];
-        self.titleArticle = [dictionary objectForKey:TITLE_ARTICLE];
-        self.originalLink = [dictionary objectForKey:ORIGINAL_LINK];
-        self.cid = [[dictionary objectForKey:CID] intValue];
+        self.postTime = [[dictionary objectForKeyNotNull:POST_TIME] doubleValue];
+        self.titleArticle = [dictionary objectForKeyNotNull:TITLE_ARTICLE];
+        self.originalLink = [dictionary objectForKeyNotNull:ORIGINAL_LINK];
+        self.cid = [[dictionary objectForKeyNotNull:CID] intValue];
         
         [self replaceSignImageWithActuallyLinkImage:listPictures];
         
@@ -116,14 +116,14 @@
     
     [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:temp progress:^(NSUInteger noOfFinishedUrls, NSUInteger noOfTotalUrls) {
         
-        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
-        NSLog(@"noOfTotalUrls    %lu",(unsigned long)noOfTotalUrls);
+//        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+//        NSLog(@"noOfTotalUrls    %lu",(unsigned long)noOfTotalUrls);
         
         
     } completed:^(NSUInteger noOfFinishedUrls, NSUInteger noOfSkippedUrls) {
         
-        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
-        NSLog(@"noOfSkippedUrls    %lu",(unsigned long)noOfSkippedUrls);
+//        NSLog(@"noOfFinishedUrls   %lu",(unsigned long)noOfFinishedUrls);
+//        NSLog(@"noOfSkippedUrls    %lu",(unsigned long)noOfSkippedUrls);
         
         
     }];
@@ -157,10 +157,10 @@
         }
         
 //        if (element.firstChild.content == nil) {
-//            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
+//            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKeyNotNull:@"src"]);
 //            
-//            if ([element.firstChild.attributes objectForKey:@"src"] != nil) {
-//                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKey:@"src"]};
+//            if ([element.firstChild.attributes objectForKeyNotNull:@"src"] != nil) {
+//                NSDictionary *linkImage = @{LINK_IMAGE:[element.firstChild.attributes objectForKeyNotNull:@"src"]};
 //                [temp addObject:linkImage];
 //            }
 //        }

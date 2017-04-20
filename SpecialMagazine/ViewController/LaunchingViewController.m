@@ -12,6 +12,8 @@
 #import "FLAnimatedImage.h"
 #import "CurrentLocationManager.h"
 #import "Reachability.h"
+#import "NewStyleViewController.h"
+
 
 #import "TFHpple.h"
 
@@ -20,13 +22,25 @@
 #define DANANGCITY @""
 
 #import "JHChainableAnimations.h"
+#import "CatalogRealm.h"
+#import "JDStatusBarNotification.h"
+#import "FBShimmeringView.h"
+#import "CRMotionView.h"
+
+
 #define   DEGREES_TO_RADIANS(degrees)  ((M_PI * degrees)/ 180)
+#define  DefaultWebsiteName @"Báo mới"
 
 
 @interface LaunchingViewController ()
 {
 //    WeatherObject *weather;
     NSDictionary *weather;
+    BOOL haveInternet;
+    BOOL firstTime;
+    NSArray *defaultWebsite;
+    NSMutableArray *tempArray;
+    BOOL downloadDataStatus;
     
 }
 
@@ -54,6 +68,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cloud1;
 @property (weak, nonatomic) IBOutlet UIImageView *cloud2;
 
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+
+@property (nonatomic) Reachability *internetReachability;
+
+
+@property (weak, nonatomic) IBOutlet FBShimmeringView *shimmeringView;
+
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+
+
 @end
 
 @implementation LaunchingViewController
@@ -62,104 +86,220 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"launching view did load");
+//    NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
+
+//    NSLog(@"launching view did load with old province is %@",oldProvince);
     
     
     [self loadingBeautifulAdvice];
     
     self.navigationController.navigationBarHidden = YES;
     
-    [self setYahooWeather];
+//    [self setYahooWeather];
     
     UITapGestureRecognizer *tapToView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToScreen)];
     [self.view addGestureRecognizer:tapToView];
     
     [self setDayOfCalendar];
     
-    [self checkConnectNetwork];
+    [self getDataFromLocal];
     
+    [self setCheckingConnectNetwork];
+ 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
+
+//    [self addMotionBackgroundView];
     
 }
+
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    
+    //        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
+    
+    [self showShimmerView];
+    [self addMotionBackgroundView];
+
+}
+
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    self.cloud2.hidden = NO;
-    self.cloud1.hidden = NO;
-    self.sunImageView.hidden = NO;
+    self.cloud2.hidden = YES;
+    self.cloud1.hidden = YES;
+    self.sunImageView.hidden = YES;
     
+   // [self testAnimation];
     
- }
+}
 
-
--(void) testHtmlString
+-(void) viewDidDisappear:(BOOL)animated
 {
-    NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    ArticleRealm *oneObject = [allLocalData firstObject];
-    
-//    NSLog(@"content article is %@",oneObject.content);
-    
-    
-    NSData* data = [oneObject.content dataUsingEncoding:NSUTF8StringEncoding];
-   
-    
-    TFHpple *tutorialsParser = [TFHpple hppleWithHTMLData:data];
+    [self getCatagories];
+}
 
-    NSString *tutorialsXpathQueryString = @"//div[@class='text-conent']/p";
-    NSArray *tutorialsNodes = [tutorialsParser searchWithXPathQuery:tutorialsXpathQueryString];
+-(void) showShimmerView
+{
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:self.shimmeringView.bounds];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = @"Bắt đầu";
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.shimmeringView.shimmeringEndFadeDuration = 3;
+    self.shimmeringView.contentView = loadingLabel;
     
-//    NSMutableArray *arrayContent = [NSMutableArray new];
+    self.shimmeringView.shimmering = YES;
     
-    for (TFHppleElement *element in tutorialsNodes) {
-      
-        NSLog(@"------------------------------------------------------------");
-        
- 
-        
-        NSLog(@"get content --------------------%@",element.firstChild.content);
-        if (element.firstChild.content == nil) {
-            NSLog(@"each element element.firstChild.attributes in this object is:%@",[element.firstChild.attributes objectForKey:@"src"]);
+}
+
+-(void) addMotionBackgroundView
+{
+    
+    NSDictionary *fileConfigure =[[UserData sharedInstance] getFileConfigure];
+    NSString *imageUrlStr = [fileConfigure objectForKeyNotNull:BG_IMG_URL_STR];
+    if (imageUrlStr) {
+        UIImage *storeImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageUrlStr];
+        if (storeImage) {
+            CRMotionView *motionView = [[CRMotionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT)];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:storeImage];
+            [motionView setContentView:imageView];
+            motionView.zoomEnabled = NO;
+            motionView.scrollIndicatorEnabled = NO;
+            
+            [self.backgroundView addSubview:motionView];
 
         }
-
+        else
+        {
+            [self addDefaultBackgroundImage];
+        }
     }
-
-
+    else
+    {
+        [self addDefaultBackgroundImage];
+    }
 }
 
-
-
-
-
--(void) checkConnectNetwork
+-(void) addDefaultBackgroundImage
 {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+    CRMotionView *motionView = [[CRMotionView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH , SCREEN_HEIGHT)];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg1"]];
+    [motionView setContentView:imageView];
+    motionView.zoomEnabled = NO;
+    motionView.scrollIndicatorEnabled = NO;
     
-    NetworkStatus status = [reachability currentReachabilityStatus];
     
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
-    }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
+    [self.backgroundView addSubview:motionView];
+
+}
+
+-(void) setCheckingConnectNetwork
+{
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    [self.internetReachability startNotifier];
+    [self updateInterfaceWithReachability:self.internetReachability];
+    
+}
+
+-(void) getDataFromLocal
+{
+    NSArray *allLocalData = (NSArray*)[CatalogRealm allObjects];
+    NSLog(@"load local data  %i",(int)allLocalData.count);
+    
+    if (allLocalData.count > 0) {
+        for (CatalogRealm *object in allLocalData) {
+//            NSLog(@"website name is %@",object.websiteName);
+//            [tableData addObject:object];
+            
+            if ([object.websiteName isEqualToString:DefaultWebsiteName]) {
+                defaultWebsite = [self convertRealmDataToArray:object];
+            }
+            
+        }
         
+//        [self.tableView reloadData];
     }
-    else if (status == ReachableViaWWAN)
+    else
     {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
+        [self getCatagories];
     }
+    
+    
+    
+}
+
+-(void) getCatagories
+{
+    
+    tempArray = [NSMutableArray new];
+    
+    [ARTIST_API getAllWebsite:^(id dataResponse, NSError *error) {
+        
+        if (dataResponse != nil) {
+            NSArray *temp = (NSArray*)dataResponse;
+            
+            [temp enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                CatalogRealm *websiteRealm = [[CatalogRealm alloc] initWithDictionary:obj];
+                
+                if ([websiteRealm.websiteName isEqualToString:DefaultWebsiteName]) {
+                    
+                    defaultWebsite = [self convertRealmDataToArray:websiteRealm];
+                }
+                
+                    [tempArray addObject:websiteRealm];
+            }];
+        }
+        
+        [tempArray addObject:[self favoriteWebsite]];
+        
+        [self addDataToRealm:tempArray];
+
+        
+    }];
+    
+}
+
+-(CatalogRealm * ) favoriteWebsite
+{
+    CatalogRealm *websiteRealm = [[CatalogRealm alloc] init];
+    websiteRealm.websiteName = FAVORITE_WEBSITE;
+    websiteRealm.id = 1000;
+    NSArray *catalog = @[@{@"id":@"1",@"name":@"Favorite"}];
+    websiteRealm.categories = [NSKeyedArchiver archivedDataWithRootObject:catalog];
+    return websiteRealm;
 }
 
 
+
+-(NSArray *) convertRealmDataToArray:(CatalogRealm *) catalogRealm
+{
+    NSArray *catalogWebsite =[NSKeyedUnarchiver unarchiveObjectWithData:catalogRealm.categories];
+    
+    NSMutableArray *categoriesInWebsite = [NSMutableArray new];
+    
+    for (NSDictionary *dic in catalogWebsite) {
+        
+        NSMutableDictionary *tempDic = [NSMutableDictionary new];
+        [tempDic setObject:[NSString stringWithFormat:@"%li",(long)catalogRealm.id] forKey:WEBSITE_ID];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_ID] forKey:WEBSITE_CATEGORY];
+        [tempDic setObject:[dic objectForKeyNotNull:WEBSITE_NAME] forKey:WEBSITE_NAME];
+        [categoriesInWebsite addObject:tempDic];
+        
+    }
+
+    return categoriesInWebsite;
+}
 
 -(void) setDayOfCalendar
 {
@@ -193,32 +333,6 @@
     
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocalProvince:) name:NOTIFICATION_FOR_LOCAITON object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setYahooWeather) name:NOTIFICATION_FOR_WEATHER object:nil];
-
-//        NSLog(@"all thread running in app %@", [NSThread callStackSymbols]);
-
-    
-}
-
-
-
-
--(void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-}
-
-
 
 -(void) loadingBeautifulAdvice
 {
@@ -231,8 +345,7 @@
     
     NSString *randomSentence = [json objectAtIndex:randomInt];
     
-    NSLog(@" nice advices:  %@",randomSentence);
-
+//    NSLog(@" nice advices:  %@",randomSentence);
     
     self.meaningfulSentence.text = randomSentence;
     
@@ -241,7 +354,7 @@
 
 -(void) setYahooWeather
 {
-    NSLog(@"notification when get weather ---------");
+//    NSLog(@"notification when get weather ---------");
 //     weather = [[WeatherObject alloc] getWeatherForecast];
     
 //    NSLog(@"weather of hanoi is %@",weather.hanoiWeather);
@@ -250,10 +363,12 @@
     
      weather = [[UserData sharedInstance] getOldForcast];
     
+//    NSLog(@"old weather forcast is %@",weather);
+    
     NSString *oldProvince = [[UserData sharedInstance] getOldProvince];
     
     
-    NSLog(@"old province is %@",oldProvince);
+//    NSLog(@"old province is %@",oldProvince);
     
     
 //    NSLog(@"old weather is %@",weather);
@@ -265,18 +380,18 @@
     }
     else
     {
-        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HANOI] inProvince:@"TP Hà Nội"];
     }
 }
 
 -(void) getLocalProvince:(NSNotification *) userData
 {
-    NSLog(@"notification when get location -----------");
+//    NSLog(@"notification when get location -----------");
     NSDictionary *localData = [userData userInfo];
     
 //    NSLog(@"local data is %@", localData);
     
-    NSString *localProvince = [localData objectForKey:PROVINCE];
+    NSString *localProvince = [localData objectForKeyNotNull:PROVINCE];
     
     [self findWeatherForcastFromProvince:localProvince];
     
@@ -284,17 +399,19 @@
 
 -(void) findWeatherForcastFromProvince:(NSString *) localProvince
 {
+//    NSLog(@"findWeatherForcastFromProvince");
     if ([localProvince isEqualToString:@"Thành Phố Đà Nẵng"]) {
         
-        [self setDataForWeatherView:[weather objectForKey:DANANG] inProvince:@"TP Đà Nẵng"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:DANANG] inProvince:@"TP Đà Nẵng"];
     }
     else if ([localProvince isEqualToString:@"Ho Chi Minh City"])
     {
-        [self setDataForWeatherView:[weather objectForKey:HOCHIMINH] inProvince:@"TP Hồ Chí Minh"];
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HOCHIMINH] inProvince:@"TP Hồ Chí Minh"];
     }
     else
     {
-        [self setDataForWeatherView:[weather objectForKey:HANOI] inProvince:@"TP Hà Nội"];
+//        NSLog(@"find ha noi here");
+        [self setDataForWeatherView:[weather objectForKeyNotNull:HANOI] inProvince:@"TP Hà Nội"];
     }
 
 }
@@ -303,20 +420,28 @@
 -(void) setDataForWeatherView:(NSDictionary *) weatherDic inProvince:(NSString *) provinceName
 {
     if (weatherDic != nil) {
-        NSDictionary *currentWeather = [weatherDic objectForKey:CURRENT_CONDITION_WEATHER];
-        self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKey:TEMP]];
-        self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKey:FORECAST]];
+//        NSLog(@"run to setDataForWeatherView");
+        NSDictionary *currentWeather = [weatherDic objectForKeyNotNull:CURRENT_CONDITION_WEATHER];
+        self.currentDegree.text = [NSString stringWithFormat:@"%@°C",[currentWeather objectForKeyNotNull:TEMP]];
+        self.forcastWeather.text = [NSString stringWithFormat:@"Hôm nay %@",[currentWeather objectForKeyNotNull:FORECAST]];
         
-        NSArray *forecast = [weatherDic objectForKey:FORECAST_WEATHER];
+        NSArray *forecast = [weatherDic objectForKeyNotNull:FORECAST_WEATHER];
         NSDictionary *object1 = [forecast firstObject];
         
-        self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKey:HIGH]];
-        self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKey:LOW]];
+        self.highDegree.text = [NSString stringWithFormat:@"%@°C",[object1 objectForKeyNotNull:HIGH]];
+        self.lowDegree.text =  [NSString stringWithFormat:@"%@°C",[object1 objectForKeyNotNull:LOW]];
         
+        if (haveInternet) {
+            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKeyNotNull:@"code"]]]]];
+    
+            self.weatherIcon.animatedImage = image;
+        }
+        else
+        {
+            self.weatherIcon.hidden = YES;
+        }
         
-        FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://l.yimg.com/a/i/us/we/52/%@.gif",[currentWeather objectForKey:@"code"]]]]];
-        
-        self.weatherIcon.animatedImage = image;
+
         
         self.nameProvince.text = provinceName;
 
@@ -324,56 +449,73 @@
  
 }
 
+#pragma mark - CheckConnectNetwork Delegate
 
 - (void) reachabilityChanged:(NSNotification *)note
 {
-    
-    NSLog(@"connection change status");
-    
     Reachability* curReach = [note object];
+    [self updateInterfaceWithReachability:curReach];
     
-    NetworkStatus netStatus = [curReach currentReachabilityStatus];
-    
+}
+- (void)updateInterfaceWithReachability:(Reachability *)reachability
+{
+    NSLog(@"LaunchingViewController connection change status");
+    NetworkStatus netStatus = [reachability currentReachabilityStatus];
     if (netStatus == NotReachable) {
-        
         NSLog(@"don't have internet");
-        
+        [JDStatusBarNotification showWithStatus:@"Bạn đang không kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        haveInternet = NO;
     }
     else
     {
         NSLog(@" have internet");
-        
+//        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        haveInternet = YES;
+
     }
-    
+
 }
+
 
 
 -(void) tapToScreen
 {
-    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+//    ListWebsitesController *listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+//    
+//    [self.navigationController pushViewController:listWebsites animated:YES];
     
-    [self.navigationController pushViewController:listWebsites animated:YES];
+    NewStyleViewController *newStyleController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewStyleViewController"];
+    newStyleController.listCatagories = defaultWebsite;
+    newStyleController.nameOfWebsite = DefaultWebsiteName;
+    [newStyleController reloadCatagories];
+    
+    [self.navigationController pushViewController:newStyleController animated:YES];
+
 
 }
 
+#pragma mark - Download Function
 - (IBAction)downloadClick:(id)sender {
     
     NSLog(@"download click");
-//    
-//    [self deleteAllOldData];
-//    
-//    
-//    [ARTIST_API downloadForNoInternet];
     
-    [self testAnimation];
+    [self deleteAllOldData];
     
     
+    [ARTIST_API downloadForNoInternet];
+    
+//    [self testAnimation];
+    
+//    [JDStatusBarNotification showWithStatus:@"Connect to internet by wifi" dismissAfter:2.0 styleName:JDStatusBarStyleWarning];
+
     
 }
 
 
 -(void) testAnimation
 {
+    NSLog(@"any mation run");
+    
     self.cloud1.moveX(300).animate(2);
     self.cloud2.moveX(- 300).animate(2);
     
@@ -410,6 +552,28 @@
     
 }
 
+-(void) addDataToRealm:(NSArray*) data
+{
+//    NSLog(@"add catalog to realm");
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_sync(queue, ^{
+        // Get the default Realm
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        // You only need to do this once (per thread)
+        
+        [data enumerateObjectsUsingBlock:^(CatalogRealm * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            [realm beginWriteTransaction];
+            [realm addOrUpdateObject:obj];
+            [realm commitWriteTransaction];
+            
+            
+        }];
+        
+    });
+}
 
 
 

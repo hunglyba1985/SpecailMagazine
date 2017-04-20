@@ -8,7 +8,6 @@
 
 #import "ContainViewController.h"
 #import "XLButtonBarViewCell.h"
-#import "ViewController.h"
 #import "TestChildViewController.h"
 
 @interface ContainViewController ()
@@ -121,14 +120,7 @@
         NSLog(@"reload new contain view ");
         NSMutableArray *catagories = [NSMutableArray new];
         
-        for (NSDictionary *tempDic  in self.listCatagories) {
-            
-            ViewController *tempViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-            tempViewController.catagoryInfo = tempDic;
-            [catagories addObject:tempViewController];
-            
-        }
-        
+               
         return catagories;
 
     }

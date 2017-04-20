@@ -11,19 +11,27 @@
 #import "DetailViewController.h"
 #import "HMSegmentedControl.h"
 #import "NewDetailViewController.h"
+#import "CustomTableCell.h"
+#import "ListWebsitesController.h"
 
 
-@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate>
+
+@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate,ListWebsitesControllerDelegate>
 {
     NSMutableArray *collectionData;
-    HMSegmentedControl *segmentedControl1;
-    
+    UIView *topNavigationView;
     BOOL haveInternet;
+    HMSegmentedControl*    segmentedControl1;
+    UIColor *categoryBarColor;
+    UIColor *indicateBarColor;
     
-    
+    ListWebsitesController *listWebsites;
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 
 @end
@@ -36,73 +44,102 @@
     
 //    self.view.backgroundColor = [UIColor yellowColor];
     
-    NSLog(@"new style view controller did load");
     self.navigationController.navigationBarHidden = YES;
     
-    
     [self setUpCollectionView];
-    [self addVerticalSegment];
-    [self checkConnectNetwork];
+    [self setCategoryColor];
+    [self addTopNavigationView];
     
 }
 
--(void) checkConnectNetwork
+-(void) setCategoryColor
 {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+    int randomColor = arc4random_uniform(14);
+    categoryBarColor = FLAT_COLOR[randomColor];
     
-    NetworkStatus status = [reachability currentReachabilityStatus];
-    
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
-        
-    }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
-        
-    }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
-    }
+    int anotherRandomColor = arc4random_uniform(8);
+    indicateBarColor = FLAT_COLOR[anotherRandomColor];
 }
-
-
-
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    if ([self.nameOfWebsite isEqualToString:FAVORITE_WEBSITE]) {
+        [self.collectionView reloadData];
+    }
+
+}
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
 
+-(void) addTopNavigationView
+{
+    topNavigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    topNavigationView.backgroundColor = categoryBarColor;
+    [self.view addSubview:topNavigationView];
+    [self addVerticalSegment];
+}
+
+-(void) setupTableView
+{
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+}
+
+
+
+- (void) reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass:[Reachability class]]);
+    NSLog(@"NewStyleViewController internet chagne satatt");
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    
+    if (netStatus == NotReachable) {
+        NSLog(@"don't have internet");
+        [JDStatusBarNotification showWithStatus:@"Bạn đang không kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        
+    }
+    else
+    {
+        NSLog(@" have internet");
+        [JDStatusBarNotification showWithStatus:@"Bạn đã kết nối internet" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+        [self reloadCatagories];
+    }
+
+}
+
+
 -(void) addVerticalSegment
 {
+    [segmentedControl1 removeFromSuperview];
+    
 //    NSLog(@"list catalog is %@",self.listCatagories);
     NSMutableArray *listNameOfCatalog = [NSMutableArray new];
     [self.listCatagories enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [listNameOfCatalog addObject:[obj objectForKey:@"name"]];
+        [listNameOfCatalog addObject:[obj objectForKeyNotNull:@"name"]];
     }];
     
     
     // Segmented control with scrolling
     segmentedControl1 = [[HMSegmentedControl alloc] initWithSectionTitles:listNameOfCatalog];
     segmentedControl1.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    segmentedControl1.frame = CGRectMake(0, 0, SCREEN_HEIGHT - 20, 40);
+    segmentedControl1.frame = CGRectMake(0, 20, SCREEN_WIDTH, 30);
     segmentedControl1.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segmentedControl1.selectionStyle = HMSegmentedControlSelectionStyleBox;
     segmentedControl1.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl1.verticalDividerEnabled = YES;
-    segmentedControl1.verticalDividerColor = [UIColor blackColor];
+    segmentedControl1.verticalDividerColor = [UIColor whiteColor];
+    segmentedControl1.selectionIndicatorColor = indicateBarColor;
+    segmentedControl1.backgroundColor = categoryBarColor;
     segmentedControl1.verticalDividerWidth = 1.0f;
     [segmentedControl1 setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor blueColor]}];
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:16]}];
         return attString;
     }];
     [segmentedControl1 addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
@@ -114,18 +151,45 @@
 //
     
     
-    UIView *rotateView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT - 20, 40)];
-    rotateView.backgroundColor = [UIColor yellowColor];
-    rotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
     
-    [self.view addSubview:rotateView];
+//    CGRect newFrame = rotateView.frame;
+//    newFrame.origin = CGPointMake(0, 20);
+//    rotateView.frame = newFrame;
     
-    CGRect newFrame = rotateView.frame;
-    newFrame.origin = CGPointMake(0, 20);
-    rotateView.frame = newFrame;
-    
-    [rotateView addSubview:segmentedControl1];
+    [topNavigationView addSubview:segmentedControl1];
 }
+
+- (IBAction)showListWebsite:(id)sender {
+    
+    if (listWebsites == nil) {
+        listWebsites = [self.storyboard instantiateViewControllerWithIdentifier:@"ListWebsitesController"];
+        listWebsites.delegate = self;
+        [self presentViewController:listWebsites animated:YES completion:nil];
+    }
+    else
+    {
+        [self presentViewController:listWebsites animated:YES completion:nil];
+    }
+  
+    
+    
+}
+
+#pragma mark - ListWebsiteViewDelegate
+-(void) selectWebsiteWithInfo:(NSArray *)websiteData andWebsiteName:(NSString *)websiteName
+{
+    self.collectionView.hidden = YES;
+    self.listCatagories = websiteData;
+    self.nameOfWebsite = websiteName;
+    [self addVerticalSegment];
+    [self.collectionView reloadData];
+    
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+    self.collectionView.hidden = NO;
+}
+
+
 
 -(void) setUpCollectionView
 {
@@ -139,8 +203,8 @@
     
     
     UICollectionViewFlowLayout *layoutCollectionView = [[UICollectionViewFlowLayout alloc] init];
-    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionVertical;
-    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    layoutCollectionView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    [layoutCollectionView setSectionInset:UIEdgeInsetsMake(5, 5, 5, 5)];
 //    layoutCollectionView.minimumInteritemSpacing = 0;
 //    layoutCollectionView.minimumLineSpacing = 0;
     
@@ -159,8 +223,43 @@
     
 }
 
+#pragma mark - TableView Datasource
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.listCatagories.count;
+}
 
-#pragma mark CollectionView Datasource
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CustomTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CustomTableCell"];
+    
+    if (cell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CustomTableCell" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
+    cell.delegate = self;
+    
+    NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+    [cell loadingDataForCatalog:oneCatagory];
+    
+    
+    return cell;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return SCREEN_HEIGHT - 20;
+}
+
+
+
+
+#pragma mark - CollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.listCatagories.count;
@@ -172,13 +271,18 @@
 {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell Collection" forIndexPath:indexPath];
     
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    [cell layoutIfNeeded];
+    
     cell.delegate = self;
+    cell.websiteName = self.nameOfWebsite;
     
-    
-//    NSLog(@"one catagory is %@",oneCatagory);
     
 #pragma mark - For have internet
     NSDictionary *oneCatagory = [self.listCatagories objectAtIndex:indexPath.row];
+//    NSLog(@"one catagory is %@",oneCatagory);
+
     [cell loadingDataForCatalog:oneCatagory];
     
 #pragma mark - For not have internet
@@ -187,10 +291,18 @@
     return cell;
 }
 
+-(UIColor *)randomColor
+{
+    CGFloat hue = ( arc4random() % 256 / 256.0 );
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    return color;
+}
 
 #pragma mark CollectionView Delegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT - 10);
+    return CGSizeMake(SCREEN_WIDTH - 10, self.collectionView.frame.size.height - 10);
 }
 
 
@@ -205,7 +317,7 @@
 
 
 
-#pragma mark CollectionViewCell Delegate
+#pragma mark - CollectionViewCell Delegate
 -(void) selectedArticleWithInformation:(ArticleRealm *)artistInfo
 {
 //    DetailViewController *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
@@ -226,8 +338,8 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    CGFloat pageWidth = scrollView.frame.size.height;
-    NSInteger page = scrollView.contentOffset.y / pageWidth;
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger page = scrollView.contentOffset.x / pageWidth;
     
 //    NSLog(@"page of collection view is %i",(int) page);
     
@@ -240,10 +352,19 @@
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
  
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:segmentedControl.selectedSegmentIndex inSection:0];
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+//    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
     
 }
 
+- (IBAction)backClick:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

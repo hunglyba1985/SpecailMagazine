@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CellCollectionView.h"
+#import "DGActivityIndicatorView.h"
 
 @protocol CollectionViewCellDelegate <NSObject>
 
@@ -17,9 +18,11 @@
 @end
 
 
-@interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource>
+@interface CollectionViewCell : UICollectionViewCell <UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *collectionData;
+    DGActivityIndicatorView *activityIndicatorView;
+    
     
 }
 
@@ -27,6 +30,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo;
@@ -35,6 +39,7 @@
 
 
 @property (nonatomic,strong) NSDictionary *cellCatagoryInfo;
+@property (nonatomic,strong) NSString *websiteName;
 
 
 

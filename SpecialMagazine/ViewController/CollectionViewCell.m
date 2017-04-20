@@ -7,6 +7,10 @@
 //
 
 #import "CollectionViewCell.h"
+#import <FLAnimatedImage/FLAnimatedImage.h>
+#import "NewTableCellStyle.h"
+#import "ODRefreshControl.h"
+
 
 
 NSDictionary * catagoryInfor;
@@ -16,52 +20,175 @@ NSDictionary * catagoryInfor;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+ 
+    [self setupTableView];
     
-    // Create random background color
-//    CGFloat hue = ( arc4random() % 256 / 256.0 );
-//    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-//    UIColor *randomColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-//    self.backgroundColor = randomColor;
-    
-    [self setupCollectionView];
-    
-//    self.collectionView.hidden = YES;
-    
-    [self checkConnectNetwork];
-    
-    
+    [self addLoadingView];
 }
 
-
--(void) checkConnectNetwork
+-(void) addLoadingView
 {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+        self.tableView.hidden = YES;
+        int randomInt = arc4random_uniform(33);
+        int randomColor = arc4random_uniform(14);
+        activityIndicatorView = [[DGActivityIndicatorView alloc] initWithType:(DGActivityIndicatorAnimationType)[ACTIVE_TYPE[randomInt] integerValue] tintColor:FLAT_COLOR[randomColor]];
+        activityIndicatorView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+
+        [self addSubview:activityIndicatorView];
+        [activityIndicatorView startAnimating];
+}
+
+
+-(void) setupTableView
+{
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.pagingEnabled = YES;
     
-    NetworkStatus status = [reachability currentReachabilityStatus];
+//    ODRefreshControl *refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
+//    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+//
+}
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+    NSLog(@"start refresh data ----------  ");
+//    double delayInSeconds = 3.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [refreshControl endRefreshing];
+//    });
     
-    if(status == NotReachable)
-    {
-        //No internet
-        NSLog(@"not connect to internet");
+    [self loadingDataForCatalog:self.cellCatagoryInfo];
+    
+}
+
+
+#pragma mark - TableView Datasource
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return collectionData.count;
+}
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NewTableCellStyle *cell = [tableView dequeueReusableCellWithIdentifier:@"NewStyleTableCell"];
+    
+    if (cell == nil) {
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"NewTableCellStyle" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
     }
-    else if (status == ReachableViaWiFi)
-    {
-        //WiFi
-        NSLog(@"connect to internet by wifi");
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+    
+    cell.articleTitle.text = cellData.titleArticle;
+    
+//    NSMutableAttributedString *attributeString = [NSMutableAttributedString new];
+//    NSAttributedString *nextLine = [[NSAttributedString alloc] initWithString:@" \n "];
+//    NSAttributedString *desArticel = [[NSAttributedString alloc] initWithString:cellData.descriptionArticle];
+//    [attributeString appendAttributedString:titleWebsite];
+//    [attributeString appendAttributedString:nextLine];
+//    [attributeString appendAttributedString:desArticel];
+//    
+//    cell.articleDescription.attributedText = attributeString;
+    
+    
+//    cell.articleDescription.text = [NSString stringWithFormat:@"%@ \n %@",self.websiteName,cellData.descriptionArticle];
+    
+    NSAttributedString *titleWebsite = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ",self.websiteName] attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                                                                                                                                    NSFontAttributeName:[UIFont italicSystemFontOfSize:16]}];
+    cell.websiteName.attributedText = titleWebsite;
+    cell.articleDescription.text = cellData.descriptionArticle;
+    
+    cell.articleImage.alignTop = YES;
+    
+    cell.activityIndicatorView.hidden = NO;
+    [cell.activityIndicatorView startAnimating];
+    
+    cell.activityIndicatorView.center = cell.articleImage.center;
+    
+    
+//    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]];
+    
+    [cell.articleImage sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (image) {
+            cell.articleImage.alpha = 0;
+            [UIView animateWithDuration:1 animations:^{
+                [cell.articleImage setImage:image];
+                cell.articleImage.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [cell.activityIndicatorView stopAnimating];
+            cell.activityIndicatorView.hidden = YES;
+        }
+        else
+        {
+            
+        }
         
+    }];
+    
+    
+    cell.clickButton.tag = indexPath.row;
+    
+    [cell.clickButton addTarget:self action:@selector(clickToCell:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    return cell;
+}
+
+#pragma mark - TableView Delegate
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (SCREEN_HEIGHT - 60);
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     if (![self.websiteName isEqualToString:FAVORITE_WEBSITE]) {
+         if (indexPath.row > collectionData.count - 3) {
+             printf("start to load more ");
+             [self loadMoreData];
+         }
+     }
+   
+}
+
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSLog(@"click table cell -------------- ");
+//    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+//    
+//    ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
+//    
+//    if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
+//        [strongDelegate selectedArticleWithInformation:cellData];
+//    }
+
+}
+
+-(void) clickToCell:(UIButton *) button
+{
+    id<CollectionViewCellDelegate> strongDelegate = self.delegate;
+    
+    ArticleRealm *cellData = [collectionData objectAtIndex:button.tag];
+    
+    if ([strongDelegate respondsToSelector:@selector(selectedArticleWithInformation:)]) {
+        [strongDelegate selectedArticleWithInformation:cellData];
     }
-    else if (status == ReachableViaWWAN)
-    {
-        //3G
-        NSLog(@"connect to internet by 3G");
-        
-    }
+
 }
 
 
 
+#pragma mark ------------------------------------------ OLD STYLE --------------------------------------------------------
 
 -(void) setupCollectionView
 {
@@ -92,6 +219,8 @@ NSDictionary * catagoryInfor;
     collectionData = [NSMutableArray new];
     NSArray *allLocalData = (NSArray*)[ArticleRealm allObjects];
     
+    NSLog(@"all local data in realm is %i",(int)allLocalData.count);
+    
     for (ArticleRealm *object in allLocalData) {
         
         [collectionData addObject:object];
@@ -100,41 +229,112 @@ NSDictionary * catagoryInfor;
     
 //    NSLog(@"all data in local is %@",collectionData);
     
+    if (collectionData.count > 0) {
+        
+        [self startShowArticle];
+        
+    }
+    else
+    {
+        [self hideLoadingView];
+        [JDStatusBarNotification showWithStatus:@"Không có dữ liệu" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
+    }
     
-    [self.collectionView reloadData];
+}
+
+
+-(void) startShowArticle
+{
+    [self.tableView reloadData];
+    self.tableView.hidden = NO;
     
+    [self hideLoadingView];
 
 }
 
+-(void) hideLoadingView
+{
+    [activityIndicatorView stopAnimating];
+    activityIndicatorView.hidden = YES;
+}
+
+-(void) startLoadingData
+{
+    self.tableView.hidden = YES;
+    [activityIndicatorView startAnimating];
+    activityIndicatorView.hidden = NO;
+    
+}
+
+#pragma mark - GET DATA
 -(void) loadingDataForCatalog:(NSDictionary *) catagoryInfo
 {
     self.cellCatagoryInfo = catagoryInfo;
     
-//    NSLog(@"one catagory is %@",catagoryInfor);
+    NSLog(@"one catagory is %@",catagoryInfor);
 
+    [self startLoadingData];
     collectionData = [NSMutableArray new];
-
-    [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKey:WEBSITE_ID] andCatalog:[catagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
-        if (dataResponse != nil)
-        {
-            NSArray *gettingArray = dataResponse;
+    
+    if ([self.websiteName isEqualToString:FAVORITE_WEBSITE]) {
+        
+        NSArray *allFavData = (NSArray*)[FavoriteArticles allObjects];
+        
+        for (FavoriteArticles *favArticle in allFavData) {
+            [collectionData addObject:favArticle.favoriteArticle];
+        }
+        
+        if (collectionData.count > 0) {
             
-            [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
-                
-                [collectionData addObject:realmObject];
-                
-            }];
-            
-            [self.collectionView reloadData];
+            [self startShowArticle];
             
         }
         else
         {
-            [self getDataLocal];
+            [self hideLoadingView];
+            [JDStatusBarNotification showWithStatus:@"Không có dữ liệu" dismissAfter:3 styleName:JDStatusBarStyleWarning];
+
         }
-    }];
+        
+    }
+    else
+    {
+        [ARTIST_API getListArticleAccordingToMagazine:[catagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[catagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:@"0" successResult:^(id dataResponse, NSError *error) {
+            if (dataResponse != nil)
+            {
+                //            NSLog(@"getting new data here ");
+                NSArray *gettingArray = dataResponse;
+                
+                [gettingArray enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    ArticleRealm * realmObject = [[ArticleRealm alloc] initWithDictionary:obj];
+                    
+                    [collectionData addObject:realmObject];
+                    
+                }];
+                
+                //            [self.collectionView reloadData];
+                //
+                //
+                //            self.collectionView.scrollsToTop = YES;
+                //
+                //            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                
+                
+                [self startShowArticle];
+                
+                
+            }
+            else
+            {
+                NSLog(@"getting local data");
+                [self getDataLocal];
+            }
+        }];
+    }
+
+  
 
 }
 
@@ -142,7 +342,7 @@ NSDictionary * catagoryInfor;
 {
     ArticleRealm *lastArticle = [collectionData lastObject];
     
-    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKey:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKey:WEBSITE_CATEGORY] andLastId:lastArticle.lid successResult:^(id dataResponse, NSError *error) {
+    [ARTIST_API getListArticleAccordingToMagazine:[self.cellCatagoryInfo objectForKeyNotNull:WEBSITE_ID] andCatalog:[self.cellCatagoryInfo objectForKeyNotNull:WEBSITE_CATEGORY] andLastId:lastArticle.lid successResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil)
         {
             NSArray *gettingArray = dataResponse;
@@ -154,7 +354,8 @@ NSDictionary * catagoryInfor;
                 [collectionData addObject:realmObject];
                 
             }];
-            [self.collectionView reloadData];
+//            [self.collectionView reloadData];
+            [self.tableView reloadData];
             
         }
     }];
@@ -178,14 +379,58 @@ NSDictionary * catagoryInfor;
     //    cell.lable.text = [NSString stringWithFormat:@"%i",(int)indexPath.row];
     ArticleRealm *cellData = [collectionData objectAtIndex:indexPath.row];
     
-    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
-                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+    [cell layoutIfNeeded];
+
+    
+//    [cell.image startLoaderWithTintColor:[UIColor blueColor]];
+
+    
+//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl]
+//                      placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+//    __weak typeof(CellCollectionView) *weakCell = cell;
+//    
+//    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] placeholderImage:nil options:SDWebImageCacheMemoryOnly | SDWebImageRefreshCached progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//        
+//        [weakCell.image updateImageDownloadProgress:(CGFloat)receivedSize/expectedSize];
+//        
+//    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        [weakCell.image reveal];
+//        
+//    }];
+    
+    
+    NSURL *fileURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"laughingMinion.gif" ofType:nil]];
+    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:fileURL]];
+    cell.loadingView.animatedImage = image;
+    cell.loadingView.hidden = NO;
+    
+    
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:cellData.coverImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image != nil) {
+            
+            cell.loadingView.hidden = YES;
+            cell.image.image = image;
+            
+        }
+        
+    }];
+    
+    
+    
+    
     
     cell.title.text = cellData.titleArticle;
     
     cell.descriptionLabel.text = cellData.descriptionArticle;
     
-    cell.catagory.text = [self.cellCatagoryInfo objectForKey:@"name"];
+//    cell.catagory.text = [self.cellCatagoryInfo objectForKeyNotNull:@"name"];
+    cell.catagory.hidden = YES;
+    
     
 //    NSLog(@"array content is %@", [NSKeyedUnarchiver unarchiveObjectWithData:cellData.arrayContent]);
     

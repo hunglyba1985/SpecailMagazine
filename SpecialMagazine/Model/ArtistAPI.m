@@ -7,6 +7,9 @@
 //
 
 #import "ArtistAPI.h"
+#import "SDWebImagePrefetcher.h"
+#import "SDWebImageManager.h"
+
 
 @implementation ArtistAPI
 
@@ -45,8 +48,9 @@ static ArtistAPI  *sharedController = nil;
     
     [self baseGetDataFromEndPoint:endPoint andParameter:parameters hasResult:^(id dataResponse, NSError *error) {
         if (dataResponse != nil) {
+//            NSLog(@"list all webiste %@",dataResponse);
             NSDictionary *dic = dataResponse;
-            NSArray *listWebsites = [dic objectForKey:WEBSITE];
+            NSArray *listWebsites = [dic objectForKeyNotNull:WEBSITE];
             result(listWebsites,nil);
         }
         else
@@ -60,7 +64,7 @@ static ArtistAPI  *sharedController = nil;
 
 -(void) getListArticleAccordingToMagazine:(NSString*) sid andCatalog:(NSString *) cid andLastId:(NSString *) lid successResult:(GetAPIRequestHandle) result
 {
-    NSString *endPoint = [NSString stringWithFormat:@"articles?sid=%@&count=24&latest=0&deviceld=%@&lid=%@&cid=%@",sid,DEVICE_ID,lid,cid];
+    NSString *endPoint = [NSString stringWithFormat:@"articles?sid=%@&count=10&latest=0&deviceld=%@&lid=%@&cid=%@",sid,DEVICE_ID,lid,cid];
     
     NSDictionary *parameters = @{
                                  };
@@ -69,9 +73,10 @@ static ArtistAPI  *sharedController = nil;
        
         if (dataResponse != nil) {
             NSDictionary *dic = dataResponse;
-            NSArray *listArticle = [dic objectForKey:LINFOS];
+            NSArray *listArticle = [dic objectForKeyNotNull:LINFOS];
             
-            
+//            NSLog(@"artiscle data is %@",listArticle);
+
             result(listArticle,nil);
         }
         else
@@ -96,6 +101,13 @@ static ArtistAPI  *sharedController = nil;
         
         [data enumerateObjectsUsingBlock:^(NSDictionary * obj, NSUInteger idx, BOOL * _Nonnull stop) {
             ArticleRealm *article = [[ArticleRealm alloc] initWithDictionary:obj];
+            
+            [[SDWebImageManager sharedManager] loadImageWithURL:[NSURL URLWithString:article.coverImageUrl] options:SDWebImageContinueInBackground progress:nil completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+//                if (image != nil) {
+//                    NSLog(@"loading image success");
+//                }
+            }];
+            
             [realm beginWriteTransaction];
             [realm addObject:article];
             [realm commitWriteTransaction];
@@ -111,7 +123,7 @@ static ArtistAPI  *sharedController = nil;
 {
     NSString *postLink = [NSString stringWithFormat:@"%@/%@",URL_BASE,endPoint];
     
-    NSLog(@"post link is %@",postLink);
+//    NSLog(@"post link is %@",postLink);
     
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -160,7 +172,7 @@ static ArtistAPI  *sharedController = nil;
     if (self.downloadData.count < 150) {
         NSDictionary *lastArticle = [self.downloadData lastObject];
         
-        [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKey:LID] successResult:^(id dataResponse, NSError *error) {
+        [self getListArticleAccordingToMagazine:@"999" andCatalog:@"999" andLastId:[lastArticle objectForKeyNotNull:LID] successResult:^(id dataResponse, NSError *error) {
             if (dataResponse != nil)
             {
                 

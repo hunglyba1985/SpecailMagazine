@@ -61,6 +61,48 @@ static UserData  *sharedController = nil;
     return [_userDefaults dictionaryForKey:WEATHER_SAVE];
 }
 
+-(void) setFileConfigure
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    [manager GET:@"https://raw.githubusercontent.com/hunglyba1985/SpecailMagazine/master/FileConfigure" parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"file configure is %@",responseObject);
+        
+        NSDictionary *fileConfig = (NSDictionary*) responseObject;
+        [_userDefaults setObject:fileConfig forKey:CONFIGURE_FILE];
+        
+        NSString *imageUrlStr = [fileConfig objectForKeyNotNull:BG_IMG_URL_STR];
+        
+        UIImage *storeImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:imageUrlStr];
+
+        if (storeImage) {
+            NSLog(@"already have image");
+        }
+        else
+        {
+            NSLog(@"doesn't load image from another time");
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+}
+-(NSDictionary *) getFileConfigure
+{
+    return [_userDefaults dictionaryForKey:CONFIGURE_FILE];
+    
+}
 
 
 @end
+
+
+
+
+
+
+
+
+
+

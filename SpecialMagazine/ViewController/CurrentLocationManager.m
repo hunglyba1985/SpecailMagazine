@@ -115,7 +115,7 @@ static CurrentLocationManager *sharedLocationController = nil;
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//             
+             
 //             NSLog(@"get current location -------------------------- ");
 //             
 //             NSLog(@"get current postalCode %@",placemark.postalCode);
@@ -126,9 +126,10 @@ static CurrentLocationManager *sharedLocationController = nil;
 //             NSLog(@"get current country %@",placemark.country);
              
              NSDictionary *currentProvince = @{PROVINCE:placemark.administrativeArea};
-             NSLog(@"current province is %@",currentProvince);
+//             NSLog(@"current province is %@",currentProvince);
              
              [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FOR_LOCAITON object:nil userInfo:currentProvince];
+             
              
              [[UserData sharedInstance] setCurrentProvince:placemark.administrativeArea];
              

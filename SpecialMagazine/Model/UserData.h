@@ -21,4 +21,8 @@
 -(NSDictionary *) getOldForcast;
 
 
+-(void) setFileConfigure;
+-(NSDictionary *) getFileConfigure;
+
+
 @end

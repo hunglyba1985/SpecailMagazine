@@ -25,6 +25,12 @@
 #define ARTIST_API [ArtistAPI  sharedInstance]
 
 
+#define ACTIVE_TYPE  @[@(DGActivityIndicatorAnimationTypeNineDots),@(DGActivityIndicatorAnimationTypeTriplePulse),@(DGActivityIndicatorAnimationTypeFiveDots),@(DGActivityIndicatorAnimationTypeRotatingSquares),@(DGActivityIndicatorAnimationTypeDoubleBounce),@(DGActivityIndicatorAnimationTypeTwoDots),@(DGActivityIndicatorAnimationTypeThreeDots),@(DGActivityIndicatorAnimationTypeBallPulse),@(DGActivityIndicatorAnimationTypeBallClipRotate),@(DGActivityIndicatorAnimationTypeBallClipRotatePulse),@(DGActivityIndicatorAnimationTypeBallClipRotateMultiple),@(DGActivityIndicatorAnimationTypeBallRotate),@(DGActivityIndicatorAnimationTypeBallZigZag),@(DGActivityIndicatorAnimationTypeBallZigZagDeflect),@(DGActivityIndicatorAnimationTypeBallTrianglePath),@(DGActivityIndicatorAnimationTypeBallScale),@(DGActivityIndicatorAnimationTypeLineScale),@(DGActivityIndicatorAnimationTypeLineScaleParty),@(DGActivityIndicatorAnimationTypeBallScaleMultiple),@(DGActivityIndicatorAnimationTypeBallPulseSync),@(DGActivityIndicatorAnimationTypeBallBeat),@(DGActivityIndicatorAnimationTypeLineScalePulseOut),@(DGActivityIndicatorAnimationTypeLineScalePulseOutRapid),@(DGActivityIndicatorAnimationTypeBallScaleRipple),@(DGActivityIndicatorAnimationTypeBallScaleRippleMultiple),@(DGActivityIndicatorAnimationTypeTriangleSkewSpin),@(DGActivityIndicatorAnimationTypeBallGridBeat),@(DGActivityIndicatorAnimationTypeBallGridPulse),@(DGActivityIndicatorAnimationTypeRotatingSandglass),@(DGActivityIndicatorAnimationTypeRotatingTrigons),@(DGActivityIndicatorAnimationTypeTripleRings),@(DGActivityIndicatorAnimationTypeCookieTerminator),@(DGActivityIndicatorAnimationTypeBallSpinFadeLoader)]
+
+
+#define FLAT_COLOR @[UIColorFromRGB(0x1abc9c),UIColorFromRGB(0x2ecc71),UIColorFromRGB(0x3498db),UIColorFromRGB(0x9b59b6),UIColorFromRGB(0x34495e),UIColorFromRGB(0xf1c40f),UIColorFromRGB(0xe67e22),UIColorFromRGB(0xe74c3c),UIColorFromRGB(0xDB0A5B),UIColorFromRGB(0xF64747),UIColorFromRGB(0xF62459),UIColorFromRGB(0xAEA8D3),UIColorFromRGB(0x913D88),UIColorFromRGB(0x81CFE0)]
+
+
 #define WEBSITE @"websites"
 
 #define WEBSITE_ID @"id"
@@ -32,6 +38,7 @@
 #define WEBSITE_NAME @"name"
 #define WEBSITE_ICON @"icon_url"
 
+#define FAVORITE_WEBSITE @"Favorite"
 
 #define LINFOS @"linfos"
 
@@ -82,6 +89,13 @@
 // Notification Center
 #define NOTIFICATION_FOR_WEATHER @"Notification for weather"
 #define NOTIFICATION_FOR_LOCAITON @"Notification for location"
+
+
+#pragma mark - DEFINE CONFIGURE
+#define CONFIGURE_FILE @"Configure file"
+#define BACKGROUND_IMAGES @"Background images"
+#define BG_IMG_URL_STR  @"background_image"
+
 
 
 #endif /* Define_h */
