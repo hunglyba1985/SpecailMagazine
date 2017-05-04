@@ -13,10 +13,12 @@
 #import "NewDetailViewController.h"
 #import "CustomTableCell.h"
 #import "ListWebsitesController.h"
+#import <SafariServices/SFFoundation.h>
+#import <SafariServices/SafariServices.h>
 
 
 
-@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate,ListWebsitesControllerDelegate>
+@interface NewStyleViewController () <UICollectionViewDelegate,UICollectionViewDataSource,CollectionViewCellDelegate,UITableViewDataSource,UITableViewDelegate,CustomTableCellDelegate,ListWebsitesControllerDelegate,SFSafariViewControllerDelegate>
 {
     NSMutableArray *collectionData;
     UIView *topNavigationView;
@@ -327,11 +329,33 @@
 //    NSLog(@"article information is %@",artistInfo);
 //    [self presentViewController:detail animated:YES completion:nil];
     
-    NewDetailViewController *newDetail = [self.storyboard instantiateViewControllerWithIdentifier:@"NewDetailViewController"];
-    newDetail.article = artistInfo;
     
-    [self.navigationController pushViewController:newDetail animated:YES];
+    NSDictionary *fileConfigure = [[UserData sharedInstance] getFileConfigure];
     
+    BOOL reviewState = [[fileConfigure objectForKeyNotNull:REVIEW_STATE] boolValue];
+    
+    if (reviewState) {
+        NewDetailViewController *newDetail = [self.storyboard instantiateViewControllerWithIdentifier:@"NewDetailViewController"];
+        newDetail.article = artistInfo;
+        
+        [self.navigationController pushViewController:newDetail animated:YES];
+    }
+    else
+    {
+        SFSafariViewController *webView = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:artistInfo.originalLink]];
+        webView.delegate = self;
+        [self presentViewController:webView animated:YES completion:nil];
+
+    }
+    
+ 
+    
+}
+
+#pragma mark - SFSafariViewController Delegate
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

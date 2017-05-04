@@ -95,6 +95,11 @@
 #define CONFIGURE_FILE @"Configure file"
 #define BACKGROUND_IMAGES @"Background images"
 #define BG_IMG_URL_STR  @"background_image"
+#define REVIEW_STATE @"reviewState"
+
+#define FB_AD_ID @"FbAdId"
+
+
 
 
 

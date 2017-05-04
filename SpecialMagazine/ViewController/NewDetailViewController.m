@@ -87,9 +87,16 @@
 
 -(void) loadingFbAd
 {
+    NSDictionary *fileConfigure = [[UserData sharedInstance] getFileConfigure];
+    NSString *fbAdId = [fileConfigure objectForKeyNotNull:FB_AD_ID];
+    
+    if (!fbAdId) {
+        fbAdId = @"403196480057246_403499533360274";
+    }
+    
     // Create a native ad request with a unique placement ID (generate your own on the Facebook app settings).
     // Use different ID for each ad placement in your app.
-    FBNativeAd *nativeAd = [[FBNativeAd alloc] initWithPlacementID:@"403196480057246_403499533360274"];
+    FBNativeAd *nativeAd = [[FBNativeAd alloc] initWithPlacementID:fbAdId];
     
     // Set a delegate to get notified when the ad was loaded.
     nativeAd.delegate = self;
